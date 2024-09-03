@@ -29,7 +29,6 @@
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="js/main.js"></script>
     <script src="js/calc1122.js"></script>
-    <script type="text/javascript" src="js/nhpup_1.1.js"></script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0242087922176548"
         crossorigin="anonymous"></script>
 </head>
@@ -45,55 +44,6 @@
         </div>
     </header>
     <div id="maindiv">
-
-        <!--<div style="position: fixed; top: 0; left: 0; z-index: 9999; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8);">
-                <div style="position: absolute;
-                left: calc(50% - 426px);
-                top: calc(50% - 240px);			
-                width: 852px;
-                height: 480px;
-                z-index: 99;
-                cursor: pointer;
-                border:2px solid black;
-                background-color: #fff;" onclick="$(this).hide();$($(this).parent()).hide();">
-                	< !--<a target="_blank" style="color: darkblue;" href="https://brasilparticipativo.presidencia.gov.br/processes/programas/f/2/proposals/1545">-- >
-                	<div style="background-image: url(img/ppa2.png);background-size: contain;width: 852px;
-                	height: 480px;">
-                	</div></a>
-                	<div style="width:20px;height:20px;float:right;border:1px solid black;position: absolute;
-                	right: 0;
-                	top: 0;
-                	cursor: pointer;
-                	margin: -1px;
-                	background:linear-gradient(45deg, rgba(0,0,0,0) 0%,rgba(0,0,0,0) 43%,#000 45%,#000 55%,rgba(0,0,0,0) 57%,rgba(0,0,0,0) 100%),
-                linear-gradient(135deg, #fff 0%,#fff 43%,#000 45%,#000 55%,#fff 57%,#fff 100%);">
-                
-                	</div>
-                	< !--<div style="position: absolute; bottom: 20px;left: 120px;
-                	font-size: larger;color: #000;">
-                		Clique neste banner!
-                	</div>-- >
-                </div>
-                </div>  -->
-       <!--<div class="titleHolder">
-            <div class="mainTitle">
-                <h1>
-                   Calculadora
-                </h1>
-            </div>
-            <div class="cbajuda">
-                <div><input type="checkbox" name="ajuda" id="checkajuda" value="Ajuda" /> Mostrar ajuda</div>
-            </div>
-        </div> -->
-        <!-- <div class="callout">
-            <big>ATENÇÃO!</big><br />
-            Os aumentos de 4,5% para 2025 e 2026 foram oferecidos pelo governo para todas carreiras e ainda estão em negociação.
-            São os mesmos valores que foram oferecidos pelo MGI na reunião da Mesa Específica do dia 22/02/2024. 
-        </div>
-        <div class="callout callout-alert">
-            <span style="font-size:200%">AGORA É GREVE! &nbsp;&nbsp;&nbsp; Fortaleça o movimento, apoie a <span
-                    style="font-weight: 800;">nossa</span> luta!</span>
-        </div> -->
         <div class="main-content">
             <h2>
                 Simulação 1
@@ -107,8 +57,7 @@
                     <div class="tab">
                         <div id="tab-carreira1" class="tab-content tab-content1">
                             <div>
-                                <label
-                                    onmouseover="nhpup.popup('Vários valores dependem do período do salário. Selecione o período em que o salário seria recebido, independente de seu ingresso na IFE. Esta opção tem maior chance de erros para períodos anteriores ao atual.');">
+                                <label>
                                     Período:
                                     <select name="ddAno" id="ddAno1" onchange="updateQuali(this.form);">
                                         <option value="1" selected>
@@ -139,8 +88,7 @@
                                 </label>
                             </div>
                             <div>
-                                <label
-                                    onmouseover="nhpup.popup('A classe é definida pela exigência de escolaridade do cargo.');">
+                                <label>
                                     Cargo:
                                     <select name="ddClasse" id="ddClasse1"
                                         onchange="updateQuali(this.form);">
@@ -157,8 +105,7 @@
                                 </label>
                             </div>
                             <div>
-                                <label
-                                    onmouseover="nhpup.popup('A Progressão por mérito profissional é relativa ao tempo do servidor no cargo, podendo ser avançada a cada 18 meses.');">
+                                <label>
                                     Classe/Nível:
                                     <select name="ddNivel" id="ddNivel1" onchange="atualizaPadrao(this.form);">
                                         <option value="1" selected>
@@ -262,8 +209,7 @@
                                 </label>
                             </div>
                             <div>
-                                <label
-                                    onmouseover="nhpup.popup('O Adicional por Tempo de Serviço é calculado como 5% por cada período de 5 anos. Ele foi revogado em 1999, mas se mantém para aqueles que o recebiam na época.')">
+                                <label>
                                     Quinquênio:
                                 </label>
                                 <input type="number" name="numQuinquenio" id="numQuinquenio1" min="0" max="35" step="5"
@@ -326,8 +272,7 @@
                                 <input type="text" name="txInsa" style="width: 82px" value="R$ 0,00" readonly />
                             </div>
                             <div>
-                                <label
-                                    onmouseover="nhpup.popup('Para cada dependente cadastrado, é reduzida uma alíquota fixa do salário bruto, antes do cálculo do valor base. O valor indicado é o valore que é deduzido da base do IRRF.');">
+                                <label>
                                     Nº de dep. IR:
                                     <input type="number" name="numDepIRRF" id="numDepIRRF1" min="0" max="20" step="1"
                                         value="0" style="width: 35px;" onClick="calcSalario(this.form);"
@@ -342,8 +287,7 @@
                                         onClick="calcSalario(this.form);" />
                                     <input type="text" name="txTicket" value="R$ 0,00" readonly />
                                 </label>
-                                <label
-                                    onmouseover="nhpup.popup('A contribuição sindical varia de acordo com o sindicato. As principais formas de cálculo são 1% do seu VB e 1% do menor VB da categoria.')">
+                                <label>
                                     Sindicato:
                                     <select name="ddSindTipo" id="ddSindTipo1" onchange="calcSalario(this.form);"
                                         style="width: 110px;">
@@ -366,14 +310,13 @@
                                 </label>
                             </div>
                             <div id="depsFunbendiv">
-                                <label
-                                onmouseover="nhpup.popup('Para cada dependente cadastrado, é reduzida uma alíquota fixa do salário bruto, antes do cálculo do valor base. O valor indicado é o valore que é deduzido da base do IRRF.');">
-                                Nº de dep. Funben:
-                                <input type="number" name="numDepFunben" id="numDepFunben1" min="0" max="20" step="1"
-                                    value="0" style="width: 35px;" onClick="calcSalario(this.form);"
-                                    onKeyPress="calcSalario(this.form);" onKeyUp="calcSalario(this.form);" />
-                                <input type="text" name="txDepsFunben" value="R$ 0,00" readonly />
-                            </label>
+                                <label>
+                                    Nº de dep. Funben:
+                                    <input type="number" name="numDepFunben" id="numDepFunben1" min="0" max="20" step="1"
+                                        value="0" style="width: 35px;" onClick="calcSalario(this.form);"
+                                        onKeyPress="calcSalario(this.form);" onKeyUp="calcSalario(this.form);" />
+                                    <input type="text" name="txDepsFunben" value="R$ 0,00" readonly />
+                                </label>
                             </div>
                             <div>
                                 <label>
@@ -429,13 +372,11 @@
                     <div class="tabresults">
                         <div class="tab-content3 tab-resumo" id="tab-resumo1">
                             <div class="divresults_col" style="float: left;">
-                                <label
-                                    onmouseover="nhpup.popup('Pode ser que haja uma diferença nos centavos dos valores. Isto porque considero a fórmula genérica VB_PX = PA1 * ((1 + Step)^(X-1)), sendo que o cálculo real é feito a partir do valor de P anterior arredondado, levando a uma pequena propagação de erro.');">
+                                <label>
                                     Vencimento:
                                     <input type="text" name="txVB" value="0" readonly />
                                 </label>                                
-                                <label
-                                onmouseover="nhpup.popup('Valor recebido pelo incentivo à qualificação (graduação, especialização, pós-graduação)');">
+                                <label>
                                     Adicionais:
                                     <input type="text" name="txAdicionais" value="0" readonly />
                                 </label>
@@ -498,13 +439,6 @@
                 </div>
             </form>
         </div>
-        <!-- Horizontal Bar -->
-        <!-- rm to restore ad  <ins class="adsbygoogle" style="display: block; height: 90px;" data-ad-client="ca-pub-0242087922176548"
-            data-ad-slot="2331914013"> </ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script> -->
-
         <div id="div_botoes">
             <p style="margin: auto;">
                 <span style="margin: 0 30px;display: inline-block;" onclick="inverterform('baixo')"><img
@@ -529,8 +463,7 @@
                     <div class="tab">
                         <div id="tab-carreira2" class="tab-content tab-content2">
                             <div>
-                                <label
-                                    onmouseover="nhpup.popup('Vários valores dependem do período do salário. Selecione o período em que o salário seria recebido, independente de seu ingresso na IFE. Esta opção tem maior chance de erros para períodos anteriores ao atual.');">
+                                <label>
                                     Período:
                                     <select name="ddAno" id="ddAno2" onchange="calcSalario(this.form);">
                                         <option value="1" selected>
@@ -561,8 +494,7 @@
                                 </label>
                             </div>
                             <div>
-                                <label
-                                    onmouseover="nhpup.popup('A classe é definida pela exigência de escolaridade do cargo.');">
+                                <label>
                                     Cargo:
                                     <select name="ddClasse" id="ddClasse2"
                                         onchange="updateQuali(this.form, this.form.ddClasse.value, this.form.ddAno.value);">
@@ -579,8 +511,7 @@
                                 </label>
                             </div>
                             <div>
-                                <label
-                                    onmouseover="nhpup.popup('A Progressão por mérito profissional é relativa ao tempo do servidor no cargo, podendo ser avançada a cada 18 meses.');">
+                                <label>
                                     Classe/Nível:
                                     <select name="ddNivel" id="ddNivel2" onchange="atualizaPadrao(this.form);">
                                         <option value="1" selected>
@@ -684,8 +615,7 @@
                                 </label>
                             </div>
                             <div>
-                                <label
-                                    onmouseover="nhpup.popup('O Adicional por Tempo de Serviço é calculado como 5% por cada período de 5 anos. Ele foi revogado em 1999, mas se mantém para aqueles que o recebiam na época.')">
+                                <label>
                                     Quinquênio:
                                 </label>
                                 <input type="number" name="numQuinquenio" id="numQuinquenio2" min="0" max="35" step="5"
@@ -748,8 +678,7 @@
                                 <input type="text" name="txInsa" style="width: 82px" value="R$ 0,00" readonly />
                             </div>
                             <div>
-                                <label
-                                    onmouseover="nhpup.popup('Para cada dependente cadastrado, é reduzida uma alíquota fixa do salário bruto, antes do cálculo do valor base. O valor indicado é o valore que é deduzido da base do IRRF.');">
+                                <label>
                                     Nº de dep. IR:
                                     <input type="number" name="numDepIRRF" id="numDepIRRF2" min="0" max="20" step="1"
                                         value="0" style="width: 35px;" onClick="calcSalario(this.form);"
@@ -764,8 +693,7 @@
                                         onClick="calcSalario(this.form);" />
                                     <input type="text" name="txTicket" value="R$ 0,00" readonly />
                                 </label>
-                                <label
-                                    onmouseover="nhpup.popup('A contribuição sindical varia de acordo com o sindicato. As principais formas de cálculo são 1% do seu VB e 1% do menor VB da categoria.')">
+                                <label>
                                     Sindicato:
                                     <select name="ddSindTipo" id="ddSindTipo2" onchange="calcSalario(this.form);"
                                         style="width: 110px;">
@@ -788,14 +716,13 @@
                                 </label>
                             </div>
                             <div id="depsFunbendiv">
-                                <label
-                                onmouseover="nhpup.popup('Para cada dependente cadastrado, é reduzida uma alíquota fixa do salário bruto, antes do cálculo do valor base. O valor indicado é o valore que é deduzido da base do IRRF.');">
-                                Nº de dep. Funben:
-                                <input type="number" name="numDepFunben" id="numDepFunben2" min="0" max="20" step="1"
-                                    value="0" style="width: 35px;" onClick="calcSalario(this.form);"
-                                    onKeyPress="calcSalario(this.form);" onKeyUp="calcSalario(this.form);" />
-                                <input type="text" name="txDepsFunben" value="R$ 0,00" readonly />
-                            </label>
+                                <label>
+                                    Nº de dep. Funben:
+                                    <input type="number" name="numDepFunben" id="numDepFunben2" min="0" max="20" step="1"
+                                        value="0" style="width: 35px;" onClick="calcSalario(this.form);"
+                                        onKeyPress="calcSalario(this.form);" onKeyUp="calcSalario(this.form);" />
+                                    <input type="text" name="txDepsFunben" value="R$ 0,00" readonly />
+                                </label>
                             </div>
                             <div>
                                 <label>
@@ -851,13 +778,11 @@
                     <div class="tabresults">
                         <div class="tab-content4 tab-resumo" id="tab-resumo2">
                             <div class="divresults_col" style="float: left;">
-                                <label
-                                    onmouseover="nhpup.popup('Pode ser que haja uma diferença nos centavos dos valores. Isto porque considero a fórmula genérica VB_PX = PA1 * ((1 + Step)^(X-1)), sendo que o cálculo real é feito a partir do valor de P anterior arredondado, levando a uma pequena propagação de erro.');">
+                                <label>
                                     Vencimento:
                                     <input type="text" name="txVB" value="0" readonly />
                                 </label>                                
-                                <label
-                                onmouseover="nhpup.popup('Valor recebido pelo incentivo à qualificação (graduação, especialização, pós-graduação)');">
+                                <label>
                                     Adicionais:
                                     <input type="text" name="txAdicionais" value="0" readonly />
                                 </label>
@@ -950,5 +875,4 @@
         </div>
     </footer>
 </body>
-
 </html>
