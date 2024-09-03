@@ -137,12 +137,14 @@ function dependentesFunben(deps) {
 
 function atualizaPadrao(form) {
     let nivel = parseInt(form.ddNivel.value);
+    /* Bloco para conversão de nivel/classe considerando que os atuais vão ser beneficiados com a redução de tempo para progressão.
     if (nivel < 9) {
         form.ddPadrao.value = parseInt((nivel - 1) * 2.5 + 1, 10);
     } else {
         form.ddPadrao.value = 20;
     }
-    //form.ddPadrao.value = parseInt((pold - 1) * 2.5, 10);
+    */
+    form.ddPadrao.value = nivel;
     calcSalario(form);
 }
 
