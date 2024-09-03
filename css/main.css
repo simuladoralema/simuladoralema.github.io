@@ -170,12 +170,12 @@ textarea {
 
 #maindiv,
 #maindiv3 {
-	max-width: 1000px;
+	max-width: 1080px;
 	margin: 0 auto;
 }
 
 #maindiv2 {
-	max-width: 1000px;
+	max-width: 1080px;
 	margin: -1em auto 0 auto;
 }
 
@@ -381,7 +381,7 @@ ol {
 	}
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1080px) {
 	#maindiv {
 		padding: 0 1em;
 	}
