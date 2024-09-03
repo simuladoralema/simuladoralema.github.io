@@ -249,8 +249,8 @@ function calcSalario(form) {
     let vencimento;
     
     if (periodo == 1) {
-        base = 17154.92055;
-        //base = 17789.6526, // Aumento de 3,7%, em 2024
+        //base = 17154.92055;
+        base = 17789.6526, // Aumento de 3,7%, em 2024
         ftstep = 1.025;
         vencimento = correl * Math.ceil(base * Math.pow(ftstep, ftvb) * 100) / 100;
     } else if (periodo == 2) {
