@@ -144,7 +144,13 @@ function atualizaPadrao(form) {
         form.ddPadrao.value = 20;
     }
     */
-    form.ddPadrao.value = nivel;
+    if (( nivel >= 1 && nivel <= 3 )) {
+        form.ddPadrao.value = nivel;
+    } else if (( nivel >= 4 && nivel <= 6 )) {
+        form.ddPadrao.value = nivel + 2;
+    } else if (( nivel >= 7 && nivel <= 10 )) {
+        form.ddPadrao.value = nivel + 4;
+    }
     calcSalario(form);
 }
 
