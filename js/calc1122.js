@@ -211,11 +211,6 @@ function calcSalario(form) {
     let periodo = parseInt(form.ddAno.value, 10);
 
     //ftstep = 1.025;
-    let reajuste = parseFloat(form.numProposta.value); 
-
-    if (reajuste > 0) {
-        base = base * (1 + (reajuste / 100));
-    }
 
     let nivelMerito = 1,
         correlacoes = [0.2341958, 0.511298, 1];
@@ -266,6 +261,15 @@ function calcSalario(form) {
         //ftstep = 1.025;
         vencimento = calcNovoPCCV(base,nivelMerito, correl);
     }
+
+    let reajuste = parseFloat(form.numProposta.value);
+    if (isNaN(reajuste)) {
+        reajuste = 0;
+    } else {
+        vencimento = vencimento * (1 + (reajuste / 100));
+    }
+    console.log('Reajuste: ', reajuste);
+    console.log('Base: ', vencimento);
     //nivelMerito=;
     //let vencimento = correl * Math.ceil(base * Math.pow(ftstep, ftvb) * 100) / 100;
 
