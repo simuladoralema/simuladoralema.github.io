@@ -201,11 +201,19 @@ function calcSalario(form) {
 
     if (form.ticket.checked){
         ticket = 1400.0;
-        $('#ticketdiv').css('visibility','visible');  
+        if (form.name == "myform") {
+            $('#ticketdiv1').css('visibility','visible');  
+        } else {
+            $('#ticketdiv2').css('visibility','visible');  
+        }
     } 
     else {
         ticket = 0;
-        $('#ticketdiv').css('visibility','hidden');
+        if (form.name == "myform") {
+            $('#ticketdiv1').css('visibility','hidden');  
+        } else {
+            $('#ticketdiv2').css('visibility','hidden');  
+        }
     }
 
     let periodo = parseInt(form.ddAno.value, 10);
