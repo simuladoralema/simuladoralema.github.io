@@ -11,7 +11,7 @@ function updateQuali(form) {
     let newvalues = Array();
     let curValue = form.ddQuali.value;
     let classe = parseInt(form.ddClasse.value, 10);
-    if (periodo == 1) {
+    if (periodo == 0 || periodo == 1) {
         if (classe == 0) {
             newoptions = alloptions.slice(0, alloptions.length);
             newvalues = allvalues.slice(0, alloptions.length);
@@ -68,7 +68,7 @@ function formatValor(valor) {
 
 function valorIRRF(base, periodo) {
     let aliquota = 0;
-    if (periodo >= 1) { 
+    if (periodo >= 0) { 
         // Ano 2024
         if (base < 2259.20) {
             aliquota = 0;
@@ -225,7 +225,7 @@ function calcSalario(form) {
         //0,5112985014
         //0,234195651
 
-    if (periodo == 1) {
+    if (periodo == 0 || periodo == 1) {
         //form.ddClasse.value = "Técnico Legislativo"
         if (form.name == "myform") {
             $('#ddNivel1').parent().parent().show();
@@ -259,7 +259,11 @@ function calcSalario(form) {
 
     let vencimento;
     
-    if (periodo == 1) {
+    if (periodo == 0) {
+        base = 17154.92055;
+        ftstep = 1.025;
+        vencimento = correl * Math.ceil(base * Math.pow(ftstep, ftvb) * 100) / 100;
+    } else if (periodo == 1) {
         //base = 17154.92055;
         base = 17789.6526, // Aumento de 3,7%, em 2024
         ftstep = 1.025;
@@ -312,7 +316,7 @@ function calcSalario(form) {
 
     let qualificacao;
 
-    if (periodo == 1){
+    if (periodo == 0 || periodo == 1){
         qualificacao = 0;
         if (form.ddQuali.value == 1) {
             qualificacao = 350;
