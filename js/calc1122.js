@@ -362,6 +362,27 @@ function calcSalario(form) {
         retroativo = vbretro + gratretro + aqretro + insalretro;
     }
 
+    if (form.retrobox.checked){
+        if (form.name == "myform") {
+            $('#retro1').parent().css('visibility','visible');
+        } else if (form.name == "myform2") {
+            $('#retro2').parent().css('visibility','visible');
+        }
+    } else {
+        vbretro = 0;
+        gratretro = 0;
+        aqretro = 0;
+        insalretro = 0;
+        retroativo = 0;
+        if (form.name == "myform") {
+            $('#retro1').parent().css('visibility','hidden');
+        } else if (form.name == "myform2") {
+            $('#retro2').parent().css('visibility','hidden');
+        }
+    }
+
+    console.log('retroativo: ', retroativo);
+
     let outrosRendTrib0 = parseFloat(form.numOutrosRendTrib0.value) || 0;
     let outrosRendTrib1 = parseFloat(form.numOutrosRendTrib1.value) || 0;
     let outrosRendTrib2 = parseFloat(form.numOutrosRendTrib2.value) || 0;
@@ -394,7 +415,7 @@ function calcSalario(form) {
 
     let outrosRendIsnt = parseFloat(form.numOutrosRendIsnt.value) || 0;
 
-    let outros = outrosRendTrib + outrosRendIsnt;
+    let outros = retroativo + outrosRendTrib + outrosRendIsnt;
 
     let adicionais = qualificacao + grat + insal + quinquenio;
     
@@ -474,6 +495,7 @@ function calcSalario(form) {
     let bruto = remuneracao + outrosRendTrib + outrosRendIsnt;
 
     let salario = bruto - descontos;
+
     if (form.name == "myform") {
         liq1 = salario;
     } else {
@@ -590,6 +612,7 @@ function inverterform(tipo) {
             form1.outrosFEPA0.checked,
             form1.outrosFEPA1.checked,
             form1.outrosFEPA2.checked,
+            form1.retrobox.checked,
         );
 
         var values2 = Array(
@@ -623,6 +646,7 @@ function inverterform(tipo) {
             form2.outrosFEPA0.checked,
             form2.outrosFEPA1.checked,
             form2.outrosFEPA2.checked,
+            form2.retrobox.checked,
         );
     } else if (tipo == "cima") {
         values2 = Array(
@@ -656,6 +680,7 @@ function inverterform(tipo) {
             form2.outrosFEPA0.checked,
             form2.outrosFEPA1.checked,
             form2.outrosFEPA2.checked,
+            form2.retrobox.checked,
         );
 
         values1 = values2;
@@ -692,6 +717,7 @@ function inverterform(tipo) {
             form1.outrosFEPA0.checked,
             form1.outrosFEPA1.checked,
             form1.outrosFEPA2.checked,
+            form1.retrobox.checked,
         );
 
         values2 = values1;
@@ -725,7 +751,8 @@ function inverterform(tipo) {
     form1.outrosIR2.checked = values1[26];
     form1.outrosFEPA0.checked = values2[27];
     form1.outrosFEPA1.checked = values2[28];
-    form1.outrosFEPA2.checked = values2[29];    
+    form1.outrosFEPA2.checked = values2[29];
+	form1.retrobox.checked = values2[30];    
 
     ///////////////////////////////////
 
@@ -759,6 +786,7 @@ function inverterform(tipo) {
     form2.outrosFEPA0.checked = values1[27];
     form2.outrosFEPA1.checked = values1[28];
     form2.outrosFEPA2.checked = values1[29];
+	form2.retrobox.checked = values1[30];
 
     updateQuali(form1, values2[0]);
     updateQuali(form2, values1[0]);
@@ -768,4 +796,6 @@ function inverterform(tipo) {
 
     calcSalario(form1);
     calcSalario(form2);
+
+    
 }
