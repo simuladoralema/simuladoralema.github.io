@@ -345,11 +345,11 @@
                                 empréstimo
                                 consignado, pagamento de aluguel direto no contracheque ou recebimento de GECC.</small>
                             <h4 style="margin: 0.5em 0 0 0;">Rendimentos</h4>
-                            <div style="display: block; width: 100%;">
+                            <div class="tab-content_col" > <!-- </div>style="display: block; width: 100%;"> -->
                                 <label for="numOutrosRendTrib1"
                                     style="display: inline-block;width: 85px;">Tributáveis:</label>
                                 R$ <input type="number" name="numOutrosRendTrib0" id="numOutrosRendTrib10" min="0"
-                                    max="20000" step="0.01" value="0" style="width: 80px;"
+                                    max="20000" step="0.01" value="0" style="width: 70px;"
                                     onKeyPress="calcSalario(this.form);" onKeyDown="calcSalario(this.form);"
                                     onKeyUp="calcSalario(this.form);" onClick="calcSalario(this.form);" />
                                 IR <input type="checkbox" name="outrosIR0" id="outrosIR10" value="0"
@@ -359,7 +359,7 @@
                                         <br />
                                 <label style="display: inline-block;width: 85px;"></label>
                                 R$ <input type="number" name="numOutrosRendTrib1" id="numOutrosRendTrib11" min="0"
-                                    max="20000" step="0.01" value="0" style="width: 80px;"
+                                    max="20000" step="0.01" value="0" style="width: 70px;"
                                     onKeyPress="calcSalario(this.form);" onKeyDown="calcSalario(this.form);"
                                     onKeyUp="calcSalario(this.form);" onClick="calcSalario(this.form);" />
                                 IR <input type="checkbox" name="outrosIR1" id="outrosIR11" value="0"
@@ -369,7 +369,7 @@
                                     <br />                              
                                 <label style="display: inline-block;width: 85px;"></label>    
                                 R$ <input type="number" name="numOutrosRendTrib2" id="numOutrosRendTrib12" min="0"
-                                    max="20000" step="0.01" value="0" style="width: 80px;"
+                                    max="20000" step="0.01" value="0" style="width: 70px;"
                                     onKeyPress="calcSalario(this.form);" onKeyDown="calcSalario(this.form);"
                                     onKeyUp="calcSalario(this.form);" onClick="calcSalario(this.form);" />
                                 IR <input type="checkbox" name="outrosIR2" id="outrosIR12" value="0"
@@ -378,11 +378,30 @@
                                     onClick="calcSalario(this.form);" />
                                     <br />
                             </div>
+                            <div class="tab-content_col" > <!-- </div>style="display: block; width: 100%;"> -->
+                                <label for="numOutrosRendTrib1"
+                                    style="display: inline-block;">Diferença no aumento:</label>
+                                <input type="number" name="diffReajuste" id="diffReajuste1" min="0"
+                                    step="1" value="0" style="width: 40px;" onClick="calcSalario(this.form);"
+                                    onKeyUp="calcSalario(this.form);" /> <br/>
+                                    <label>
+                                        VB:
+                                        <input type="text" name="txDifVB" value="0" readonly />
+                                    </label>
+                                    <label>
+                                        Grat.:
+                                        <input type="text" name="txDifGT" value="0" readonly />
+                                    </label>
+                                    <label>
+                                        Insal./Peric.:
+                                        <input type="text" name="txDifRisco" value="0" readonly />
+                                    </label>
+                            </div>
                             <div style="display: block;">
                                 <label for="numOutrosRendIsnt1"
                                     style="display: inline-block;width: 85px;">Isentos:</label>
                                 R$ <input type="number" name="numOutrosRendIsnt" id="numOutrosRendIsnt1" min="0"
-                                    max="20000" step="0.01" value="0" style="width: 80px;"
+                                    max="20000" step="0.01" value="0" style="width: 70px;"
                                     onKeyPress="calcSalario(this.form);" onKeyDown="calcSalario(this.form);"
                                     onKeyUp="calcSalario(this.form);" onClick="calcSalario(this.form);" />
                             </div>
@@ -784,11 +803,11 @@
                                 empréstimo
                                 consignado, pagamento de aluguel direto no contracheque ou recebimento de GECC.</small>
                             <h4 style="margin: 0.5em 0 0 0;">Rendimentos</h4>
-                            <div style="display: block; width: 100%;">
+                            <div class="tab-content_col"> <!-- style="display: block; width: 100%;"> -->
                                 <label for="numOutrosRendTrib2"
                                     style="display: inline-block;width: 85px;">Tributáveis:</label>
                                 R$ <input type="number" name="numOutrosRendTrib0" id="numOutrosRendTrib20" min="0"
-                                    max="20000" step="0.01" value="0" style="width: 80px;"
+                                    max="20000" step="0.01" value="0" style="width: 70px;"
                                     onKeyPress="calcSalario(this.form);" onKeyDown="calcSalario(this.form);"
                                     onKeyUp="calcSalario(this.form);" onClick="calcSalario(this.form);" />
                                 IR <input type="checkbox" name="outrosIR0" id="outrosIR20" value="0"
@@ -798,7 +817,7 @@
                                         <br />
                                 <label style="display: inline-block;width: 85px;"></label>
                                 R$ <input type="number" name="numOutrosRendTrib1" id="numOutrosRendTrib21" min="0"
-                                    max="20000" step="0.01" value="0" style="width: 80px;"
+                                    max="20000" step="0.01" value="0" style="width: 70px;"
                                     onKeyPress="calcSalario(this.form);" onKeyDown="calcSalario(this.form);"
                                     onKeyUp="calcSalario(this.form);" onClick="calcSalario(this.form);" />
                                 IR <input type="checkbox" name="outrosIR1" id="outrosIR21" value="0"
@@ -808,7 +827,7 @@
                                     <br />                              
                                 <label style="display: inline-block;width: 85px;"></label>    
                                 R$ <input type="number" name="numOutrosRendTrib2" id="numOutrosRendTrib22" min="0"
-                                    max="20000" step="0.01" value="0" style="width: 80px;"
+                                    max="20000" step="0.01" value="0" style="width: 70px;"
                                     onKeyPress="calcSalario(this.form);" onKeyDown="calcSalario(this.form);"
                                     onKeyUp="calcSalario(this.form);" onClick="calcSalario(this.form);" />
                                 IR <input type="checkbox" name="outrosIR2" id="outrosIR22" value="0"
@@ -817,11 +836,30 @@
                                     onClick="calcSalario(this.form);" />
                                     <br />
                             </div>
+                            <div class="tab-content_col" > <!-- </div>style="display: block; width: 100%;"> -->
+                                <label for="numOutrosRendTrib2"
+                                    style="display: inline-block;">Diferença no aumento:</label>
+                                <input type="number" name="diffReajuste" id="diffReajuste2" min="0"
+                                    step="1" value="0" style="width: 40px;" onClick="calcSalario(this.form);"
+                                    onKeyUp="calcSalario(this.form);" /> <br/>
+                                    <label>
+                                        VB:
+                                        <input type="text" name="txDifVB" value="0" readonly />
+                                    </label>
+                                    <label>
+                                        Grat.:
+                                        <input type="text" name="txDifGT" value="0" readonly />
+                                    </label>
+                                    <label>
+                                        Insal./Peric.:
+                                        <input type="text" name="txDifRisco" value="0" readonly />
+                                    </label>
+                            </div>
                             <div style="display: block;">
                                 <label for="numOutrosRendIsnt2"
                                     style="display: inline-block;width: 85px;">Isentos:</label>
                                 R$ <input type="number" name="numOutrosRendIsnt" id="numOutrosRendIsnt2" min="0"
-                                    max="20000" step="0.01" value="0" style="width: 80px;"
+                                    max="20000" step="0.01" value="0" style="width: 70px;"
                                     onKeyPress="calcSalario(this.form);" onKeyDown="calcSalario(this.form);"
                                     onKeyUp="calcSalario(this.form);" onClick="calcSalario(this.form);" />
                             </div>
