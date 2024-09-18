@@ -362,12 +362,41 @@ function calcSalario(form) {
         retroativo = vbretro + gratretro + aqretro + insalretro;
     }
 
-    let outrosRendTrib = parseFloat(form.numOutrosRendTrib.value) || 0;
+    let outrosRendTrib0 = parseFloat(form.numOutrosRendTrib0.value) || 0;
+    let outrosRendTrib1 = parseFloat(form.numOutrosRendTrib1.value) || 0;
+    let outrosRendTrib2 = parseFloat(form.numOutrosRendTrib2.value) || 0;
+
+    let outrosRendTribIR = 0;
+    if (form.outrosIR0.checked) {
+        outrosRendTribIR += outrosRendTrib0;
+        //let aliqirrfferias = valorIRRF(ferias, periodo);
+    } if (form.outrosIR1.checked) {
+        outrosRendTribIR += outrosRendTrib1;
+        //let aliqirrfferias = valorIRRF(ferias, periodo);
+    } if (form.outrosIR2.checked) {
+        outrosRendTribIR += outrosRendTrib2;
+        //let aliqirrfferias = valorIRRF(ferias, periodo);
+    }
+
+    let outrosRendTribFEPA = 0;
+    if (form.outrosFEPA0.checked) {
+        outrosRendTribFEPA += outrosRendTrib0;
+        //let aliqirrfferias = valorIRRF(ferias, periodo);
+    } if (form.outrosFEPA1.checked) {
+        outrosRendTribFEPA += outrosRendTrib1;
+        //let aliqirrfferias = valorIRRF(ferias, periodo);
+    } if (form.outrosFEPA2.checked) {
+        outrosRendTribFEPA += outrosRendTrib2;
+        //let aliqirrfferias = valorIRRF(ferias, periodo);
+    }
+
+    let outrosRendTrib = outrosRendTrib0 + outrosRendTrib1 + outrosRendTrib2;
+
     let outrosRendIsnt = parseFloat(form.numOutrosRendIsnt.value) || 0;
 
     let adicionais = qualificacao + grat + insal + quinquenio;
     
-    let remuneracao = vencimento + grat + qualificacao + insal + retroativo + quinquenio + outrosRendTrib;
+    let remuneracao = vencimento + grat + qualificacao + insal + retroativo + quinquenio; //+ outrosRendTribIR + outrosRendTribFEPA;
 
     let sindicato = 0;
     if (form.ddSindTipo.value != "nao") {
@@ -382,7 +411,7 @@ function calcSalario(form) {
     }
 
     //A base do PSS é quase a mesma da 'remuneracao', mas sem insalubridade pois a cobrança é opcional
-    let basepss = remuneracao - grat - gratretro;
+    let basepss = remuneracao - grat - gratretro + outrosRendTribFEPA;
 
     //let valorpss = calcPSS(periodo, basepss, tetopss);
     let valorpss = calcPSS(periodo, basepss);
@@ -421,12 +450,12 @@ function calcSalario(form) {
     }
 
     //let rendTributavel = vencimento + qualificacao + quinquenio + ftinsa * vencimento + outrosRendTrib;
-    let rendTributavel = remuneracao;
+    //let rendTributavel = remuneracao + outrosRendTribFEPA + outrosRendTribIR;
 
     //let deducoesIrrf = valorpss + aliqfunp + aliqFunpFacul + reducaoDepsIRRF;
     let deducoesIrrf = valorpss + funben + reducaoDepsIRRF;
 
-    let baseirrf = rendTributavel - deducoesIrrf;
+    let baseirrf = remuneracao + outrosRendTribIR - deducoesIrrf;
 
     /*if (periodo == 16 && deducoesIrrf < 528) {
         baseirrf = rendTributavel - 528;
@@ -440,7 +469,7 @@ function calcSalario(form) {
 
     let descontos = aliqirrf + funben + valorpss + sindicato + outrosdescontos;
 
-    let bruto = remuneracao + outrosRendIsnt;
+    let bruto = remuneracao + outrosRendTrib + outrosRendIsnt;
 
     let salario = bruto - descontos;
     if (form.name == "myform") {
@@ -543,7 +572,7 @@ function inverterform(tipo) {
             form1.ddSindTipo.value,
             form1.numOutros.value,
             form1.numOutrosRendIsnt.value,
-            form1.numOutrosRendTrib.value,
+            form1.numOutrosRendTrib0.value,
             form1.numProposta.value,
             form1.ddAno.value,
             form1.grat.value,
@@ -551,6 +580,14 @@ function inverterform(tipo) {
             form1.cursos.value,
             form1.funben.checked,
             form1.ddPadrao.value,
+            form1.numOutrosRendTrib1.value,
+            form1.numOutrosRendTrib2.value,
+            form1.outrosIR0.checked,
+            form1.outrosIR1.checked,
+            form1.outrosIR2.checked,
+            form1.outrosFEPA0.checked,
+            form1.outrosFEPA1.checked,
+            form1.outrosFEPA2.checked,
         );
 
         var values2 = Array(
@@ -568,7 +605,7 @@ function inverterform(tipo) {
             form2.ddSindTipo.value,
             form2.numOutros.value,
             form2.numOutrosRendIsnt.value,
-            form2.numOutrosRendTrib.value,
+            form2.numOutrosRendTrib0.value,
             form2.numProposta.value,
             form2.ddAno.value,
             form2.grat.value,
@@ -576,6 +613,14 @@ function inverterform(tipo) {
             form2.cursos.value,
             form2.funben.checked,
             form2.ddPadrao.value,
+            form2.numOutrosRendTrib1.value,
+            form2.numOutrosRendTrib2.value,
+            form2.outrosIR0.checked,
+            form2.outrosIR1.checked,
+            form2.outrosIR2.checked,
+            form2.outrosFEPA0.checked,
+            form2.outrosFEPA1.checked,
+            form2.outrosFEPA2.checked,
         );
     } else if (tipo == "cima") {
         values2 = Array(
@@ -593,7 +638,7 @@ function inverterform(tipo) {
             form2.ddSindTipo.value,
             form2.numOutros.value,
             form2.numOutrosRendIsnt.value,
-            form2.numOutrosRendTrib.value,
+            form2.numOutrosRendTrib0.value,
             form2.numProposta.value,
             form2.ddAno.value,
             form2.grat.value,
@@ -601,6 +646,14 @@ function inverterform(tipo) {
             form2.cursos.value,
             form2.funben.checked,
             form2.ddPadrao.value,
+            form2.numOutrosRendTrib1.value,
+            form2.numOutrosRendTrib2.value,
+            form2.outrosIR0.checked,
+            form2.outrosIR1.checked,
+            form2.outrosIR2.checked,
+            form2.outrosFEPA0.checked,
+            form2.outrosFEPA1.checked,
+            form2.outrosFEPA2.checked,
         );
 
         values1 = values2;
@@ -621,7 +674,7 @@ function inverterform(tipo) {
             form1.ddSindTipo.value,
             form1.numOutros.value,
             form1.numOutrosRendIsnt.value,
-            form1.numOutrosRendTrib.value,
+            form1.numOutrosRendTrib0.value,
             form1.numProposta.value,
             form1.ddAno.value,
             form1.grat.value,
@@ -629,6 +682,14 @@ function inverterform(tipo) {
             form1.cursos.value,
             form1.funben.checked,            
             form1.ddPadrao.value,
+            form1.numOutrosRendTrib1.value,
+            form1.numOutrosRendTrib2.value,
+            form1.outrosIR0.checked,
+            form1.outrosIR1.checked,
+            form1.outrosIR2.checked,
+            form1.outrosFEPA0.checked,
+            form1.outrosFEPA1.checked,
+            form1.outrosFEPA2.checked,
         );
 
         values2 = values1;
@@ -648,13 +709,21 @@ function inverterform(tipo) {
     form1.ddSindTipo.value = values2[11];
     form1.numOutros.value = values2[12];
     form1.numOutrosRendIsnt.value = values2[13];
-    form1.numOutrosRendTrib.value = values2[14];
+    form1.numOutrosRendTrib0.value = values2[14];
     form1.numProposta.value = values2[15];
     form1.ddAno.value = values2[16];
     form1.grat.checked = values2[18];
     form1.cursos.value = values2[19];
     form1.funben.checked = values2[20];
     form1.ddPadrao.value = values2[21];
+    form1.numOutrosRendTrib1.value = values2[22];
+    form1.numOutrosRendTrib2.value = values2[23];
+    form1.outrosIR0.checked = values2[24];
+    form1.outrosIR1.checked = values2[25];
+    form1.outrosIR2.checked = values1[26];
+    form1.outrosFEPA0.checked = values2[27];
+    form1.outrosFEPA1.checked = values2[28];
+    form1.outrosFEPA2.checked = values2[29];    
 
     ///////////////////////////////////
 
@@ -672,7 +741,7 @@ function inverterform(tipo) {
     form2.ddSindTipo.value = values1[11];
     form2.numOutros.value = values1[12];
     form2.numOutrosRendIsnt.value = values1[13];
-    form2.numOutrosRendTrib.value = values1[14];
+    form2.numOutrosRendTrib0.value = values1[14];
     form2.numProposta.value = values1[15];
     form2.ddAno.value = values1[16];
     form2.grat.value = values1[17];
@@ -680,6 +749,14 @@ function inverterform(tipo) {
     form2.cursos.value = values1[19];
     form2.funben.checked = values1[20];
     form2.ddPadrao.value = values1[21];
+    form2.numOutrosRendTrib1.value = values1[22];
+    form2.numOutrosRendTrib2.value = values1[23];
+    form2.outrosIR0.checked = values1[24];
+    form2.outrosIR1.checked = values1[25];
+    form2.outrosIR2.checked = values1[26];
+    form2.outrosFEPA0.checked = values1[27];
+    form2.outrosFEPA1.checked = values1[28];
+    form2.outrosFEPA2.checked = values1[29];
 
     updateQuali(form1, values2[0]);
     updateQuali(form2, values1[0]);
