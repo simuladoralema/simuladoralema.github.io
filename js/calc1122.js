@@ -3,6 +3,27 @@ let liq2 = 0;
 let base = 0;
 let ftstep = 0;
 
+
+
+function enSind (){
+    let checkSind = document.getElementById("enSind1");
+    if (checkSind.checked) {
+        $("#ddAno1")
+            .append($('<option>', { value : 2 })
+            .text("Proposta Sindsalem")); 
+        $("#ddAno2")
+            .append($('<option>', { value : 2 })
+            .text("Proposta Sindsalem")); 
+    } else {
+        $("#ddAno1 option[value='2']").remove();
+        $("#ddAno2 option[value='2']").remove();
+
+    }
+          //  [value='2']").remove();
+        //$("#ddAno1 option[value='2']").remove();
+        //$("#ddAno2 option[value='2']").remove();
+}
+
 function updateQuali(form) {
     let periodo = parseInt(form.ddAno.value, 10);
     let alloptions = Array("Exigência minima", "Graduação", "Especialização", "Mestrado", "Doutorado");
@@ -55,6 +76,7 @@ function updateQuali(form) {
 function firstload() {
     updateQuali(myform, 1);
     updateQuali(myform2, 1);
+    enSind();
 }
 
 function formatValor(valor) {
@@ -182,6 +204,8 @@ function calcNovoPCCV(salarioBase, nivelDesejado, correl) {
 }
 
 function calcSalario(form) {
+
+    
     if (form.name == "myform") {
         //$('#numProposta1').parent().css('visibility','hidden');
         //$('#ddCargaH1').parent().css('visibility','hidden');
