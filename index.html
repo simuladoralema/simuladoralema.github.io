@@ -83,7 +83,7 @@
                             </div>
                             <div>
                                 <label>
-                                    Grat. Legislativa
+                                    Grat. Leg.
                                     <input type="checkbox" name="grat" id="grat1" value="0"
                                         onClick="calcSalario(this.form);" />
                                     <input style="width: 85px;" type="text" name="txGrat" id="txGrat1"
@@ -323,15 +323,20 @@
                             </div>
                             <div>
                                 <label>
-                                    Retroativo (dias):
+                                    Retroativo:
+                                    <input type="checkbox" name="retrobox" id="retrobox1" value="0"
+                                        onClick="calcSalario(this.form);" />
+                                </label>
+                                <br/>
+                                <label>
+                                    Quantos dias? 
                                     <input type="number" name="retro" id="retro1" min="0" max="30"
                                     step="1" value="0" style="width: 35px;" onClick="calcSalario(this.form);"
                                     onKeyUp="calcSalario(this.form);" /> <br/>
-                                    VB: <input type="text" name="txVBretro" value="R$ 0,00" style="width: 94px;" readonly />
-                                    Insal./Pericul.: <input type="text" name="txInsalRetro" value="R$ 0,00" readonly />
-                                    <br/>
-                                    AQ: <input type="text" name="txAQretro" value="R$ 0,00" readonly />
-                                    Grat.Leg.: <input type="text" name="txGratRetro" value="R$ 0,00" readonly />
+                                    VB: <input type="text" name="txVBretro" value="R$ 0,00" style="width: 80px;" readonly />
+                                    Insal./Pericul.: <input type="text" name="txInsalRetro" value="R$ 0,00" style="width: 80px;" readonly />
+                                    AQ: <input type="text" name="txAQretro" value="R$ 0,00" style="width: 80px;" readonly />
+                                    Grat.Leg.: <input type="text" name="txGratRetro" value="R$ 0,00" style="width: 80px;" readonly />
                                 </label>
                             </div>
                         </div>
@@ -517,7 +522,7 @@
                             </div>
                             <div>
                                 <label>
-                                    Grat. Legislativa
+                                    Grat. Leg.
                                     <input type="checkbox" name="grat" id="grat2" value="0"
                                         onClick="calcSalario(this.form);" />
                                     <input style="width: 85px;" type="text" name="txGrat" id="txGrat2"
@@ -757,15 +762,20 @@
                             </div>
                             <div>
                                 <label>
-                                    Retroativo (dias):
+                                    Retroativo:
+                                    <input type="checkbox" name="retrobox" id="retrobox2" value="0"
+                                        onClick="calcSalario(this.form);" />
+                                </label>
+                                <br>
+                                <label>
+                                    Quantos dias? 
                                     <input type="number" name="retro" id="retro2" min="0" max="30"
                                     step="1" value="0" style="width: 35px;" onClick="calcSalario(this.form);"
                                     onKeyUp="calcSalario(this.form);" /> <br/>
-                                    VB: <input type="text" name="txVBretro" value="R$ 0,00" style="width: 94px;" readonly />
-                                    Insal./Pericul.: <input type="text" name="txInsalRetro" value="R$ 0,00" readonly />
-                                    <br/>
-                                    AQ: <input type="text" name="txAQretro" value="R$ 0,00" readonly />
-                                    Grat.Leg.: <input type="text" name="txGratRetro" value="R$ 0,00" readonly />
+                                    VB: <input type="text" name="txVBretro" value="R$ 0,00" style="width: 80px;" readonly />
+                                    Insal./Pericul.: <input type="text" name="txInsalRetro" value="R$ 0,00" style="width: 80px;" readonly />
+                                    AQ: <input type="text" name="txAQretro" value="R$ 0,00" style="width: 80px;" readonly />
+                                    Grat.Leg.: <input type="text" name="txGratRetro" value="R$ 0,00" style="width: 80px;" readonly />
                                 </label>
                             </div>
                         </div>
