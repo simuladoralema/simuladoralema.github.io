@@ -394,6 +394,8 @@ function calcSalario(form) {
 
     let outrosRendIsnt = parseFloat(form.numOutrosRendIsnt.value) || 0;
 
+    let outros = outrosRendTrib + outrosRendIsnt;
+
     let adicionais = qualificacao + grat + insal + quinquenio;
     
     let remuneracao = vencimento + grat + qualificacao + insal + retroativo + quinquenio; //+ outrosRendTribIR + outrosRendTribFEPA;
@@ -486,7 +488,7 @@ function calcSalario(form) {
     document.getElementById("diffLiqPor").innerHTML = ((100 * liq2) / liq1).toFixed(0) + "%";
     form.txVB.value = formatValor(vencimento);
     form.txAdicionais.value = formatValor(adicionais);
-    form.txRetro.value = formatValor(retroativo);
+    form.txOutros.value = formatValor(outros);
     form.txVBretro.value = formatValor(vbretro);
     form.txGrat.value = formatValor(grat);
     form.txGratRetro.value = formatValor(gratretro);
