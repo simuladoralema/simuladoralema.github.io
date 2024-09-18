@@ -121,7 +121,7 @@ function calcPSS(periodo, base) {
 function dependentesIR(deps, periodo) {
     let aliq = 0;
     //let deps = 0;
-    if (periodo >= 1) {
+    if (periodo >= 0) {
         // Ano 2024
         aliq = deps * 189.59;
     } else {
