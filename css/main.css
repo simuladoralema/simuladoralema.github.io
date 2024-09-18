@@ -554,6 +554,10 @@ ul {
   margin-right:10px;
 }
 
+.tab-content_col label {
+	display: block;
+}
+
 #tab-carreira1 {
  display: block;   
 }
