@@ -290,15 +290,15 @@ function calcSalario(form) {
     console.log('Reajuste: ', reajuste);
     console.log('Base: ', base);
 
+    var percQuinquenio = (form.numQuinquenio.value / 100),
+        quinquenio = percQuinquenio * vencimento;
+
     let grat = 0;
     if (form.grat.checked) {
-        grat = (vencimento * 0.05);
+        grat = (vencimento + quinquenio) * 0.05;
     } else {
         grat = 0;
     }
-
-    var percQuinquenio = (form.numQuinquenio.value / 100),
-        quinquenio = percQuinquenio * vencimento;
 
     let percInsal = (form.ddInsa.value),
         insal = percInsal * vencimento;
@@ -395,7 +395,7 @@ function calcSalario(form) {
     
     if(isNaN(difReajusteDias)){
         var diffReajuste = 0,
-            diffVB = 0;
+            diffVB = 0,
             diffGT = 0,
             diffFunben = 0,
             //diffQuali = 0,
@@ -409,11 +409,11 @@ function calcSalario(form) {
         diffDias = difReajusteDias;
         diffReajuste = (vb2 - vb1) / 30 * diffDias;
         diffVB = diffReajuste;
-        diffGT = diffReajuste * 0.05;
+	diffQuinq = diffReajuste * percQuinquenio;
+        diffGT = (diffReajuste + diffQuinq) * 0.05;
         //diffQuali = diffReajuste;
         diffFunben = diffReajuste * 0.03;
         diffSindi = diffReajuste * 0.01;
-        diffQuinq = diffReajuste * percQuinquenio;
         diffRisco = diffReajuste * percInsal;
         diffDias = diffReajuste;
         diffTotal = diffVB + diffGT + diffQuinq + diffRisco;
