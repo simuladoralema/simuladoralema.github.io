@@ -63,12 +63,18 @@ function zeraForm(form){
         form.txDifRisco.value = "R$ 0,00";
         form.numOutrosRendIsnt.value = 0;
         form.numOutros.value = 0;
+        enSind("disable");
         calcSalario(form);
 }
 
 // Checkbox que habilita/desabilita proposta do sindicato
-function enSind (){
+function enSind (comando){
     let checkSind = document.getElementById("enSind1");
+    if (comando == "disable"){
+        checkSind.checked = false;
+        $("#ddAno1 option[value='2']").remove();
+        $("#ddAno2 option[value='2']").remove();
+    }
     if (checkSind.checked) {
         $("#ddAno1")
             .append($('<option>', { value : 2 })
@@ -79,7 +85,6 @@ function enSind (){
     } else {
         $("#ddAno1 option[value='2']").remove();
         $("#ddAno2 option[value='2']").remove();
-
     }
 }
 
