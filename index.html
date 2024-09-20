@@ -48,6 +48,10 @@
             <h2>
                 Simulação 1
             </h2>
+            <div>
+                <input type="button" value="Zera simulação 1" onClick="zeraForm(myform);"/>
+            </div>
+            <br />
             <form name="myform" action="" class="calcform" method="GET">
                 <div class="divdata">
                     <ul class="tabs-menu tabs-menu1">
@@ -328,7 +332,7 @@
                                         onClick="calcSalario(this.form);" />
                                 </label>
                                 <br/>
-                                <label>
+                                <label id="quantosDias1">
                                     Quantos dias? 
                                     <input type="number" name="retro" id="retro1" min="0" max="30"
                                     step="1" value="0" style="width: 35px;" onClick="calcSalario(this.form);"
@@ -506,6 +510,10 @@
             <h2>
                 Simulação 2
             </h2>
+            <div>
+                <input type="button" value="Zera simulação 2" onClick="zeraForm(myform2);"/>
+            </div>
+            <br />
             <form name="myform2" action="" class="calcform" method="GET">
                 <div class="divdata">
                     <ul class="tabs-menu tabs-menu2">
@@ -786,7 +794,7 @@
                                         onClick="calcSalario(this.form);" />
                                 </label>
                                 <br>
-                                <label>
+                                <label id="quantosDias2">
                                     Quantos dias? 
                                     <input type="number" name="retro" id="retro2" min="0" max="30"
                                     step="1" value="0" style="width: 35px;" onClick="calcSalario(this.form);"
