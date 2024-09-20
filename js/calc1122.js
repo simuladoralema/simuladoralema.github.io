@@ -63,6 +63,7 @@ function zeraForm(form){
         form.txDifRisco.value = "R$ 0,00";
         form.numOutrosRendIsnt.value = 0;
         form.numOutros.value = 0;
+        calcSalario(form);
 }
 
 // Checkbox que habilita/desabilita proposta do sindicato
