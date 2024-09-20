@@ -29,6 +29,13 @@ function zeraForm(form){
         form.txSindicato.value = "R$ 0,00";
         form.funben.checked = false;
         form.txFunbenTit.value = "R$ 0,00";
+        if (form.name == "myform"){
+            $("#depsFunbenLabel1").css('visibility','hidden');
+        } else if (form.name == "myform2"){
+            $("#depsFunbenLabel2").css('visibility','hidden');
+        }
+        form.numDepFunben.value = 0;
+        form.txDepsFunben.value = "R$ 0,00"
         form.retrobox.checked = false;
         if (form.name == "myform"){
             $("#quantosDias1").css('visibility','hidden');
@@ -37,9 +44,9 @@ function zeraForm(form){
         }
         form.retro.value = 0;
         form.txVBretro.value = "R$ 0,00";
-        form.txInsatletro.value = "R$ 0,00";
+        form.txInsalRetro.value = "R$ 0,00";
         form.txAQretro.value = "R$ 0,00";
-        form.txGratretro.value = "R$ 0,00";
+        form.txGratRetro.value = "R$ 0,00";
         // Aba "Outros"
         form.numOutrosRendTrib0.value = 0;
         form.numOutrosRendTrib1.value = 0;
@@ -445,8 +452,8 @@ function calcSalario(form) {
         vb2 = calcNovoPCCV(base, nivel, correl);
     }
     
+    // Calcula diferença de valores entre dois períodos para efeito de recebimento retroativo de aumento
     let difReajusteDias = parseInt(form.diffReajuste.value, 10);
-    
     if(isNaN(difReajusteDias)){
         var diffReajuste = 0,
             diffVB = 0,
