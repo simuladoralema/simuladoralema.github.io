@@ -6,6 +6,58 @@ let base = 0;
     base2025 = 23159.15; // 23159.15055;
 let ftstep = 0;
 
+// Zera tudo ao carregar a página e ao pressionar o botão
+function zeraForm(form){
+    // Zera os campos do formulário 1 ("Simulação 1")
+        // Aba "Carreira"
+        form.ddAno.value = 1;
+        form.numProposta.value = 0;
+        form.grat.checked = false;
+        form.txGrat.value = "R$ 0,00";
+        form.ddClasse.value = 0;
+        form.ddNivel.value = 1;
+        form.numQuinquenio.value = 0;
+        form.ddQuali.value = 0;
+        form.cursos.value = 0;
+        form.ddInsa.value = 0;
+        form.txInsa.value = "R$ 0,00";
+        form.numDepIRRF.value = 0;
+        form.txDepIRRF.value = "R$ 0,00";
+        form.ticket.checked = false;
+        form.txTicket.value = "R$ 0,00";
+        form.ddSindTipo.value = "nao";
+        form.txSindicato.value = "R$ 0,00";
+        form.funben.checked = false;
+        form.txFunbenTit.value = "R$ 0,00";
+        form.retrobox.checked = false;
+        if (form.name == "myform"){
+            $("#quantosDias1").css('visibility','hidden');
+        } else if (form.name == "myform2"){
+            $("#quantosDias2").css('visibility','hidden');
+        }
+        form.retro.value = 0;
+        form.txVBretro.value = "R$ 0,00";
+        form.txInsatletro.value = "R$ 0,00";
+        form.txAQretro.value = "R$ 0,00";
+        form.txGratretro.value = "R$ 0,00";
+        // Aba "Outros"
+        form.numOutrosRendTrib0.value = 0;
+        form.numOutrosRendTrib1.value = 0;
+        form.numOutrosRendTrib2.value = 0;
+        form.outrosFEPA0.checked = false;
+        form.outrosFEPA1.checked = false;
+        form.outrosFEPA2.checked = false;
+        form.outrosIR0.checked = false;
+        form.outrosIR1.checked = false;
+        form.outrosIR2.checked = false;
+        form.diffReajuste.value = 0;
+        form.txDifVB.value = "R$ 0,00";
+        form.txDifGT.value = "R$ 0,00";
+        form.txDifRisco.value = "R$ 0,00";
+        form.numOutrosRendIsnt.value = 0;
+        form.numOutros.value = 0;
+}
+
 // Checkbox que habilita/desabilita proposta do sindicato
 function enSind (){
     let checkSind = document.getElementById("enSind1");
@@ -78,6 +130,8 @@ function firstload() {
     updateQuali(myform, 1);
     updateQuali(myform2, 1);
     enSind();
+    zeraForm(myform);
+    zeraForm(myform2);
 }
 
 // Formata o valor para R$
