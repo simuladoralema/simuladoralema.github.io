@@ -180,10 +180,10 @@ function valorIRRF(base, periodo) {
 // Calcula Previdência (FEPA)
 function calcPSS(periodo, base) {
     let valor = 0;
-    if (periodo == 0) {
+    if (periodo < 0) {
         valor = base * 0.11;
     } 
-    else if (periodo >= 1) {
+    else if (periodo >= 0) {
        if (base <= 1412.0) {
             //salario minimo
             valor = 0.075 * base;
