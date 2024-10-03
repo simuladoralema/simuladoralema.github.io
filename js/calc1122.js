@@ -3,7 +3,8 @@ let liq2 = 0;
 let base = 0;
     base2023 = 17154.93, // 17154.92055,
     base2024 = 17789.66, // 17789.6526,
-    base2025 = 23159.15; // 23159.15055;
+    base2025 = base2024 * 1.277; // 23159.15055;
+    base2026 = base2025 * 0;
 let ftstep = 0;
 
 // Zera tudo ao carregar a página e ao pressionar o botão
@@ -14,7 +15,7 @@ function zeraForm(form){
         form.numProposta.value = 0;
         form.grat.checked = false;
         form.txGrat.value = "R$ 0,00";
-        form.ddClasse.value = 0;
+        form.ddCargo.value = 0;
         form.ddNivel.value = 1;
         form.numQuinquenio.value = 0;
         form.ddQuali.value = 0;
@@ -63,11 +64,13 @@ function zeraForm(form){
         form.txDifRisco.value = "R$ 0,00";
         form.numOutrosRendIsnt.value = 0;
         form.numOutros.value = 0;
-        enSind("disable");
+        form.numTempo.value = 100;
+        // enSind("disable");
         calcSalario(form);
 }
 
 // Checkbox que habilita/desabilita proposta do sindicato
+/*
 function enSind (comando){
     let checkSind = document.getElementById("enSind1");
     if (comando == "disable"){
@@ -87,6 +90,7 @@ function enSind (comando){
         $("#ddAno2 option[value='2']").remove();
     }
 }
+*/
 
 // Função para atualizar lista de Adicional de Qualificação
 function updateQuali(form) {
@@ -96,27 +100,28 @@ function updateQuali(form) {
     let newoptions = Array();
     let newvalues = Array();
     let curValue = form.ddQuali.value;
-    let classe = parseInt(form.ddClasse.value, 10);
+    let cargo = parseInt(form.ddCargo.value, 10);
     if (periodo == 0 || periodo == 1) {
-        if (classe == 0) {
+        if (cargo == 0) {
             newoptions = alloptions.slice(0, alloptions.length);
             newvalues = allvalues.slice(0, alloptions.length);
             newoptions.splice(2, alloptions.length);
             newvalues.splice(2, allvalues.length);
-        } else if (classe == 1 || classe == 2) {
+        } else if (cargo == 1 || cargo == 2) {
             newoptions = alloptions.slice(0, alloptions.length);
             newvalues = allvalues.slice(0, alloptions.length);
             newoptions.splice(1, 1);
             newvalues.splice(1, 1);
         }
     } 
-    else if (periodo == 2){
-        if (classe == 0) {
+    else if (periodo >= 2){
+        
+        if (cargo == 0) {
             newoptions = alloptions.slice(0, alloptions.length);
             newvalues = allvalues.slice(0, alloptions.length);
             newoptions.slice(0, alloptions.length);
             newvalues.slice(0, allvalues.length);
-        } else if (classe == 1 || classe == 2) {
+        } else if (cargo == 1 || cargo == 2) {
             newoptions = alloptions.slice(0, alloptions.length);
             newvalues = allvalues.slice(0, alloptions.length);
             newoptions.splice(1, 1);
@@ -135,14 +140,48 @@ function updateQuali(form) {
     if (newvalues.includes(parseInt(curValue, 10))) {
         form.ddQuali.value = curValue;
     }
+    updateCargos(form);
     calcSalario(form);
 }
 
+function updateCargos(form) {
+    let periodo = parseInt(form.ddAno.value, 10);
+    let cargos = Array("Assistente Leg. Adm.", "Técnico de Gestão Adm.", "Consultor Leg. Especial");
+    let cargos2 = Array("Técnico Legislativo", "Analista Legislativo", "Consultor Legislativo");
+    let valores = Array(0, 1, 2);
+    let novosCargos = Array();
+    let novosValores = Array();
+    let curValue = form.ddCargo.value;
+    //let cargo = parseInt(form.ddCargo.value, 10);
+    if (periodo == 0 || periodo == 1) {
+        novosCargos = cargos;
+        novosValores = valores;
+    } 
+    else if (periodo >= 2){
+        novosCargos = cargos2;
+        novosValores = valores;
+    }
+
+    while (form.ddCargo.options.length) form.ddCargo.options[0] = null;
+    for (i = 0; i < novosCargos.length; i++) {
+        // Create a new drop down option with the
+        // display text and value from arr
+        option = new Option(novosCargos[i], novosValores[i]);
+        // Add to the end of the existing options
+        form.ddCargo.options[form.ddCargo.length] = option;
+    }
+    if (novosValores.includes(parseInt(curValue, 10))) {
+        form.ddCargo.value = curValue;
+    }
+    calcSalario(form);
+}
+
+
 // Função para rodar a primeira vez
 function firstload() {
-    updateQuali(myform, 1);
-    updateQuali(myform2, 1);
-    enSind();
+    updateQuali(myform);
+    updateQuali(myform2);
+    //enSind();
     zeraForm(myform);
     zeraForm(myform2);
 }
@@ -230,12 +269,12 @@ function dependentesFunben(deps) {
 // Atualiza lista de niveis do PCCV atual para o novo
 function atualizaPadrao(form) {
     let nivel = parseInt(form.ddNivel.value);
-    if (( nivel >= 1 && nivel <= 3 )) {
+    if (( nivel >= 1 && nivel < 3 )) {
         form.ddPadrao.value = nivel;
     } else if (( nivel >= 4 && nivel <= 6 )) {
-        form.ddPadrao.value = nivel + 2;
+        form.ddPadrao.value = nivel ;
     } else if (( nivel >= 7 && nivel <= 10 )) {
-        form.ddPadrao.value = nivel + 4;
+        form.ddPadrao.value = nivel + 2;
     }
     calcSalario(form);
 }
@@ -250,7 +289,7 @@ function atualizaNivel(form) {
 // Calcula salario com o novo PCCV
 function calcNovoPCCV(salarioBase, nivelDesejado, correl) {
     const correlacao = correl;
-    const niveis = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
+    const niveis = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16];
 
     let salarioAtual = salarioBase * correlacao;
     
@@ -275,7 +314,13 @@ function calcDiff(vencimento1,vencimento2,dias){
 }
 
 // Função principal: calcula o salário sempre que chamada pela aplicação
-function calcSalario(form) {        
+function calcSalario(form) {   
+    // Seleciona o período para cálculo
+    let periodo = parseInt(form.ddAno.value, 10);
+
+    // Seleciona o tempo de serviço
+    let tempo = parseInt(form.numTempo.value, 10);
+
     // Adiciona o tiquete alimentação no cálculo
     let ticket = 0;
 
@@ -296,10 +341,7 @@ function calcSalario(form) {
         }
     }
 
-    // Seleciona o período para cálculo
-    let periodo = parseInt(form.ddAno.value, 10);
-
-    // Fator de step
+        // Fator de step
     ftstep = 1.025;
 
     let nivel = 1,
@@ -308,7 +350,7 @@ function calcSalario(form) {
         //0,5112985014
         //0,234195651
 
-    if (periodo == 0 || periodo == 1) {
+    if (periodo <= 3) {
         if (form.name == "myform") {
             $('#ddNivel1').parent().parent().show();
             $('#ddPadrao1').parent().parent().hide();
@@ -317,7 +359,7 @@ function calcSalario(form) {
             $('#ddPadrao2').parent().parent().hide();
         }
         nivel = parseInt(form.ddNivel.value);
-    } else if (periodo == 2) {
+    } else if (periodo >= 4) {
         if (form.name == "myform") {
             $('#ddNivel1').parent().parent().hide();
             $('#ddPadrao1').parent().parent().show();
@@ -328,7 +370,7 @@ function calcSalario(form) {
         nivel = form.ddPadrao.value;
     } 
     
-    let correl = correlacoes[parseInt(form.ddClasse.value)];
+    let correl = correlacoes[parseInt(form.ddCargo.value)];
     let ftvb = nivel - 1;
 
     let vencimento;
@@ -359,7 +401,7 @@ function calcSalario(form) {
 
     var percQuinquenio = (form.numQuinquenio.value / 100),
         quinquenio = percQuinquenio * vencimento;
-
+        
     let grat = 0;
     if (form.grat.checked) {
         grat = (vencimento + quinquenio) * 0.05;
@@ -698,7 +740,7 @@ function inverterform(tipo) {
 
     if (tipo == "inverter") {
         var values1 = Array(
-            form1.ddClasse.value,
+            form1.ddCargo.value,
             form1.ddNivel.value,
             form1.ddQuali.value,
             form1.cursos.checked,
@@ -732,7 +774,7 @@ function inverterform(tipo) {
         );
 
         var values2 = Array(
-            form2.ddClasse.value,
+            form2.ddCargo.value,
             form2.ddNivel.value,
             form2.ddQuali.value,
             form2.cursos.checked,
@@ -766,7 +808,7 @@ function inverterform(tipo) {
         );
     } else if (tipo == "cima") {
         values2 = Array(
-            form2.ddClasse.value,
+            form2.ddCargo.value,
             form2.ddNivel.value,
             form2.ddQuali.value,
             form2.cursos.checked,
@@ -803,7 +845,7 @@ function inverterform(tipo) {
 
     } else {
         values1 = Array(
-            form1.ddClasse.value,
+            form1.ddCargo.value,
             form1.ddNivel.value,
             form1.ddQuali.value,
             form1.cursos.checked,
@@ -839,7 +881,7 @@ function inverterform(tipo) {
         values2 = values1;
     }
 
-    form1.ddClasse.value = values2[0];
+    form1.ddCargo.value = values2[0];
     form1.ddNivel.value = values2[1];
     //form1.ddQuali.value = values2[2];
     form1.cursos.checked = values2[3];
@@ -872,7 +914,7 @@ function inverterform(tipo) {
 
     ///////////////////////////////////
 
-    form2.ddClasse.value = values1[0];
+    form2.ddCargo.value = values1[0];
     form2.ddNivel.value = values1[1];
     //form2.ddQuali.value = values1[2];
     form2.cursos.checked = values1[3];

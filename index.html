@@ -71,7 +71,16 @@
                                             Vigente (a partir de 05/2024)
                                         </option>
                                         <option value="2">
-                                            Proposta Sindsalem
+                                            2025 (2024 + 21,7% + 4%)
+                                            <!-- Proposta Sindsalem (05/2025 a 04/2026) -->
+                                        </option>
+                                        <option value="3">
+                                            2026 (2025 + 6,1% + 4%)
+                                            <!-- Proposta Sindsalem (05/2026 a 04/2027) -->
+                                        </option>
+                                        <option value="4">
+                                            2027 (2026 + 5% + 4%)
+                                            <!-- Proposta Sindsalem (a partir de 05/2027) -->
                                         </option>
                                     </select>
                                 </label>
@@ -97,10 +106,10 @@
                             <div>
                                 <label>
                                     Cargo:
-                                    <select name="ddClasse" id="ddClasse1"
+                                    <select name="ddCargo" id="ddCargo1"
                                         onchange="updateQuali(this.form);">
                                         <option value="0">
-                                            Assistente Legislativo Administrativo
+                                            Assistente Legislativo Adm.
                                         </option>
                                         <option value="1" selected>
                                             Técnico de Gestão Administrativa
@@ -109,6 +118,14 @@
                                             Consultor Legislativo Especial
                                         </option>
                                     </select>
+                                </label>
+                            </div>
+                            <div>
+                                <label>
+                                    Tempo de serviço (em anos):
+                                    <input type="number" name="numTempo" id="numTempo1" min="0" max="100" step="1"
+                                    value="0" style="width: 35px;" onClick="calcSalario(this.form);"
+                                    onKeyPress="calcSalario(this.form);" onKeyUp="calcSalario(this.form);" />
                                 </label>
                             </div>
                             <div>
@@ -165,52 +182,40 @@
                                             A4
                                         </option>
                                         <option value="5">
-                                            A5
-                                        </option>
-                                        <option value="6">
                                             B1
                                         </option>
-                                        <option value="7">
+                                        <option value="6">
                                             B2
                                         </option>
-                                        <option value="8">
+                                        <option value="7">
                                             B3
                                         </option>
-                                        <option value="9">
+                                        <option value="8">
                                             B4
                                         </option>
-                                        <option value="10">
-                                            B5
-                                        </option>
-                                        <option value="11">
+                                        <option value="9">
                                             C1
                                         </option>
-                                        <option value="12">
+                                        <option value="10">
                                             C2
                                         </option>
-                                        <option value="13">
+                                        <option value="11">
                                             C3
                                         </option>
-                                        <option value="14">
+                                        <option value="12">
                                             C4
                                         </option>
-                                        <option value="15">
-                                            C5
-                                        </option>
-                                        <option value="16">
+                                        <option value="13">
                                             D1
                                         </option>
-                                        <option value="17">
+                                        <option value="14">
                                             D2
                                         </option>
-                                        <option value="18">
+                                        <option value="15">
                                             D3
                                         </option>
-                                        <option value="19">
+                                        <option value="16">
                                             D4
-                                        </option>
-                                        <option value="20">
-                                            D5
                                         </option>
                                     </select>
                                 </label>
@@ -525,7 +530,7 @@
                             <div>
                                 <label>
                                     Período:
-                                    <select name="ddAno" id="ddAno2" onchange="calcSalario(this.form);">
+                                    <select name="ddAno" id="ddAno2" onchange="updateQuali(this.form);">
                                         <option value="0">
                                             Anterior (até 04/2024)
                                         </option>
@@ -533,7 +538,16 @@
                                             Vigente (a partir de 05/2024)
                                         </option>
                                         <option value="2">
-                                            Proposta Sindsalem
+                                            2025 (2024 + 21,7% + 4%)
+                                            <!-- Proposta Sindsalem (05/2025 a 04/2026) -->
+                                        </option>
+                                        <option value="3">
+                                            2026 (2025 + 6,1% + 4%)
+                                            <!-- Proposta Sindsalem (05/2026 a 04/2027) -->
+                                        </option>
+                                        <option value="4">
+                                            2027 (2026 + 5% + 4%)
+                                            <!-- Proposta Sindsalem (a partir de 05/2027) -->
                                         </option>
                                     </select>
                                 </label>
@@ -559,8 +573,8 @@
                             <div>
                                 <label>
                                     Cargo:
-                                    <select name="ddClasse" id="ddClasse2"
-                                        onchange="updateQuali(this.form, this.form.ddClasse.value, this.form.ddAno.value);">
+                                    <select name="ddCargo" id="ddCargo2"
+                                        onchange="updateQuali(this.form, this.form.ddCargo.value, this.form.ddAno.value);">
                                         <option value="0">
                                             Assistente Legislativo Administrativo
                                         </option>
@@ -627,52 +641,40 @@
                                             A4
                                         </option>
                                         <option value="5">
-                                            A5
-                                        </option>
-                                        <option value="6">
                                             B1
                                         </option>
-                                        <option value="7">
+                                        <option value="6">
                                             B2
                                         </option>
-                                        <option value="8">
+                                        <option value="7">
                                             B3
                                         </option>
-                                        <option value="9">
+                                        <option value="8">
                                             B4
                                         </option>
-                                        <option value="10">
-                                            B5
-                                        </option>
-                                        <option value="11">
+                                        <option value="9">
                                             C1
                                         </option>
-                                        <option value="12">
+                                        <option value="10">
                                             C2
                                         </option>
-                                        <option value="13">
+                                        <option value="11">
                                             C3
                                         </option>
-                                        <option value="14">
+                                        <option value="12">
                                             C4
                                         </option>
-                                        <option value="15">
-                                            C5
-                                        </option>
-                                        <option value="16">
+                                        <option value="13">
                                             D1
                                         </option>
-                                        <option value="17">
+                                        <option value="14">
                                             D2
                                         </option>
-                                        <option value="18">
+                                        <option value="15">
                                             D3
                                         </option>
-                                        <option value="19">
+                                        <option value="16">
                                             D4
-                                        </option>
-                                        <option value="20">
-                                            D5
                                         </option>
                                     </select>
                                 </label>
