@@ -377,34 +377,34 @@ function calcTempo(form){
     }
 
     if(periodo < 4){
-        if(tempo < 2.5){
+        if(tempo < 3){
             form.ddNivel.value = 1;
             form.ddPadrao.value = 1;
-        } else if(tempo >= 2.5 && tempo < 5){
+        } else if(tempo >= 3 && tempo < 5.5){
             form.ddNivel.value = 2;
             form.ddPadrao.value = 2;
-        } else if(tempo >= 5 && tempo < 7.5){
+        } else if(tempo >= 5.5 && tempo < 8){
             form.ddNivel.value = 3;
             form.ddPadrao.value = 3;
-        } else if(tempo >= 7.5 && tempo < 10){
+        } else if(tempo >= 8 && tempo < 10.5){
             form.ddNivel.value = 4;
             form.ddPadrao.value = 4;
-        } else if(tempo >= 10 && tempo < 12.5){
+        } else if(tempo >= 10.5 && tempo < 13){
             form.ddNivel.value = 5;
             form.ddPadrao.value = 5;
-        } else if(tempo >= 12.5 && tempo < 15){
+        } else if(tempo >= 13 && tempo < 15.5){
             form.ddNivel.value = 6;
             form.ddPadrao.value = 6;
-        } else if(tempo >= 15 && tempo < 17.5){
+        } else if(tempo >= 15.5 && tempo < 18){
             form.ddNivel.value = 7;
             form.ddPadrao.value = 7;
-        } else if(tempo >= 17.5 && tempo < 20){
+        } else if(tempo >= 18 && tempo < 20.5){
             form.ddNivel.value = 8;
             form.ddPadrao.value = 8;
-        } else if(tempo >= 20 && tempo < 22.5){
+        } else if(tempo >= 20.5 && tempo < 23){
             form.ddNivel.value = 9;
             form.ddPadrao.value = 9;
-        } else if(tempo >= 22.5){
+        } else if(tempo >= 23){
             form.ddNivel.value = 10;
             form.ddPadrao.value = 10;
         }
