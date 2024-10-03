@@ -4,7 +4,7 @@ let base = 0;
     base2023 = 17154.93, // 17154.92055,
     base2024 = 17789.66, // 17789.6526,
     base2025 = base2024 * 1.277; // 23159.15055;
-    base2026 = base2025 * 0;
+    //base2026 = base2025 * 0;
 let ftstep = 0;
 
 // Zera tudo ao carregar a página e ao pressionar o botão
@@ -64,7 +64,7 @@ function zeraForm(form){
         form.txDifRisco.value = "R$ 0,00";
         form.numOutrosRendIsnt.value = 0;
         form.numOutros.value = 0;
-        form.numTempo.value = 100;
+        //form.numTempo.value = 100;
         // enSind("disable");
         calcSalario(form);
 }
@@ -319,7 +319,7 @@ function calcSalario(form) {
     let periodo = parseInt(form.ddAno.value, 10);
 
     // Seleciona o tempo de serviço
-    let tempo = parseInt(form.numTempo.value, 10);
+    //let tempo = parseInt(form.numTempo.value, 10);
 
     // Adiciona o tiquete alimentação no cálculo
     let ticket = 0;
@@ -404,7 +404,7 @@ function calcSalario(form) {
         
     let grat = 0;
     if (form.grat.checked) {
-        grat = (vencimento + quinquenio) * 0.05;
+        grat = ((vencimento + quinquenio ) * 0.05);
     } else {
         grat = 0;
     }
