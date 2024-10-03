@@ -1,11 +1,15 @@
 let liq1 = 0;
 let liq2 = 0;
+
+/*
 let base = 0;
     base2023 = 17154.93, // 17154.92055,
     base2024 = 17789.66, // 17789.6526,
-    base2025 = base2024 * 1.277; // 23159.15055;
-    //base2026 = base2025 * 0;
-let ftstep = 0;
+    base2025 = base2024 * (100 + 21.7 + 6) / 100, // 23159.15055;
+    base2026 = base2025 * (100 + 6.1 + 6) / 100,
+    base2027 = base2026 * (100 + 5 + 5) / 100;
+    let ftstep = 0;
+    */
 
 // Zera tudo ao carregar a página e ao pressionar o botão
 function zeraForm(form){
@@ -64,6 +68,7 @@ function zeraForm(form){
         form.txDifRisco.value = "R$ 0,00";
         form.numOutrosRendIsnt.value = 0;
         form.numOutros.value = 0;
+        form.contra.checked = false;
         //form.numTempo.value = 100;
         // enSind("disable");
         calcSalario(form);
@@ -289,17 +294,17 @@ function atualizaNivel(form) {
 // Calcula salario com o novo PCCV
 function calcNovoPCCV(salarioBase, nivelDesejado, correl) {
     const correlacao = correl;
-    const niveis = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16];
+    const niveis = [1,2,3,4,5,6,7,8,9,10,11,12];
 
     let salarioAtual = salarioBase * correlacao;
     
     for (let i = 1; i < nivelDesejado; i++) {
-        let aumento = 0.025;
+        let aumento = 0.03;
         
-        if ((niveis[i] === 5 && niveis[i + 1] === 6) ||
-            (niveis[i] === 10 && niveis[i + 1] === 11) ||
-            (niveis[i] === 15 && niveis[i + 1] === 16)) {
-            aumento = 0.04;
+        if ((niveis[i] === 3 && niveis[i + 1] === 4) ||
+            (niveis[i] === 6 && niveis[i + 1] === 7) ||
+            (niveis[i] === 9 && niveis[i + 1] === 10)) {
+            aumento = 0.05;
         }
         
         salarioAtual += salarioAtual * aumento;
@@ -314,7 +319,25 @@ function calcDiff(vencimento1,vencimento2,dias){
 }
 
 // Função principal: calcula o salário sempre que chamada pela aplicação
-function calcSalario(form) {   
+function calcSalario(form) {  
+    //let checkContra = document.getElementById("contra1");
+    if (form.contra.checked) {
+    var base = 0,
+        base2023 = 17154.93, // 17154.92055,
+        base2024 = 17789.66, // 17789.6526,
+        base2025 = base2024 * (100 + 21.7 + 4) / 100, // 23159.15055;
+        base2026 = base2025 * (100 + 6.1 + 4) / 100,
+        base2027 = base2026 * (100 + 5 + 4) / 100;
+    } else {
+    var base = 0,
+        base2023 = 17154.93, // 17154.92055,
+        base2024 = 17789.66, // 17789.6526,
+        base2025 = base2024 * (100 + 21.7 + 6) / 100, // 23159.15055;
+        base2026 = base2025 * (100 + 6.1 + 6) / 100,
+        base2027 = base2026 * (100 + 5 + 5) / 100;
+    }
+    
+
     // Seleciona o período para cálculo
     let periodo = parseInt(form.ddAno.value, 10);
 
@@ -342,7 +365,7 @@ function calcSalario(form) {
     }
 
         // Fator de step
-    ftstep = 1.025;
+    let ftstep = 1.025;
 
     let nivel = 1,
         correlacoes = [0.2341963333, 0.51129858, 1];
@@ -377,15 +400,24 @@ function calcSalario(form) {
     
     if (periodo == 0) {
         base = base2023;
-        ftstep = 1.025;
+        //ftstep = 1.025;
         vencimento = correl * Math.ceil(base * Math.pow(ftstep, ftvb) * 100) / 100;
     } else if (periodo == 1) {
-        //base = 17154.92055;
         base = base2024; // Aumento de 3,7%, em 2024
-        ftstep = 1.025;
+        //ftstep = 1.025;
         vencimento = correl * Math.ceil(base * Math.pow(ftstep, ftvb) * 100) / 100;
     } else if (periodo == 2) {
-        base = base2025; // Proposta do Sindsalem
+        //base = 17154.92055;
+        base = base2025; // Aumento de 3,7%, em 2024
+        //ftstep = 1.025;
+        vencimento = correl * Math.ceil(base * Math.pow(ftstep, ftvb) * 100) / 100;
+    } else if (periodo == 3) {
+        //base = 17154.92055;
+        base = base2026; // Aumento de 3,7%, em 2024
+        //ftstep = 1.025;
+        vencimento = correl * Math.ceil(base * Math.pow(ftstep, ftvb) * 100) / 100;
+    } else if (periodo == 4) { 
+        base = base2027; // Proposta do Sindsalem
         //ftstep = 1.025;
         vencimento = calcNovoPCCV(base, nivel, correl);
     }
@@ -418,32 +450,61 @@ function calcSalario(form) {
         cursos = 0;
     }
 
-    let qualificacao;
+    let qualificacao = 0,
+        graduacao = 350,
+        especializacao = 550,
+        mestrado = 750,
+        doutorado = 950,
+        valorCursos = 200;
 
     if (periodo == 0 || periodo == 1){
         qualificacao = 0;
         if (form.ddQuali.value == 1) {
-            qualificacao = 350;
+            qualificacao = graduacao;
         } else if (form.ddQuali.value == 2) {
-            qualificacao = 550;
+            qualificacao = especializacao;
         } else if (form.ddQuali.value == 3) {
-            qualificacao = 750;
+            qualificacao = mestrado;
         } else if (form.ddQuali.value == 4) {
-            qualificacao = 950;
+            qualificacao = doutorado;
         }
-        aqcursos = cursos * 200;
+        aqcursos = cursos * valorCursos;
     } else if (periodo == 2) {
         qualificacao = 0;
         if (form.ddQuali.value == 1) {
-            qualificacao = base * 0.05;
+            qualificacao = graduacao * 1.15;
         } else if (form.ddQuali.value == 2) {
-            qualificacao = base * 0.1;
+            qualificacao = especializacao * 1.15;
         } else if (form.ddQuali.value == 3) {
-            qualificacao = base * 0.125;
+            qualificacao = mestrado * 1.15; 
         } else if (form.ddQuali.value == 4) {
-            qualificacao = base * 0.15;
+            qualificacao = doutorado * 1.15;
         }
-        aqcursos = cursos * base * 0.02;
+        aqcursos = cursos * valorCursos * 1.15;
+    } else if (periodo == 3) {
+        qualificacao = 0;
+        if (form.ddQuali.value == 1) {
+            qualificacao = graduacao * 1.15 * 1.06;
+        } else if (form.ddQuali.value == 2) {
+            qualificacao = especializacao * 1.15 * 1.06;
+        } else if (form.ddQuali.value == 3) {
+            qualificacao = mestrado * 1.15 * 1.06; 
+        } else if (form.ddQuali.value == 4) {
+            qualificacao = doutorado * 1.15 * 1.06;
+        }
+        aqcursos = cursos * valorCursos * 1.15 * 1.06;
+    } else if (periodo == 4) {
+        qualificacao = 0;
+        if (form.ddQuali.value == 1) {
+            qualificacao = graduacao * 1.15 * 1.06 * 1.06;
+        } else if (form.ddQuali.value == 2) {
+            qualificacao = especializacao * 1.15 * 1.06 * 1.06;
+        } else if (form.ddQuali.value == 3) {
+            qualificacao = mestrado * 1.15 * 1.06 * 1.06; 
+        } else if (form.ddQuali.value == 4) {
+            qualificacao = doutorado * 1.15 * 1.06 * 1.06;
+        }
+        aqcursos = cursos * valorCursos * 1.15 * 1.06 * 1.06;
     }
 
     qualificacao += aqcursos;
@@ -496,6 +557,16 @@ function calcSalario(form) {
         base1 = base2024, // Aumento de 3,7%, em 2024
         vb1 = correl * Math.ceil(base1 * Math.pow(ftstep, ftvb) * 100) / 100;
         base2 = base2025; // Proposta do Sindsalem
+        vb2 = correl * Math.ceil(base2 * Math.pow(ftstep, ftvb) * 100) / 100;
+    } else if (periodo == 3){
+        base1 = base2025,
+        vb1 = correl * Math.ceil(base1 * Math.pow(ftstep, ftvb) * 100) / 100;
+        base2 = base2026; // Proposta do Sindsalem
+        vb2 = correl * Math.ceil(base2 * Math.pow(ftstep, ftvb) * 100) / 100;
+    } else if (periodo == 4){
+        base1 = base2026,
+        vb1 = correl * Math.ceil(base1 * Math.pow(ftstep, ftvb) * 100) / 100;
+        base2 = base2027; // Proposta do Sindsalem
         //ftstep = 1.025;
         vb2 = calcNovoPCCV(base, nivel, correl);
     }
@@ -771,6 +842,7 @@ function inverterform(tipo) {
             form1.outrosFEPA1.checked,
             form1.outrosFEPA2.checked,
             form1.retrobox.checked,
+			form1.diffReajuste.value,
         );
 
         var values2 = Array(
@@ -805,6 +877,7 @@ function inverterform(tipo) {
             form2.outrosFEPA1.checked,
             form2.outrosFEPA2.checked,
             form2.retrobox.checked,
+			form2.diffReajuste.value,
         );
     } else if (tipo == "cima") {
         values2 = Array(
@@ -839,6 +912,7 @@ function inverterform(tipo) {
             form2.outrosFEPA1.checked,
             form2.outrosFEPA2.checked,
             form2.retrobox.checked,
+			form2.diffReajuste.value,
         );
 
         values1 = values2;
@@ -876,6 +950,7 @@ function inverterform(tipo) {
             form1.outrosFEPA1.checked,
             form1.outrosFEPA2.checked,
             form1.retrobox.checked,
+			form1.diffReajuste.value,
         );
 
         values2 = values1;
@@ -910,7 +985,8 @@ function inverterform(tipo) {
     form1.outrosFEPA0.checked = values2[27];
     form1.outrosFEPA1.checked = values2[28];
     form1.outrosFEPA2.checked = values2[29];
-	form1.retrobox.checked = values2[30];    
+	form1.retrobox.checked = values2[30];
+	form1.diffReajuste.value = values2[31];    
 
     ///////////////////////////////////
 
@@ -945,6 +1021,7 @@ function inverterform(tipo) {
     form2.outrosFEPA1.checked = values1[28];
     form2.outrosFEPA2.checked = values1[29];
 	form2.retrobox.checked = values1[30];
+	form2.diffReajuste.value = values1[31];
 
     updateQuali(form1, values2[0]);
     updateQuali(form2, values1[0]);
