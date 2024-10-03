@@ -71,7 +71,8 @@ function zeraForm(form){
         form.contra.checked = false;
         form.numTempo.value = 0;
         // enSind("disable");
-        calcSalario(form);
+        updatePeriodo(form);
+        //calcSalario(form);
 }
 
 // Checkbox que habilita/desabilita proposta do sindicato
@@ -146,6 +147,7 @@ function updateQuali(form) {
         form.ddQuali.value = curValue;
     }
     updateCargos(form);
+    atualizaNiveis(form);
     calcSalario(form);
 }
 
@@ -303,6 +305,7 @@ function dependentesFunben(deps) {
 }
 
 // Atualiza lista de niveis do PCCV atual para o novo
+/*
 function atualizaPadrao(form) {
     let nivel = parseInt(form.ddNivel.value);
     if (( nivel >= 1 && nivel < 3 )) {
@@ -310,17 +313,19 @@ function atualizaPadrao(form) {
     } else if (( nivel >= 4 && nivel <= 6 )) {
         form.ddPadrao.value = nivel ;
     } else if (( nivel >= 7 && nivel <= 10 )) {
-        form.ddPadrao.value = nivel + 2;
+        form.ddPadrao.value = nivel;
     }
     calcSalario(form);
-}
+} */
 
+/*
 // Atualiza lista de niveis do PCCV novo para o atual
 function atualizaNivel(form) {
     let padrao = parseInt(form.ddPadrao.value);
     form.ddNivel.value = parseInt((padrao / 2.5) + 1, 10);
     calcSalario(form);
 }
+*/
 
 // Calcula salario com o novo PCCV
 function calcNovoPCCV(salarioBase, nivelDesejado, correl) {
@@ -445,6 +450,41 @@ function calcTempo(form){
     
     calcSalario(form);
 }
+
+function atualizaNiveis(form){
+    let periodo = parseInt(form.ddAno.value, 10);
+    let alloptions = Array("A1", "A2", "A3", "B1", "B2", "B3", "C1", "C2", "C3", "C4");
+    let allvalues = Array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+    let newoptions = Array();
+    let newvalues = Array();
+    let curValue = form.ddNivel.value;
+    let cargo = parseInt(form.ddCargo.value, 10);
+    if (periodo < 4) {
+        if (cargo == 2) {
+            newoptions = alloptions.slice(0, alloptions.length);
+            newvalues = allvalues.slice(0, alloptions.length);
+            newoptions.splice(9, alloptions.length);
+            newvalues.splice(9, allvalues.length);
+        } else if (cargo < 2) {
+            newoptions = alloptions;
+            newvalues = allvalues;
+        }
+    }
+
+    while (form.ddNivel.options.length) form.ddNivel.options[0] = null;
+    for (i = 0; i < newoptions.length; i++) {
+        // Create a new drop down option with the
+        // display text and value from arr
+        option = new Option(newoptions[i], newvalues[i]);
+        // Add to the end of the existing options
+        form.ddNivel.options[form.ddNivel.length] = option;
+    }
+    if (newvalues.includes(parseInt(curValue, 10))) {
+        form.ddNivel.value = curValue;
+    }
+    //updateQuali(form);
+}
+
 // Função principal: calcula o salário sempre que chamada pela aplicação
 function calcSalario(form) {  
     //let checkContra = document.getElementById("contra1");
