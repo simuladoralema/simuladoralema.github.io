@@ -181,6 +181,37 @@ function updateCargos(form) {
     calcSalario(form);
 }
 
+function updatePeriodo(form){
+    //let periodo = parseInt(form.ddAno.value, 10);
+    let periodos = Array("Anterior (até 04/2024)", "Vigente (a partir de 05/2024)", "2025 (2024 + 21,7% + 6%)", "2026 (2025 + 6,1% + 6%)", "2027 (2026 + 5% + 6%)");
+    let periodos2 = Array("Anterior (até 04/2024)", "Vigente (a partir de 05/2024)", "2025 (2024 + 21,7% + 4%)", "2026 (2025 + 6,1% + 4%)", "2027 (2026 + 5% + 4%)");
+    let valores = Array(0, 1, 2, 3, 4);
+    let novosPeriodos = Array();
+    let novosValores = Array();
+    let curValue = form.ddAno.value;
+    //let cargo = parseInt(form.ddCargo.value, 10);
+    if (form.contra.checked) {
+        novosPeriodos = periodos2;
+        novosValores = valores;
+    } else {
+        novosPeriodos = periodos;
+        novosValores = valores;
+    }
+
+    while (form.ddAno.options.length) form.ddAno.options[0] = null;
+    for (i = 0; i < novosPeriodos.length; i++) {
+        // Create a new drop down option with the
+        // display text and value from arr
+        option = new Option(novosPeriodos[i], novosValores[i]);
+        // Add to the end of the existing options
+        form.ddAno.options[form.ddAno.length] = option;
+    }
+    if (novosValores.includes(parseInt(curValue, 10))) {
+        form.ddAno.value = curValue;
+    }
+    calcSalario(form);
+}
+
 
 // Função para rodar a primeira vez
 function firstload() {
@@ -321,6 +352,25 @@ function calcDiff(vencimento1,vencimento2,dias){
 function calcTempo(form){
     let tempo = parseFloat(form.numTempo.value);
     let periodo = parseInt(form.ddAno.value, 10);
+
+    if(tempo < 5){
+        form.numQuinquenio.value = 0;
+    } else if(tempo >= 5 && tempo < 10){
+        form.numQuinquenio.value = 5;
+    } else if(tempo >= 10 && tempo < 15){
+        form.numQuinquenio.value = 10;
+    } else if(tempo >= 15 && tempo < 20){
+        form.numQuinquenio.value = 15;
+    } else if(tempo >= 20 && tempo < 25){
+        form.numQuinquenio.value = 20;
+    } else if(tempo >= 25 && tempo < 30){
+        form.numQuinquenio.value = 25;
+    } else if(tempo >= 30 && tempo < 35){
+        form.numQuinquenio.value = 30;
+    } else if(tempo >= 35){
+        form.numQuinquenio.value = 35;
+    }
+
     if(periodo < 4){
         if(tempo < 2.5){
             form.ddNivel.value = 1;
@@ -921,6 +971,8 @@ function inverterform(tipo) {
             form1.outrosFEPA2.checked,
             form1.retrobox.checked,
 			form1.diffReajuste.value,
+			form1.numTempo.value,
+			form1.contra.checked,
         );
 
         var values2 = Array(
@@ -956,6 +1008,8 @@ function inverterform(tipo) {
             form2.outrosFEPA2.checked,
             form2.retrobox.checked,
 			form2.diffReajuste.value,
+			form2.numTempo.value,
+			form2.contra.checked,
         );
     } else if (tipo == "cima") {
         values2 = Array(
@@ -991,6 +1045,8 @@ function inverterform(tipo) {
             form2.outrosFEPA2.checked,
             form2.retrobox.checked,
 			form2.diffReajuste.value,
+			form2.numTempo.value,
+			form2.contra.checked,
         );
 
         values1 = values2;
@@ -1029,6 +1085,8 @@ function inverterform(tipo) {
             form1.outrosFEPA2.checked,
             form1.retrobox.checked,
 			form1.diffReajuste.value,
+			form1.numTempo.value,
+			form1.contra.checked,
         );
 
         values2 = values1;
@@ -1064,7 +1122,9 @@ function inverterform(tipo) {
     form1.outrosFEPA1.checked = values2[28];
     form1.outrosFEPA2.checked = values2[29];
 	form1.retrobox.checked = values2[30];
-	form1.diffReajuste.value = values2[31];    
+	form1.diffReajuste.value = values2[31];
+	form1.numTempo.value = values2[32];
+	form1.contra.checked = values2[33];    
 
     ///////////////////////////////////
 
@@ -1100,6 +1160,8 @@ function inverterform(tipo) {
     form2.outrosFEPA2.checked = values1[29];
 	form2.retrobox.checked = values1[30];
 	form2.diffReajuste.value = values1[31];
+	form2.numTempo.value = values1[32];
+	form2.contra.checked = values1[33];
 
     updateQuali(form1, values2[0]);
     updateQuali(form2, values1[0]);
