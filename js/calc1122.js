@@ -1,6 +1,6 @@
 let liq1 = 0;
 let liq2 = 0;
-
+let descontoSimplificado = 564.8;
 /*
 let base = 0;
     base2023 = 17154.93, // 17154.92055,
@@ -833,7 +833,7 @@ function calcSalario(form) {
 
     console.log('FEPA: ', valorpss);
 
-    let reducaoDepsIRRF = dependentesIR(form.numDepIRRF.value, periodo);
+    let deducaoDepsIRRF = dependentesIR(form.numDepIRRF.value, periodo);
 
     //Funben
     if (form.funben.checked){
@@ -869,8 +869,11 @@ function calcSalario(form) {
     //let rendTributavel = vencimento + qualificacao + quinquenio + ftinsa * vencimento + outrosRendTrib;
     //let rendTributavel = remuneracao + outrosRendTribFEPA + outrosRendTribIR;
 
-    //let deducoesIrrf = valorpss + aliqfunp + aliqFunpFacul + reducaoDepsIRRF;
-    let deducoesIrrf = valorpss + funben + reducaoDepsIRRF;
+    //let deducoesIrrf = valorpss + aliqfunp + aliqFunpFacul + deducaoDepsIRRF;
+    let deducoesIrrf = valorpss + funben + deducaoDepsIRRF;
+    if ( deducoesIrrf < descontoSimplificado ) {
+        deducoesIrrf = descontoSimplificado;
+    }
 
     let baseirrf = remuneracao + outrosRendTribIR + diffTotal - deducoesIrrf;
 
@@ -918,7 +921,7 @@ function calcSalario(form) {
         form.txSindicato.value = formatValor(sindicato);
         form.txQualif.value = formatValor(qualificacao);
         form.txAQretro.value = formatValor(aqretro);
-        form.txDepIRRF.value = formatValor(reducaoDepsIRRF);
+        form.txDepIRRF.value = formatValor(deducaoDepsIRRF);
         form.txTicket.value = formatValor(ticket);
         form.txCticket.value = formatValor(salario + ticket);
         form.txFunbenTit.value = formatValor(funbentit);
