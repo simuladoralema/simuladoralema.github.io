@@ -4,9 +4,9 @@ let descontoSimplificado = 564.8;
 var base = 0,
     base2023 = 17154.93, // 17154.92055,
     base2024 = 17789.66, // 17789.6526,
-    base2025 = base2024 * (100 + 21.7 + 4) / 100, // 23159.15055;
-    base2026 = base2025 * (100 + 6.1 + 4) / 100,
-    base2027 = base2026 * (100 + 5 + 4) / 100;
+    base2025 = (base2024 * 1.217) * 1.04, // 23159.15055;
+    base2026 = (base2025 * 1.061) * 1.04,
+    base2027 = (base2026 * 1.05) * 1.04;
 /*
 let base = 0;
     base2023 = 17154.93, // 17154.92055,
@@ -131,7 +131,7 @@ function updateQuali(form) {
     let curValue = form.ddQuali.value;
     let cargo = parseInt(form.ddCargo.value, 10);
     if (periodo == 0 || periodo == 1) {
-        if (cargo == 0) {
+        if (cargo == -1 || cargo == 0) {
             newoptions = alloptions.slice(0, alloptions.length);
             newvalues = allvalues.slice(0, alloptions.length);
             newoptions.splice(2, alloptions.length);
@@ -145,7 +145,7 @@ function updateQuali(form) {
     } 
     else if (periodo >= 2){
         
-        if (cargo == 0) {
+        if (cargo == -1 || cargo == 0) {
             newoptions = alloptions.slice(0, alloptions.length);
             newvalues = allvalues.slice(0, alloptions.length);
             newoptions.slice(0, alloptions.length);
@@ -176,9 +176,9 @@ function updateQuali(form) {
 
 function updateCargos(form) {
     let periodo = parseInt(form.ddAno.value, 10);
-    let cargos = Array("Assistente Leg. Adm.", "Técnico de Gestão Adm.", "Consultor Leg. Especial");
-    let cargos2 = Array("Técnico Legislativo", "Analista Legislativo", "Consultor Legislativo");
-    let valores = Array(0, 1, 2);
+    let cargos = Array("Auxiliar Leg. Ope.", "Assistente Leg. Adm.", "Técnico de Gestão Adm.", "Consultor Leg. Especial");
+    let cargos2 = Array("Auxiliar Legislativo", "Técnico Legislativo", "Analista Legislativo", "Consultor Legislativo");
+    let valores = Array(-1, 0, 1, 2);
     let novosCargos = Array();
     let novosValores = Array();
     let curValue = form.ddCargo.value;
@@ -570,7 +570,7 @@ function calcSalario(form) {
     let ftstep = 1.025;
 
     let nivel = 1,
-        correlacoes = [0.2341963333, 0.51129858, 1];
+        correlacoes = [0.096243475, 0.2341963333, 0.51129858, 1];
         //correlacoes = [0.2341958, 0.511298, 1];
         //0,5112985014
         //0,234195651
@@ -595,7 +595,7 @@ function calcSalario(form) {
         nivel = form.ddPadrao.value;
     } 
     
-    let correl = correlacoes[parseInt(form.ddCargo.value)];
+    let correl = correlacoes[parseInt(form.ddCargo.value, 10) + 1];
 
     let ftvb = nivel - 1;
 
