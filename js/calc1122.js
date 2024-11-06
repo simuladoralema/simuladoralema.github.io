@@ -848,14 +848,19 @@ function calcSalario(form) {
 
     let sindicato = 0;
     if (form.ddSindTipo.value != "nao") {
-        if (form.ddSindTipo.value == "vb") {
-            sindicato = vencimento * 0.01;
-        } else if (form.ddSindTipo.value == "rem") {
+        if (form.ddSindTipo.value == "sim") {
+            if (periodo < 2) {
+                sindicato = vencimento * 0.01;
+            } else {
+                sindicato = vencimento * 0.015;
+            }
+        }
+        /* else if (form.ddSindTipo.value == "rem") {
             sindicato = remuneracao * 0.01;
         } else {
             //form.ddSindTipo.value == "cat" 
             sindicato = Math.round(0.01 * correl * Math.ceil(base * Math.pow(ftstep, ftvb)) * ftcarga * 100) / 100;
-        }
+        } */
     }
 
     //A base do PSS é quase a mesma da 'remuneracao', mas sem insalubridade pois a cobrança é opcional
