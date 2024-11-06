@@ -183,11 +183,11 @@ function updateCargos(form) {
     let novosValores = Array();
     let curValue = form.ddCargo.value;
     //let cargo = parseInt(form.ddCargo.value, 10);
-    if (periodo == 0 || periodo == 1) {
+    if (periodo < 4) {
         novosCargos = cargos;
         novosValores = valores;
     } 
-    else if (periodo >= 2){
+    else if (periodo >= 4){
         novosCargos = cargos2;
         novosValores = valores;
     }
