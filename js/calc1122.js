@@ -6,7 +6,10 @@ var base = 0,
     base2024 = 17789.66, // 17789.6526,
     base2025 = (base2024 * 1.217) * 1.04, // 23159.15055;
     base2026 = (base2025 * 1.061) * 1.04,
-    base2027 = (base2026 * 1.05) * 1.04;
+    base2027 = (base2026 * 1.05) * 1.04,
+    aq2025 = 1.19,
+    aq2026 = aq2025 * 1.04,
+    aq2027 = aq2026 * 1.04;
 /*
 let base = 0;
     base2023 = 17154.93, // 17154.92055,
@@ -402,72 +405,72 @@ function calcTempo(form){
     }
 
     if(periodo < 4){
-        if(tempo < 3){
+        if(tempo <= 3){
             form.ddNivel.value = 1;
             form.ddPadrao.value = 1;
-        } else if(tempo >= 3 && tempo < 5.5){
+        } else if(tempo > 3 && tempo <= 5.5){
             form.ddNivel.value = 2;
             form.ddPadrao.value = 2;
-        } else if(tempo >= 5.5 && tempo < 8){
+        } else if(tempo > 5.5 && tempo <= 8){
             form.ddNivel.value = 3;
             form.ddPadrao.value = 3;
-        } else if(tempo >= 8 && tempo < 10.5){
+        } else if(tempo > 8 && tempo <= 10.5){
             form.ddNivel.value = 4;
             form.ddPadrao.value = 4;
-        } else if(tempo >= 10.5 && tempo < 13){
+        } else if(tempo > 10.5 && tempo <= 13){
             form.ddNivel.value = 5;
             form.ddPadrao.value = 5;
-        } else if(tempo >= 13 && tempo < 15.5){
+        } else if(tempo > 13 && tempo <= 15.5){
             form.ddNivel.value = 6;
             form.ddPadrao.value = 6;
-        } else if(tempo >= 15.5 && tempo < 18){
+        } else if(tempo > 15.5 && tempo <= 18){
             form.ddNivel.value = 7;
             form.ddPadrao.value = 7;
-        } else if(tempo >= 18 && tempo < 20.5){
+        } else if(tempo > 18 && tempo <= 20.5){
             form.ddNivel.value = 8;
             form.ddPadrao.value = 8;
-        } else if(tempo >= 20.5 && tempo < 23){
+        } else if(tempo > 20.5 && tempo <= 23){
             form.ddNivel.value = 9;
             form.ddPadrao.value = 9;
-        } else if(tempo >= 23){
+        } else if(tempo > 23){
             form.ddNivel.value = 10;
             form.ddPadrao.value = 10;
         }
     } else if(periodo == 4){
-        if(tempo < 3){
+        if(tempo <= 3){
             form.ddNivel.value = 1;
             form.ddPadrao.value = 1;
-        } else if(tempo >= 3 && tempo < 5){
+        } else if(tempo > 3 && tempo <= 5){
             form.ddNivel.value = 2;
             form.ddPadrao.value = 2;
-        } else if(tempo >= 5 && tempo < 7){
+        } else if(tempo > 5 && tempo <= 7){
             form.ddNivel.value = 3;
             form.ddPadrao.value = 3;
-        } else if(tempo >= 7 && tempo < 10){
+        } else if(tempo > 7 && tempo <= 10){
             form.ddNivel.value = 4;
             form.ddPadrao.value = 4;
-        } else if(tempo >= 10 && tempo < 12){
+        } else if(tempo > 10 && tempo <= 12){
             form.ddNivel.value = 5;
             form.ddPadrao.value = 5;
-        } else if(tempo >= 12 && tempo < 14){
+        } else if(tempo > 12 && tempo <= 14){
             form.ddNivel.value = 6;
             form.ddPadrao.value = 6;
-        } else if(tempo >= 14 && tempo < 17){
+        } else if(tempo > 14 && tempo <= 17){
             form.ddNivel.value = 7;
             form.ddPadrao.value = 7;
-        } else if(tempo >= 17 && tempo < 19){
+        } else if(tempo > 17 && tempo <= 19){
             form.ddNivel.value = 8;
             form.ddPadrao.value = 8;
-        } else if(tempo >= 19 && tempo < 21){
+        } else if(tempo > 19 && tempo <= 21){
             form.ddNivel.value = 9;
             form.ddPadrao.value = 9;
-        } else if(tempo >= 21 && tempo < 24){
+        } else if(tempo > 21 && tempo <= 24){
             form.ddNivel.value = 10;
             form.ddPadrao.value = 10;
-        } else if(tempo >= 24 && tempo < 26){
+        } else if(tempo > 24 && tempo <= 26){
             form.ddNivel.value = 11;
             form.ddPadrao.value = 11;
-        } else if(tempo >= 26){
+        } else if(tempo > 26){
             form.ddNivel.value = 12;
             form.ddPadrao.value = 12;
         }
@@ -673,42 +676,42 @@ function calcSalario(form) {
             aqdiploma = doutorado;
         }
         aqcursos = cursos * valorCursos;
-    } else if (periodo == 2) {
+    } else if (periodo == 2) { // 2025
         aqdiploma = 0;
         if (form.ddQuali.value == 1) {
-            aqdiploma = graduacao * 1.15;
+            aqdiploma = graduacao * aq2025
         } else if (form.ddQuali.value == 2) {
-            aqdiploma = especializacao * 1.15;
+            aqdiploma = especializacao * aq2025;
         } else if (form.ddQuali.value == 3) {
-            aqdiploma = mestrado * 1.15; 
+            aqdiploma = mestrado * aq2025; 
         } else if (form.ddQuali.value == 4) {
-            aqdiploma = doutorado * 1.15;
+            aqdiploma = doutorado * aq2025;
         }
-        aqcursos = cursos * valorCursos * 1.15;
-    } else if (periodo == 3) {
+        aqcursos = cursos * valorCursos * aq2025;
+    } else if (periodo == 3) { // 2026
         aqdiploma = 0;
         if (form.ddQuali.value == 1) {
-            aqdiploma = graduacao * 1.15 * 1.06;
+            aqdiploma = graduacao * aq2026;
         } else if (form.ddQuali.value == 2) {
-            aqdiploma = especializacao * 1.15 * 1.06;
+            aqdiploma = especializacao * aq2026;
         } else if (form.ddQuali.value == 3) {
-            aqdiploma = mestrado * 1.15 * 1.06; 
+            aqdiploma = mestrado * aq2026; 
         } else if (form.ddQuali.value == 4) {
-            aqdiploma = doutorado * 1.15 * 1.06;
+            aqdiploma = doutorado * aq2026;
         }
-        aqcursos = cursos * valorCursos * 1.15 * 1.06;
-    } else if (periodo == 4) {
+        aqcursos = cursos * valorCursos * aq2026;
+    } else if (periodo == 4) { // 2027
         aqdiploma = 0;
         if (form.ddQuali.value == 1) {
-            aqdiploma = graduacao * 1.15 * 1.06 * 1.06;
+            aqdiploma = graduacao * aq2027;
         } else if (form.ddQuali.value == 2) {
-            aqdiploma = especializacao * 1.15 * 1.06 * 1.06;
+            aqdiploma = especializacao * aq2027;
         } else if (form.ddQuali.value == 3) {
-            aqdiploma = mestrado * 1.15 * 1.06 * 1.06; 
+            aqdiploma = mestrado * aq2027; 
         } else if (form.ddQuali.value == 4) {
-            aqdiploma = doutorado * 1.15 * 1.06 * 1.06;
+            aqdiploma = doutorado * aq2027;
         }
-        aqcursos = cursos * valorCursos * 1.15 * 1.06 * 1.06;
+        aqcursos = cursos * valorCursos * aq2027;
     }
 
     qualificacao = aqdiploma + aqcursos;
