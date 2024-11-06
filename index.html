@@ -51,9 +51,9 @@
                 <input type="button" value="Zera simulação 1" onClick="zeraForm(myform);"/>
             </div>
             <form name="myform" action="" class="calcform" method="GET">
-                <div style="text-align: right; margin: 20px;">
+                <!-- <div style="text-align: right; margin: 20px;">
                     <input type="checkbox" name="contra" id="contra1" value="0" onClick="updatePeriodo(this.form);"/>
-                </div>
+                </div> -->
                 <div class="divdata">
                     <ul class="tabs-menu tabs-menu1">
                         <li class="current"><a href="#tab-carreira1">Carreira</a></li>
@@ -95,7 +95,7 @@
                                     %
                                 </label>
                             </div>
-                            <div>
+                            <div id="gratdiv1">
                                 <label>
                                     Grat. Leg.
                                     <input type="checkbox" name="grat" id="grat1" value="0"
@@ -241,7 +241,8 @@
                                             Doutorado
                                         </option>
                                     </select>
-                                </label>                                
+                                </label>  
+                                <input type="text" name="txAQ" value="R$ 0,00" readonly />                              
                             </div>
                             <div>
                                 <label>
@@ -250,6 +251,7 @@
                                         step="1" value="0" style="width: 30px;" onClick="calcSalario(this.form);"
                                         onKeyUp="calcSalario(this.form);" />
                                 </label>
+                                <input type="text" name="txCursos" value="R$ 0,00" readonly /> 
                             </div>
                             <div>
                                 <label>Adic. de risco:
@@ -321,7 +323,7 @@
                                     <input type="text" name="txDepsFunben" value="R$ 0,00" readonly />
                                 </label>
                             </div>
-                            <div>
+                            <div style="display: none">
                                 <label>
                                     Retroativo:
                                     <input type="checkbox" name="retrobox" id="retrobox1" value="0"
@@ -378,7 +380,7 @@
                                     onClick="calcSalario(this.form);" />
                                     <br />
                             </div>
-                            <div class="tab-content_col" > <!-- </div>style="display: block; width: 100%;"> -->
+                            <div style="display: none" class="tab-content_col" > <!-- </div>style="display: block; width: 100%;"> -->
                                 <label for="numOutrosRendTrib1"
                                     style="display: inline-block;">Diferença no aumento:</label>
                                 <input type="number" name="diffReajuste" id="diffReajuste1" min="0"
@@ -440,9 +442,9 @@
                                     Bruto:
                                     <input type="text" name="txBruto" value="0" readonly />
                                 </label>
-                                <label id="aqtext">
+                                <label> <!-- id="aqtext"> -->
                                     AQ:
-                                    <input type="text" name="txQualif" value="0" readonly />
+                                    <input type="text" name="txQualif" value="R$ 0,00" readonly />
                                 </label>
                                 <label>
                                     Líquido:
@@ -510,9 +512,9 @@
                 <input type="button" value="Zera simulação 2" onClick="zeraForm(myform2);"/>
             </div>
             <form name="myform2" action="" class="calcform" method="GET">
-                <div style="text-align: right; margin: 20px;">
+                <!-- <div style="text-align: right; margin: 20px;">
                     <input type="checkbox" name="contra" id="contra2" value="0" onClick="updatePeriodo(this.form);"/>
-                </div>
+                </div> -->
                 <div class="divdata">
                     <ul class="tabs-menu tabs-menu2">
                         <li class="current"><a href="#tab-carreira2">Carreira</a></li>
@@ -554,7 +556,7 @@
                                     %
                                 </label>
                             </div>
-                            <div>
+                            <div id="gratdiv2">
                                 <label>
                                     Grat. Leg.
                                     <input type="checkbox" name="grat" id="grat2" value="0"
@@ -698,7 +700,8 @@
                                             Doutorado
                                         </option>
                                     </select>
-                                </label>                                
+                                </label>  
+                                <input type="text" name="txAQ" value="R$ 0,00" readonly />                               
                             </div>
                             <div>
                                 <label>
@@ -707,6 +710,7 @@
                                         step="1" value="0" style="width: 30px;" onClick="calcSalario(this.form);"
                                         onKeyUp="calcSalario(this.form);" />
                                 </label>
+                                <input type="text" name="txCursos" value="R$ 0,00" readonly /> 
                             </div>
                             <div>
                                 <label>Adic. de risco:
@@ -778,7 +782,7 @@
                                     <input type="text" name="txDepsFunben" value="R$ 0,00" readonly />
                                 </label>
                             </div>
-                            <div>
+                            <div style="display: none">
                                 <label>
                                     Retroativo:
                                     <input type="checkbox" name="retrobox" id="retrobox2" value="0"
@@ -835,7 +839,7 @@
                                     onClick="calcSalario(this.form);" />
                                     <br />
                             </div>
-                            <div class="tab-content_col" > <!-- </div>style="display: block; width: 100%;"> -->
+                            <div style="display: none" class="tab-content_col" > <!-- </div>style="display: block; width: 100%;"> -->
                                 <label for="numOutrosRendTrib2"
                                     style="display: inline-block;">Diferença no aumento:</label>
                                 <input type="number" name="diffReajuste" id="diffReajuste2" min="0"
@@ -897,7 +901,7 @@
                                     Bruto:
                                     <input type="text" name="txBruto" value="0" readonly />
                                 </label>
-                                <label id="aqtext">
+                                <label> <!-- id="aqtext"> -->
                                     AQ:
                                     <input type="text" name="txQualif" value="0" readonly />
                                 </label>
