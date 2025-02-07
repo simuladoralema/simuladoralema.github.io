@@ -404,7 +404,7 @@ function calcTempo(form){
         form.numQuinquenio.value = 35;
     }
 
-    if(periodo < 4){
+    if(periodo < 2){
         if(tempo < 3){
             form.ddNivel.value = 1;
             form.ddPadrao.value = 1;
