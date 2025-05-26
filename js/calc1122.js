@@ -29,6 +29,7 @@ function zeraForm(form){
         form.grat.checked = false;
         form.txGrat.value = "R$ 0,00";
         form.txAQ.value = "R$ 0,00";
+	form.txFG.value = "R$ 0,00";
         form.txCursos.value = "R$ 0,00";
         form.txQualif.value = "R$ 0,00";
         form.txAdicionais.value = "R$ 0,00";
@@ -987,7 +988,7 @@ function calcSalario(form) {
         document.getElementById("diffLiqPor").innerHTML = ((100 * liq2) / liq1).toFixed(0) + "%";
         form.txVB.value = formatValor(vencimento);
         form.txAQ.value = formatValor(aqdiploma);
-	form.txFG.value = formatValor(
+	form.txFG.value = formatValor(fg);
         form.txCursos.value = formatValor(aqcursos);
         form.txAdicionais.value = formatValor(adicionais);
         form.txOutros.value = formatValor(outros);
