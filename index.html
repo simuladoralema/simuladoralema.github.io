@@ -95,6 +95,24 @@
                                     %
                                 </label>
                             </div>
+                            <div>
+                                <label>
+                                    Função:
+                                    <select name="ddFG" id="ddFG1" onchange="calcSalario(this.form);"
+                                        style="width: 150px;">
+                                        <option value="0" selected>
+                                            Nenhuma
+                                        </option>
+                                        <option value="1">
+                                            FG-1
+                                        </option>
+                                        <option value="2">
+                                            FG-2
+                                        </option>
+                                    </select>
+                                </label>  
+                                <input type="text" name="txFG" value="R$ 0,00" readonly />                              
+                            </div>
                             <div id="gratdiv1">
                                 <label>
                                     Grat. Leg.
@@ -555,6 +573,24 @@
                                         onKeyUp="calcSalario(this.form);" />
                                     %
                                 </label>
+                            </div>
+                            <div>
+                                <label>
+                                    Função:
+                                    <select name="ddFG" id="ddFG2" onchange="calcSalario(this.form);"
+                                        style="width: 80px;">
+                                        <option value="0" selected>
+                                            Nenhuma
+                                        </option>
+                                        <option value="1">
+                                            FG-1
+                                        </option>
+                                        <option value="2">
+                                            FG-2
+                                        </option>
+                                    </select>
+                                </label>  
+                                <input type="text" name="txFG" value="R$ 0,00" readonly />                              
                             </div>
                             <div id="gratdiv2">
                                 <label>
