@@ -262,7 +262,7 @@ function formatValor(valor) {
 // Calcula o Imposto de Renda
 function valorIRRF(base, periodo) {
     let aliquota = 0;
-    if (periodo >= 0) { 
+    if (periodo <= 1) { 
         // Ano 2024
         if (base <= 2259.20) {
             aliquota = 0;
@@ -276,7 +276,7 @@ function valorIRRF(base, periodo) {
             aliquota = base * 0.275 - 896.00;
         }
     }
-    else if (periodo > 1) {
+    else if (periodo >= 2) {
         // a partir de maio/2025
         if (base <= 2259.20) {
             aliquota = 0;
