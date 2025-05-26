@@ -209,6 +209,28 @@ function updateCargos(form) {
     calcSalario(form);
 }
 
+function valorFG(FG, periodo) {
+    //FG 1-9 + FCC;
+    let FG2024 = Array(0, 1439.25, 0);
+    let FG2025 = Array(0, 1945.86, 1496.82);
+    let FG2026 = Array(0, 2023.70, 1556.69);
+    let FG2027 = Array(0, 2104.64, 1618.96);
+	
+    let valor = 0;
+    if (periodo <= 1) {
+        valor = FG2024[FG];
+    } else if (periodo == 2) {
+        //a partir de maio/2025
+        valor = FG2025[FG];
+    } else if (periodo == 3) {
+        //a partir de maio/2026
+        valor = FG2026[FG];
+    } else if (periodo >= 4) {
+        //a partir de maio/2027
+        valor = FG2027[FG];
+    }
+    return valor;
+}
 
 /*
 function updatePeriodo(form){
@@ -651,6 +673,8 @@ function calcSalario(form) {
     //console.log('Reajuste: ', reajuste);
     //console.log('Base: ', base);
 
+    let fg = valorFG(parseInt(form.ddFG.value, 10), periodo);
+
     var percQuinquenio = (form.numQuinquenio.value / 100),
         quinquenio = percQuinquenio * vencimento;
         
@@ -858,7 +882,7 @@ function calcSalario(form) {
 
     let adicionais = qualificacao + grat + insal + quinquenio;
     
-    let remuneracao = vencimento + grat + qualificacao + insal + retroativo + quinquenio; //+ outrosRendTribIR + outrosRendTribFEPA;
+    let remuneracao = vencimento + grat + qualificacao + insal + retroativo + quinquenio + fg; //+ outrosRendTribIR + outrosRendTribFEPA;
 
     let sindicato = 0;
     if (form.ddSindTipo.value != "nao") {
@@ -963,6 +987,7 @@ function calcSalario(form) {
         document.getElementById("diffLiqPor").innerHTML = ((100 * liq2) / liq1).toFixed(0) + "%";
         form.txVB.value = formatValor(vencimento);
         form.txAQ.value = formatValor(aqdiploma);
+	form.txFG.value = formatValor(
         form.txCursos.value = formatValor(aqcursos);
         form.txAdicionais.value = formatValor(adicionais);
         form.txOutros.value = formatValor(outros);
