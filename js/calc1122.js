@@ -276,8 +276,22 @@ function valorIRRF(base, periodo) {
             aliquota = base * 0.275 - 896.00;
         }
     }
+    else if (periodo > 1) {
+        // a partir de maio/2025
+        if (base <= 2259.20) {
+            aliquota = 0;
+        } else if (base >= 2259.21 && base <= 2826.65) {
+            aliquota = base * 0.075 - 186.16;
+        } else if (base >= 2826.66 && base <= 3751.05) {
+            aliquota = base * 0.15 - 394.16;
+        } else if (base >= 3751.06 && base <= 4664.68) {
+            aliquota = base * 0.225 - 675.49;
+        } else if (base > 4664.68) {
+            aliquota = base * 0.275 - 908.73;
+        }
+    }
     else {
-        // Outros períodos futuros
+	// periodos futuros	
     }
     return Math.floor(aliquota * 100) / 100;
 }
