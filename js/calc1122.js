@@ -1035,6 +1035,7 @@ function calcSalario(form) {
     //console.log("Qualificacao pre-tab_details: ", qualificacao);
     if (qualificacao > 0) addDetailValue("#tabdetails-rend", formid, "AQ", qualificacao);
     if (quinquenio > 0) addDetailValue("#tabdetails-rend", formid, "Quinquênio", quinquenio);
+    if (fg > 0) addDetailValue("#tabdetails-rend", formid, "FG", fg);
     if (insal > 0) addDetailValue("#tabdetails-rend", formid, "Insal./Pericul.", insal);
     if (retroativo > 0) addDetailValue("#tabdetails-rend", formid, "Retroativo", retroativo);
     if (outrosRendIsnt > 0) addDetailValue("#tabdetails-rend", formid, "Outros Rend. Isen.", outrosRendIsnt);
@@ -1100,6 +1101,7 @@ function inverterform(tipo) {
             form1.retrobox.checked,
 			form1.diffReajuste.value,
 			form1.numTempo.value,
+		form1.ddFG.value,
 			//form1.contra.checked,
         );
 
@@ -1137,6 +1139,7 @@ function inverterform(tipo) {
             form2.retrobox.checked,
 			form2.diffReajuste.value,
 			form2.numTempo.value,
+		form2.ddFG.value,
 			//form2.contra.checked,
         );
     } else if (tipo == "cima") {
@@ -1174,6 +1177,7 @@ function inverterform(tipo) {
             form2.retrobox.checked,
 			form2.diffReajuste.value,
 			form2.numTempo.value,
+		form2.ddFG.value,
 			//form2.contra.checked,
         );
 
@@ -1214,6 +1218,7 @@ function inverterform(tipo) {
             form1.retrobox.checked,
 			form1.diffReajuste.value,
 			form1.numTempo.value,
+		form1.ddFG.value,
 			//form1.contra.checked,
         );
 
@@ -1252,6 +1257,7 @@ function inverterform(tipo) {
 	form1.retrobox.checked = values2[30];
 	form1.diffReajuste.value = values2[31];
 	form1.numTempo.value = values2[32];
+	form1.ddFG.value = values2[33];
 	//form1.contra.checked = values2[33];    
 
     ///////////////////////////////////
@@ -1289,6 +1295,7 @@ function inverterform(tipo) {
 	form2.retrobox.checked = values1[30];
 	form2.diffReajuste.value = values1[31];
 	form2.numTempo.value = values1[32];
+	form2.ddFG.value = values1[33];
 	//form2.contra.checked = values1[33];
 
     updateQuali(form1, values2[0]);
