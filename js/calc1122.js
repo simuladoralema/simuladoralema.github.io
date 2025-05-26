@@ -866,7 +866,7 @@ function calcSalario(form) {
             if (periodo < 2) {
                 sindicato = vencimento * 0.01;
             } else {
-                sindicato = vencimento * 0.015;
+                sindicato = vencimento * 0.01;
             }
         }
         /* else if (form.ddSindTipo.value == "rem") {
