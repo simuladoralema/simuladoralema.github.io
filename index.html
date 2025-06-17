@@ -64,14 +64,14 @@
                             <div>
                                 <label>
                                     Período:
-                                    <select name="ddAno" id="ddAno1" onchange="updateQuali(this.form);">
+                                    <select name="ddAno" id="ddAno1"> <!-- </select> onchange="updateQuali(this.form);"> -->
                                         <!-- <option value="0">
                                             Anterior (até 04/2024)
                                         </option> -->
-                                        <option value="1" selected>
+                                        <option value="1">
                                             Anterior (até abril/2025)
                                         </option>
-                                        <option value="2">
+                                        <option value="2" selected>
                                             Vigente (a partir de maio/2025)
                                             <!-- Proposta Sindsalem (05/2025 a 04/2026) -->
                                         </option>
@@ -126,7 +126,10 @@
                                 <label>
                                     Cargo:
                                     <select name="ddCargo" id="ddCargo1"
-                                        onchange="updateQuali(this.form);">
+                                         onchange="updateQuali(this.form, this.form.ddCargo.value, this.form.ddAno.value);">
+                                        <option value="-1">
+                                            Auxiliar Legislativo Operacional
+                                        </option>
                                         <option value="0">
                                             Assistente Legislativo Administrativa
                                         </option>
@@ -366,8 +369,7 @@
                                 consignado, pagamento de aluguel direto no contracheque ou recebimento de GECC.</small>
                             <h4 style="margin: 0.5em 0 0 0;">Rendimentos</h4>
                             <div class="tab-content_col" > <!-- </div>style="display: block; width: 100%;"> -->
-                                <label for="numOutrosRendTrib1"
-                                    style="display: inline-block;width: 85px;">Tributáveis:</label>
+                                <label for="numOutrosRendTrib10" style="display: inline-block;width: 85px;">Tributáveis:</label>
                                 R$ <input type="number" name="numOutrosRendTrib0" id="numOutrosRendTrib10" min="0"
                                     max="20000" step="0.01" value="0" style="width: 70px;"
                                     onKeyPress="calcSalario(this.form);" onKeyDown="calcSalario(this.form);"
@@ -377,7 +379,7 @@
                                 FEPA <input type="checkbox" name="outrosFEPA0" id="outrosFEPA10" value="0"
                                         onClick="calcSalario(this.form);" />
                                         <br />
-                                <label style="display: inline-block;width: 85px;"></label>
+                                <label for="numOutrosRendTrib11" style="display: inline-block;width: 85px;"></label>
                                 R$ <input type="number" name="numOutrosRendTrib1" id="numOutrosRendTrib11" min="0"
                                     max="20000" step="0.01" value="0" style="width: 70px;"
                                     onKeyPress="calcSalario(this.form);" onKeyDown="calcSalario(this.form);"
@@ -387,7 +389,7 @@
                                 FEPA <input type="checkbox" name="outrosFEPA1" id="outrosFEPA11" value="0"
                                     onClick="calcSalario(this.form);" />
                                     <br />                              
-                                <label style="display: inline-block;width: 85px;"></label>    
+                                <label for="numOutrosRendTrib12" style="display: inline-block;width: 85px;"></label>    
                                 R$ <input type="number" name="numOutrosRendTrib2" id="numOutrosRendTrib12" min="0"
                                     max="20000" step="0.01" value="0" style="width: 70px;"
                                     onKeyPress="calcSalario(this.form);" onKeyDown="calcSalario(this.form);"
@@ -398,9 +400,8 @@
                                     onClick="calcSalario(this.form);" />
                                     <br />
                             </div>
-                            <div style="display: none" class="tab-content_col" > <!-- </div>style="display: block; width: 100%;"> -->
-                                <label for="numOutrosRendTrib1"
-                                    style="display: inline-block;">Diferença no aumento:</label>
+                            <!-- <div style="display: none" class="tab-content_col" >
+                                <label for="numOutrosRendTrib11" style="display: inline-block;">Diferença no aumento:</label>
                                 <input type="number" name="diffReajuste" id="diffReajuste1" min="0"
                                     step="1" value="0" style="width: 40px;" onClick="calcSalario(this.form);"
                                     onKeyUp="calcSalario(this.form);" /> <br/>
@@ -416,10 +417,9 @@
                                         Insal./Peric.:
                                         <input type="text" name="txDifRisco" value="0" readonly />
                                     </label>
-                            </div>
+                            </div> -->
                             <div style="display: block;">
-                                <label for="numOutrosRendIsnt1"
-                                    style="display: inline-block;width: 85px;">Isentos:</label>
+                                <label for="numOutrosRendIsnt1" style="display: inline-block;width: 85px;">Isentos:</label>
                                 R$ <input type="number" name="numOutrosRendIsnt" id="numOutrosRendIsnt1" min="0"
                                     max="20000" step="0.01" value="0" style="width: 70px;"
                                     onKeyPress="calcSalario(this.form);" onKeyDown="calcSalario(this.form);"
@@ -543,14 +543,14 @@
                             <div>
                                 <label>
                                     Período:
-                                    <select name="ddAno" id="ddAno2" onchange="updateQuali(this.form);">
+                                    <select name="ddAno" id="ddAno2"> <!-- </select> onchange="updateQuali(this.form);"> -->
                                         <!-- <option value="0">
                                             Anterior (até 04/2024)
                                         </option> -->
-                                        <option value="1" selected>
+                                        <option value="1">
                                             Anterior (até abril/2025)
                                         </option>
-                                        <option value="2">
+                                        <option value="2" selected>
                                             Vigente (a partir de maio/2025)
                                             <!-- Proposta Sindsalem (05/2025 a 04/2026) -->
                                         </option>
@@ -615,7 +615,7 @@
                                         <option value="1" selected>
                                             Técnico de Gestão Administrativa
                                         </option>
-                                        <option value="2">
+                                        <option value="2" >
                                             Consultor Legislativo Especial
                                         </option>
                                     </select>
@@ -843,22 +843,19 @@
                         <div id="tab-adicionais2" class="tab-content tab-content2">
                             <h4 style="margin: 0.5em 0 0 0;">Adicionais</h4>
                             <div class="tab-content_col"> <!-- style="display: block; width: 100%;"> -->
-                                <label for="numAdic1"
-                                    style="display: inline-block;width: 85px;">Adicional de Periculosidade:</label>
+                                <label for="numAdic11" style="display: inline-block;width: 85px;">Adicional de Periculosidade:</label>
                                 R$ <input type="number" name="numAdic1" id="numAdic11" min="0" max="20000" step="0.01"
                                     value="0" style="width: 70px;" onKeyPress="calcSalario(this.form);"
                                     onKeyDown="calcSalario(this.form);" onKeyUp="calcSalario(this.form);"
                                     onClick="calcSalario(this.form);" />
                                 <br />
-                                <label for="numAdic2"
-                                    style="display: inline-block;width: 85px;">Adicional de Insalubridade:</label>
+                                <label for="numAdic21" style="display: inline-block;width: 85px;">Adicional de Insalubridade:</label>
                                 R$ <input type="number" name="numAdic2" id="numAdic21" min="0" max="20000" step="0.01"
                                     value="0" style="width: 70px;" onKeyPress="calcSalario(this.form);"
                                     onKeyDown="calcSalario(this.form);" onKeyUp="calcSalario(this.form);"
                                     onClick="calcSalario(this.form);" />
                                 <br />
-                                <label for="numAdic3"
-                                    style="display: inline-block;width: 85px;">Adicional de Qualificação:</label>
+                                <label for="numAdic31" style="display: inline-block;width: 85px;">Adicional de Qualificação:</label>
                                 R$ <input type="number" name="numAdic3" id="numAdic31" min="0" max="20000" step="0.01"
                                     value="0" style="width: 70px;" onKeyPress="calcSalario(this.form);"
                                     onKeyDown="calcSalario(this.form);" onKeyUp="calcSalario(this.form);"
@@ -871,8 +868,7 @@
                                 consignado, pagamento de aluguel direto no contracheque ou recebimento de GECC.</small>
                             <h4 style="margin: 0.5em 0 0 0;">Rendimentos</h4>
                             <div class="tab-content_col"> <!-- style="display: block; width: 100%;"> -->
-                                <label for="numOutrosRendTrib2"
-                                    style="display: inline-block;width: 85px;">Tributáveis:</label>
+                                <label for="numOutrosRendTrib20" style="display: inline-block;width: 85px;">Tributáveis:</label>
                                 R$ <input type="number" name="numOutrosRendTrib0" id="numOutrosRendTrib20" min="0"
                                     max="20000" step="0.01" value="0" style="width: 70px;"
                                     onKeyPress="calcSalario(this.form);" onKeyDown="calcSalario(this.form);"
@@ -882,7 +878,7 @@
                                 FEPA <input type="checkbox" name="outrosFEPA0" id="outrosFEPA20" value="0"
                                         onClick="calcSalario(this.form);" />
                                         <br />
-                                <label style="display: inline-block;width: 85px;"></label>
+                                <label for="numOutrosRendTrib21" style="display: inline-block;width: 85px;"></label>
                                 R$ <input type="number" name="numOutrosRendTrib1" id="numOutrosRendTrib21" min="0"
                                     max="20000" step="0.01" value="0" style="width: 70px;"
                                     onKeyPress="calcSalario(this.form);" onKeyDown="calcSalario(this.form);"
@@ -892,7 +888,7 @@
                                 FEPA <input type="checkbox" name="outrosFEPA1" id="outrosFEPA21" value="0"
                                     onClick="calcSalario(this.form);" />
                                     <br />                              
-                                <label style="display: inline-block;width: 85px;"></label>    
+                                <label for="numOutrosRendTrib22" style="display: inline-block;width: 85px;"></label>    
                                 R$ <input type="number" name="numOutrosRendTrib2" id="numOutrosRendTrib22" min="0"
                                     max="20000" step="0.01" value="0" style="width: 70px;"
                                     onKeyPress="calcSalario(this.form);" onKeyDown="calcSalario(this.form);"
@@ -903,9 +899,8 @@
                                     onClick="calcSalario(this.form);" />
                                     <br />
                             </div>
-                            <div style="display: none" class="tab-content_col" > <!-- </div>style="display: block; width: 100%;"> -->
-                                <label for="numOutrosRendTrib2"
-                                    style="display: inline-block;">Diferença no aumento:</label>
+                            <!-- <div style="display: none" class="tab-content_col" >
+                                <label                                     style="display: inline-block;">Diferença no aumento:</label>
                                 <input type="number" name="diffReajuste" id="diffReajuste2" min="0"
                                     step="1" value="0" style="width: 40px;" onClick="calcSalario(this.form);"
                                     onKeyUp="calcSalario(this.form);" /> <br/>
@@ -921,10 +916,9 @@
                                         Insal./Peric.:
                                         <input type="text" name="txDifRisco" value="0" readonly />
                                     </label>
-                            </div>
+                            </div> -->
                             <div style="display: block;">
-                                <label for="numOutrosRendIsnt2"
-                                    style="display: inline-block;width: 85px;">Isentos:</label>
+                                <label for="numOutrosRendIsnt2" style="display: inline-block;width: 85px;">Isentos:</label>
                                 R$ <input type="number" name="numOutrosRendIsnt" id="numOutrosRendIsnt2" min="0"
                                     max="20000" step="0.01" value="0" style="width: 70px;"
                                     onKeyPress="calcSalario(this.form);" onKeyDown="calcSalario(this.form);"
