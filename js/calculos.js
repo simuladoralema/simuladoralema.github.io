@@ -17,7 +17,7 @@ const base2023 = 17154.93, // 17154.92055,
 function zeraForm(form){
     // Zera os campos do formulário 1 ("Simulação 1")
         // Aba "Carreira"
-        form.ddAno.value = 1;
+        form.ddAno.value = 2;
         form.numProposta.value = 0;
         form.grat.checked = false;
         form.txGrat.value = "R$ 0,00";
@@ -26,7 +26,7 @@ function zeraForm(form){
         form.txCursos.value = "R$ 0,00";
         form.txQualif.value = "R$ 0,00";
         form.txAdicionais.value = "R$ 0,00";
-        form.ddCargo.value = 0;
+        form.ddCargo.value = 1;
         form.ddNivel.value = 1;
         form.numQuinquenio.value = 0;
         form.ddQuali.value = 0;
@@ -61,10 +61,10 @@ function zeraForm(form){
         form.outrosIR0.checked = false;
         form.outrosIR1.checked = false;
         form.outrosIR2.checked = false;
-        form.diffReajuste.value = 0;
+        /* form.diffReajuste.value = 0;
         form.txDifVB.value = "R$ 0,00";
         form.txDifGT.value = "R$ 0,00";
-        form.txDifRisco.value = "R$ 0,00";
+        form.txDifRisco.value = "R$ 0,00"; */
         form.numOutrosRendIsnt.value = 0;
         form.numOutros.value = 0;
         form.numTempo.value = 0;
@@ -861,10 +861,10 @@ function inverterform(tipo) {
             form1.outrosFEPA0.checked,
             form1.outrosFEPA1.checked,
             form1.outrosFEPA2.checked,
-            form1.retrobox.checked,
-			form1.diffReajuste.value,
+            //form1.retrobox.checked,
+			//form1.diffReajuste.value,
 			form1.numTempo.value,
-		form1.ddFG.value,
+		    form1.ddFG.value,
 			//form1.contra.checked,
         );
 
@@ -899,8 +899,8 @@ function inverterform(tipo) {
             form2.outrosFEPA0.checked,
             form2.outrosFEPA1.checked,
             form2.outrosFEPA2.checked,
-            form2.retrobox.checked,
-			form2.diffReajuste.value,
+            //form2.retrobox.checked,
+			//form2.diffReajuste.value,
 			form2.numTempo.value,
 		form2.ddFG.value,
 			//form2.contra.checked,
@@ -937,8 +937,8 @@ function inverterform(tipo) {
             form2.outrosFEPA0.checked,
             form2.outrosFEPA1.checked,
             form2.outrosFEPA2.checked,
-            form2.retrobox.checked,
-			form2.diffReajuste.value,
+            //form2.retrobox.checked,
+			//form2.diffReajuste.value,
 			form2.numTempo.value,
 		form2.ddFG.value,
 			//form2.contra.checked,
@@ -978,8 +978,8 @@ function inverterform(tipo) {
             form1.outrosFEPA0.checked,
             form1.outrosFEPA1.checked,
             form1.outrosFEPA2.checked,
-            form1.retrobox.checked,
-			form1.diffReajuste.value,
+            //form1.retrobox.checked,
+			//form1.diffReajuste.value,
 			form1.numTempo.value,
 		form1.ddFG.value,
 			//form1.contra.checked,
@@ -1017,10 +1017,10 @@ function inverterform(tipo) {
     form1.outrosFEPA0.checked = values2[27];
     form1.outrosFEPA1.checked = values2[28];
     form1.outrosFEPA2.checked = values2[29];
-	form1.retrobox.checked = values2[30];
-	form1.diffReajuste.value = values2[31];
-	form1.numTempo.value = values2[32];
-	form1.ddFG.value = values2[33];
+	//form1.retrobox.checked = values2[30];
+	//form1.diffReajuste.value = values2[31];
+	form1.numTempo.value = values2[30];
+	form1.ddFG.value = values2[31];
 	//form1.contra.checked = values2[33];    
 
     ///////////////////////////////////
@@ -1055,10 +1055,10 @@ function inverterform(tipo) {
     form2.outrosFEPA0.checked = values1[27];
     form2.outrosFEPA1.checked = values1[28];
     form2.outrosFEPA2.checked = values1[29];
-	form2.retrobox.checked = values1[30];
-	form2.diffReajuste.value = values1[31];
-	form2.numTempo.value = values1[32];
-	form2.ddFG.value = values1[33];
+	//form2.retrobox.checked = values1[30];
+	//form2.diffReajuste.value = values1[31];
+	form2.numTempo.value = values1[30];
+	form2.ddFG.value = values1[31];
 	//form2.contra.checked = values1[33];
 
     updateQuali(form1, values2[0]);
