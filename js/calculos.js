@@ -19,7 +19,7 @@ function zeraForm(form){
         // Aba "Carreira"
         form.ddAno.value = 2;
         form.numProposta.value = 0;
-        form.grat.checked = false;
+        form.grat.checked = true;
         form.txGrat.value = "R$ 0,00";
         form.txAQ.value = "R$ 0,00";
 	    form.txFG.value = "R$ 0,00";
@@ -341,7 +341,7 @@ function calcTempo(form){
         form.numQuinquenio.value = 35;
     }
 
-    if(periodo < 2){
+    if(periodo <= 3){
         if(tempo < 3){
             form.ddNivel.value = 1;
             form.ddPadrao.value = 1;

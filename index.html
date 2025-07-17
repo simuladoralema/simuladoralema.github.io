@@ -64,7 +64,7 @@
                             <div>
                                 <label>
                                     Período:
-                                    <select name="ddAno" id="ddAno1"> <!-- </select> onchange="updateQuali(this.form);"> -->
+                                    <select name="ddAno" id="ddAno1" onchange="updateQuali(this.form);"> <!-- </select> onchange="updateQuali(this.form);"> -->
                                         <!-- <option value="0">
                                             Anterior (até 04/2024)
                                         </option> -->
@@ -145,13 +145,11 @@
                             <div>
                                 <label>
                                     Tempo de serviço (em anos):
-                                    <input type="number" name="numTempo" id="numTempo1" min="0" max="100" step="1"
+                                    <input type="number" name="numTempo" id="numTempo1" min="0" max="100" step="0.5"
                                     value="0" style="width: 35px;" onClick="calcTempo(this.form);"
                                     onKeyPress="calcTempo(this.form);" onKeyUp="calcTempo(this.form);" />
                                 </label>
-                            </div> 
-                            <!-- 
-                            -->
+                            </div>
                             <div>
                                 <label>
                                     Classe/Nível:
@@ -543,7 +541,7 @@
                             <div>
                                 <label>
                                     Período:
-                                    <select name="ddAno" id="ddAno2"> <!-- </select> onchange="updateQuali(this.form);"> -->
+                                    <select name="ddAno" id="ddAno2" onchange="updateQuali(this.form);"> <!-- </select> onchange="updateQuali(this.form);"> -->
                                         <!-- <option value="0">
                                             Anterior (até 04/2024)
                                         </option> -->
@@ -624,7 +622,7 @@
                             <div>
                                 <label>
                                     Tempo de serviço (em anos):
-                                    <input type="number" name="numTempo" id="numTempo2" min="0" max="100" step="1"
+                                    <input type="number" name="numTempo" id="numTempo2" min="0" max="100" step="0.5"
                                     value="0" style="width: 35px;" onClick="calcTempo(this.form);"
                                     onKeyPress="calcTempo(this.form);" onKeyUp="calcTempo(this.form);" />
                                 </label>
