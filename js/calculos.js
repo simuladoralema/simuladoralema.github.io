@@ -717,8 +717,8 @@ function calcSalario(form) {
     if (form.funben.checked){
         
         var depsfunben = dependentesFunben(form.numDepFunben.value),
-            funbentit = (vencimento + vbretro + diffVB) * 0.03,
-            funbendeps = (vencimento + vbretro + diffVB) * depsfunben;
+            funbentit = vencimento * 0.03,
+            funbendeps = vencimento * depsfunben;
         
         var funben = funbentit + funbendeps;
 
