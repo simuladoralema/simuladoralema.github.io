@@ -73,7 +73,7 @@ function zeraForm(form){
 }
 
 function updateVisibilidade (form, id, estado) {
-    if (form.name == "myform"){
+    if (form.name == "myform1"){
         $("#" + id + "1").css('visibility', estado);
     } else if (form.name == "myform2"){
         $("#" + id + "2").css('visibility', estado);
@@ -191,10 +191,10 @@ function valorFG(FG, periodo) {
 
 // Função para rodar a primeira vez
 function firstload() {
-    updateQuali(myform);
+    updateQuali(myform1);
     updateQuali(myform2);
     //enSind();
-    zeraForm(myform);
+    zeraForm(myform1);
     zeraForm(myform2);
 }
 
@@ -482,7 +482,7 @@ function calcSalario(form) {
         correlacoes = [0.096243475, 0.2341963333, 0.51129858, 1];
 
     if (periodo <= 3) {
-        if (form.name == "myform") {
+        if (form.name == "myform1") {
             $('#ddNivel1').parent().parent().show();
             $('#ddPadrao1').parent().parent().hide();
         } else {
@@ -491,7 +491,7 @@ function calcSalario(form) {
         }
         nivel = parseInt(form.ddNivel.value);
     } else if (periodo >= 4) {
-        if (form.name == "myform") {
+        if (form.name == "myform1") {
             $('#ddNivel1').parent().parent().hide();
             $('#ddPadrao1').parent().parent().show();
         } else {
@@ -748,7 +748,7 @@ function calcSalario(form) {
 
     let salario = bruto - descontos;
 
-    if (form.name == "myform") {
+    if (form.name == "myform1") {
         liq1 = salario;
     } else {
         liq2 = salario;
@@ -784,7 +784,7 @@ function calcSalario(form) {
 
     //Display info on Detailed Results
     let formid = 1;
-    if (form.name == "myform") {
+    if (form.name == "myform1") {
         $("#tabdetails-rend-1").empty();
         $("#tabdetails-desc-1").empty();
         $("#tabdetails-outros-1").empty();
@@ -826,7 +826,7 @@ function addDetailValue(parent, form, name, value) {
 }
 
 function inverterform(tipo) {
-    let form1 = document.forms["myform"];
+    let form1 = document.forms["myform1"];
     let form2 = document.forms["myform2"];
 
     if (tipo == "inverter") {

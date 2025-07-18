@@ -1,6 +1,6 @@
 function saveStorage() {
 	localStorage.clear();
-	var frms = ['myform', 'myform2'];
+	var frms = ['myform1', 'myform2'];
 	$.each(frms, function(i, v) {
 		$('form[name="' + v + '"] *').filter(':input').each(function(i, inp){
 			if ($(inp).attr("id")) {
