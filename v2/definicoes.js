@@ -18,9 +18,22 @@ export const definicoes = {
             },
           },
           qualificacao: {
-            especializacao: 0.05,
-            mestrado: 0.08,
-            doutorado: 0.13
+            graduacao: {
+              label: "Graduação",
+              valor: 450
+            },
+            especializacao: {
+              label: "Especialização",
+              valor: 550 
+            },
+            mestrado: {
+              label: "Mestrado", 
+              valor: 650
+            },
+            doutorado: {
+              label: "Doutorado",
+              valor: 750
+            }
           },
           grupos: {
             A: { quantidade: 3, step: 0.025, stepInicial: 0.025 },
@@ -42,9 +55,22 @@ export const definicoes = {
             },
           },
           qualificacao: {
-            especializacao: 0.05,
-            mestrado: 0.08,
-            doutorado: 0.13
+            graduacao: {
+              label: "Graduação",
+              valor: 0.03
+            },
+            especializacao: {
+              label: "Especialização",
+              valor: 0.05 
+            },
+            mestrado: {
+              label: "Mestrado", 
+              valor: 0.08 
+            },
+            doutorado: {
+              label: "Doutorado",
+              valor: 0.13
+            }
           },
           grupos: {
             A: { quantidade: 3, step: 0.025, stepInicial: 0.025 },
@@ -73,9 +99,22 @@ export const definicoes = {
             },
           },
           qualificacao: {
-            especializacao: 0.05,
-            mestrado: 0.08,
-            doutorado: 0.13
+            graduacao: {
+              label: "Graduação",
+              valor: 0.03
+            },
+            especializacao: {
+              label: "Especialização",
+              valor: 0.05 
+            },
+            mestrado: {
+              label: "Mestrado", 
+              valor: 0.08 
+            },
+            doutorado: {
+              label: "Doutorado",
+              valor: 0.13
+            }
           },
           grupos: {
             A: { quantidade: 3, step: 0.025, stepInicial: 0.025 },
@@ -99,9 +138,22 @@ export const definicoes = {
             },
           },
           qualificacao: {
-            especializacao: 0.05,
-            mestrado: 0.08,
-            doutorado: 0.13
+            graduacao: {
+              label: "Graduação",
+              valor: 0.03
+            },
+            especializacao: {
+              label: "Especialização",
+              valor: 0.05 
+            },
+            mestrado: {
+              label: "Mestrado", 
+              valor: 0.08 
+            },
+            doutorado: {
+              label: "Doutorado",
+              valor: 0.13
+            }
           },
           grupos: {
             A: { quantidade: 3, step: 0.025, stepInicial: 0.025 },
@@ -134,9 +186,22 @@ export const definicoes = {
             },
           },
           qualificacao: {
-            especializacao: 0.05,
-            mestrado: 0.08,
-            doutorado: 0.13
+            graduacao: {
+              label: "Graduação",
+              valor: 0.03
+            },
+            especializacao: {
+              label: "Especialização",
+              valor: 0.05 
+            },
+            mestrado: {
+              label: "Mestrado", 
+              valor: 0.08 
+            },
+            doutorado: {
+              label: "Doutorado",
+              valor: 0.13
+            }
           },
           grupos: {
             A: { quantidade: 5, step: 0.03, stepInicial: 0.04 },
@@ -161,9 +226,22 @@ export const definicoes = {
             },
           },
           qualificacao: {
-            especializacao: 0.05,
-            mestrado: 0.08,
-            doutorado: 0.13
+            graduacao: {
+              label: "Graduação",
+              valor: 0.03
+            },
+            especializacao: {
+              label: "Especialização",
+              valor: 0.05 
+            },
+            mestrado: {
+              label: "Mestrado", 
+              valor: 0.08 
+            },
+            doutorado: {
+              label: "Doutorado",
+              valor: 0.13
+            }
           },
           grupos: {
             A: { quantidade: 5, step: 0.03, stepInicial: 0.04 },
@@ -196,9 +274,22 @@ export const definicoes = {
             },
           },
           qualificacao: {
-            especializacao: 0.05,
-            mestrado: 0.08,
-            doutorado: 0.13
+            graduacao: {
+              label: "Graduação",
+              valor: 0.03
+            },
+            especializacao: {
+              label: "Especialização",
+              valor: 0.05 
+            },
+            mestrado: {
+              label: "Mestrado", 
+              valor: 0.08 
+            },
+            doutorado: {
+              label: "Doutorado",
+              valor: 0.13
+            }
           },
           grupos: {
             A: { quantidade: 3, step: 0.025 },
@@ -223,9 +314,22 @@ export const definicoes = {
             },
           },
           qualificacao: {
-            especializacao: 0.05,
-            mestrado: 0.08,
-            doutorado: 0.13
+            graduacao: {
+              label: "Graduação",
+              valor: 0.03
+            },
+            especializacao: {
+              label: "Especialização",
+              valor: 0.05 
+            },
+            mestrado: {
+              label: "Mestrado", 
+              valor: 0.08 
+            },
+            doutorado: {
+              label: "Doutorado",
+              valor: 0.13
+            }
           },
           grupos: {
             A: { quantidade: 3, step: 0.025 },
@@ -245,6 +349,6 @@ export const definicoes = {
 export const gratLabels = {
   alema: 'Gratificação Legislativa (R$): ',
   tjma: 'GAJ (R$): ',
-  trema: 'GAJ (R$): ',
+  trema: 'GAJ (R$): '
   // etc...
 };

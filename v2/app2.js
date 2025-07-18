@@ -20,6 +20,7 @@ function criarCard(id) {
     periodo: 'a25',
     cargo: 'tecnico',
     nivel: 'A1',
+    qualificacao: 'graduacao',
     salario: definicoes.alema.a25.cargos.assistente.niveis.A1.salario,
     alimentacao: 0,
     //adicionais: definicoes.alema.a25.cargos.assistente.niveis.A1.adicionais,
@@ -30,6 +31,7 @@ function criarCard(id) {
     aba: 'salario'
   };
   console.log(`Salário inicial: ${state.salario}`),
+  console.log(`Qualificação: ${state.qualificacao}`),
   
   function nivelInicial() {
     return Object.keys(definicoes[state.carreira][state.periodo].cargos[state.cargo].niveis)[0];
@@ -39,6 +41,9 @@ function criarCard(id) {
   //card.className = 'bg-white p-6 rounded shadow mb-8 w-full sm:w-[500px] flex-shrink-0 relative';
   card.className = 'bg-white p-6 rounded shadow mb-4 w-full max-w-3xl relative sm:mr-4';
   card.classList.add('flex', 'flex-col', 'gap-4');
+  //card.classList.add('outline-3', 'outline-offset-1', 'outline-double', 'outline-cyan-500');
+  //card.classList.add('shadow-2xl'); //('shadow-xl', 'shadow-xl/20', 'inset-shadow-sm', 'inset-shadow-indigo-500/50');
+  card.classList.add('bg-indigo-500', 'shadow-lg', 'shadow-indigo-500/30');
   card.classList.add('relative');
   card.dataset.id = id;
   card.innerHTML = `
@@ -47,10 +52,11 @@ function criarCard(id) {
     </button>
     <h2 class="text-2xl font-semibold mb-4">Carreira</h2>
     <div class="mb-4 grid grid-cols-1 md:grid-cols-3 gap-4">
-      <select data-field="carreira" class="border rounded p-2 w-full"></select>
       <select data-field="periodo" class="border rounded p-2 w-full"></select>
+      <select data-field="carreira" class="border rounded p-2 w-full"></select>
       <select data-field="cargo" class="border rounded p-2 w-full"></select>
       <select data-field="nivel" class="border rounded p-2 w-full"></select>
+      <select data-field="qualificacao" class="border rounded p-2 w-full"></select>
     </div>
     <div class="mb-4 border-b border-gray-200">
       <nav class="flex space-x-4">
@@ -83,6 +89,7 @@ function criarCard(id) {
       </div>
     </form>
     <div class="resultado border-t border-gray-200 pt-4 text-gray-800">
+    <h2 class="text-2xl font-semibold mb-4">Resultado</h2>
       <p><strong>INSS:</strong> <span data-result="inss">R$ 0,00</span></p>
       <p><strong>IRPF:</strong> <span data-result="irpf">R$ 0,00</span></p>
       <p><strong>Bruto:</strong> <span data-result="bruto">R$ 0,00</span></p>
@@ -93,10 +100,11 @@ function criarCard(id) {
  // const selectCarreira = card.querySelector('[data-field="carreira"]');
  
   const selects = {
-    carreira: card.querySelector('[data-field="carreira"]'),
     periodo: card.querySelector('[data-field="periodo"]'),
+    carreira: card.querySelector('[data-field="carreira"]'),
     cargo: card.querySelector('[data-field="cargo"]'),
-    nivel: card.querySelector('[data-field="nivel"]')
+    nivel: card.querySelector('[data-field="nivel"]'),
+    qualificacao: card.querySelector('[data-field="qualificacao"]')
   };
   const inputs = card.querySelectorAll('.input-field');
   const tabs = card.querySelectorAll('.tab-btn');
@@ -133,7 +141,11 @@ function criarCard(id) {
     const niveis = Object.keys(cargo.niveis).map(key =>
       `<option value="${key}">${key}</option>`).join('');
     selects.nivel.innerHTML = niveis;
-  }
+
+    const qualificacao = Object.entries(cargo.qualificacao).map(([key, val]) =>
+      `<option value="${key}">${val.label}</option>`).join('');
+    selects.qualificacao.innerHTML = qualificacao;
+}
 
   function atualizarValores() {
     // console.log('DEBUG:', {
@@ -155,6 +167,7 @@ function criarCard(id) {
     state.salario = dados.salario;
     state.alimentacao = dados.adicionais.alimentacao; 
     state.gratificacao = dados.adicionais.gratificacao; 
+    state.qualificacao = dados.qualificacao;
     state.adicionais = dados.total; // soma dos adicionais
     console.log(`Salário: ${state.salario.toFixed(2)} - GRAT: ${state.gratificacao.toFixed(2)}`);
     //state.outros = dados.outros;
@@ -165,6 +178,7 @@ function criarCard(id) {
     selects.periodo.value = state.periodo;
     selects.cargo.value = state.cargo;
     selects.nivel.value = state.nivel;
+    selects.qualificacao.value = state.qualificacao;
 
 
 
@@ -223,7 +237,9 @@ function criarCard(id) {
 
     const niveis = cargos[state.cargo].niveis;
     state.nivel = Object.keys(niveis)[0];
-    // state.nivel = nivelInicial(); 
+
+    const qualificacao = cargos[state.cargo].qualificacao;
+    state.qualificacao = Object.keys(qualificacao)[0];
 
     atualizarSelects();
     atualizarValores();
@@ -238,6 +254,9 @@ function criarCard(id) {
 
     const niveis = cargos[state.cargo].niveis;
     state.nivel = Object.keys(niveis)[0];
+
+    const qualificacao = cargos[state.cargo].qualificacao;
+    state.qualificacao = Object.keys(qualificacao)[0];
     //state.nivel = nivelInicial(); 
     
     atualizarSelects();
@@ -250,6 +269,9 @@ function criarCard(id) {
 
     const niveis = definicoes[state.carreira][state.periodo].cargos[state.cargo].niveis;
     state.nivel = Object.keys(niveis)[0];
+
+    const qualificacao = cargos[state.cargo].qualificacao;
+    state.qualificacao = Object.keys(qualificacao)[0];
     // state.nivel = nivelInicial();
 
     atualizarSelects();

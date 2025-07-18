@@ -67,8 +67,11 @@ export function prepararDefinicoes(definicoes) {
           // const adicionaisBase = cargo.adicionais + base * cargo.gratificacao + cargo.alimentacao; //|| 100;
           const grupos = cargo.grupos;
           // Soma os adicionais, tratando % e valores fixos
-          let adicionaisNome = '';
-          let adicionaisBase = 0;
+          let adicionaisNome = '',
+              adicionaisBase = 0,
+              qualificacaoNome = '',
+              qualificacaoBase = 0;
+
           for (const adicionalKey in cargo.adicionais) {
             const adicional = cargo.adicionais[adicionalKey];
             if (adicional.valor < 1) {
@@ -84,10 +87,26 @@ export function prepararDefinicoes(definicoes) {
             }
           } 
 
+          for (const qualificacaoKey in cargo.qualificacao) {
+            const qualificacao = cargo.qualificacao[qualificacaoKey];
+            if (qualificacao.valor < 1) {
+              // Percentual (ex: 0.05 => 5%)
+              qualificacaoNome = qualificacaoKey;
+              // console.log(`Adicional: ${adicionalKey} - Valor: ${adicional.valor}`);
+              qualificacaoBase += base * qualificacao.valor;
+            } else {
+              // Valor fixo
+              qualificacaoNome = qualificacaoKey;
+              // console.log(`Adicional: ${adicionalKey} - Valor: ${adicional.valor}`);
+              qualificacaoBase += qualificacao.valor;
+            }
+          } 
+
           cargo.niveis = {};
           //console.log(`Criando níveis para ${cargo.label} (${periodoKey}) - Base: ${base}, Adicionais: ${adicionaisNome} = ${adicionaisBase}`);
           let salarioAtual = base;
           let adicionaisAtual = adicionaisBase;
+          let qualificacaoAtual = qualificacaoBase;
           // let alimentacaoAtual = cargo.alimentacao || 0;
 
           const nomesGrupos = Object.keys(grupos);
@@ -106,6 +125,7 @@ export function prepararDefinicoes(definicoes) {
                     gratificacao: parseFloat((salarioAtual * cargo.adicionais.gratificacao.valor).toFixed(2)),
                     alimentacao: parseFloat((cargo.adicionais.alimentacao.valor).toFixed(2))
                   },
+                  qualificacao: parseFloat(qualificacaoAtual.toFixed(2)),
                   total: parseFloat(adicionaisAtual.toFixed(2)) 
                 };
               }
