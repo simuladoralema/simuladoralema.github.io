@@ -1,16 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <!-- Google tag (gtag.js)
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-69BHTXW8RH"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-
-        gtag('config', 'G-69BHTXW8RH');
-    </script> 
-    <meta name="google-site-verification" content="H8pNplduoGqN7y_l3C6x-KmyIFN88WcaWOGr34FxF70" /> -->
     <meta charset="utf-8" />
     <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> -->
     <title>
@@ -22,18 +12,14 @@
     <link rel="icon" type="image/png" href="brasao.png">
     <link rel="stylesheet" href="css/normalize.css" />
     <link rel="stylesheet" href="css/main.css" />
-    <!--<link rel="stylesheet" href="css/tabs.css" />-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="js/main.js"></script>
     <script src="js/calculos.js"></script>
-    <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0242087922176548"
-        crossorigin="anonymous"></script> -->
 </head>
 
 <body onLoad="firstload();">
-    <!--<div id="fb-root" style="display:none;"></div>-->
     <header>
         <h1>
             Simulador de Salário dos Servidores da ALEMA
@@ -51,9 +37,6 @@
                 <input type="button" value="Zera simulação 1" onClick="zeraForm(myform);"/>
             </div>
             <form name="myform" action="" class="calcform" method="GET">
-                <!-- <div style="text-align: right; margin: 20px;">
-                    <input type="checkbox" name="contra" id="contra1" value="0" onClick="updatePeriodo(this.form);"/>
-                </div> -->
                 <div class="divdata">
                     <ul class="tabs-menu tabs-menu1">
                         <li class="current"><a href="#tab-carreira1">Carreira</a></li>
@@ -64,25 +47,11 @@
                             <div>
                                 <label>
                                     Período:
-                                    <select name="ddAno" id="ddAno1" onchange="updateQuali(this.form);"> <!-- </select> onchange="updateQuali(this.form);"> -->
-                                        <!-- <option value="0">
-                                            Anterior (até 04/2024)
-                                        </option> -->
-                                        <option value="1">
-                                            Anterior (até abril/2025)
-                                        </option>
-                                        <option value="2" selected>
-                                            Vigente (a partir de maio/2025)
-                                            <!-- Proposta Sindsalem (05/2025 a 04/2026) -->
-                                        </option>
-                                        <option value="3">
-                                            2026 (2025 + 6,1% + 4%)
-                                            <!-- Proposta Sindsalem (05/2026 a 04/2027) -->
-                                        </option>
-                                        <option value="4">
-                                            2027 (2026 + 5% + 4%)
-                                            <!-- Proposta Sindsalem (a partir de 05/2027) -->
-                                        </option>
+                                    <select name="ddAno" id="ddAno1" onchange="updateQuali(this.form);">
+                                        <option value="1">Anterior (até abril/2025)</option>
+                                        <option value="2" selected>Vigente (a partir de maio/2025)</option>
+                                        <option value="3">2026 (2025 + 6,1% + 4%)</option>
+                                        <option value="4">2027 (2026 + 5% + 4%)</option>
                                     </select>
                                 </label>
                             </div>
@@ -100,15 +69,9 @@
                                     Função:
                                     <select name="ddFG" id="ddFG1" onchange="calcSalario(this.form);"
                                         style="width: 80px;">
-                                        <option value="0" selected>
-                                            Não
-                                        </option>
-                                        <option value="1">
-                                            FG-1
-                                        </option>
-                                        <option value="2">
-                                            FG-2
-                                        </option>
+                                        <option value="0" selected>Não</option>
+                                        <option value="1">FG-1</option>
+                                        <option value="2">FG-2</option>
                                     </select>
                                 </label>  
                                 <input type="text" name="txFG" value="R$ 0,00" readonly />                              
@@ -127,18 +90,10 @@
                                     Cargo:
                                     <select name="ddCargo" id="ddCargo1"
                                          onchange="updateQuali(this.form, this.form.ddCargo.value, this.form.ddAno.value);">
-                                        <option value="-1">
-                                            Auxiliar Legislativo Operacional
-                                        </option>
-                                        <option value="0">
-                                            Assistente Legislativo Administrativa
-                                        </option>
-                                        <option value="1" selected>
-                                            Técnico de Gestão Administrativa
-                                        </option>
-                                        <option value="2">
-                                            Consultor Legislativo Especial
-                                        </option>
+                                        <option value="-1">Auxiliar Legislativo Operacional</option>
+                                        <option value="0">Assistente Legislativo Administrativa</option>
+                                        <option value="1" selected>Técnico de Gestão Administrativa</option>
+                                        <option value="2">Consultor Legislativo Especial</option>
                                     </select>
                                 </label>
                             </div>
@@ -154,36 +109,16 @@
                                 <label>
                                     Classe/Nível:
                                     <select name="ddNivel" id="ddNivel1" onchange="calcSalario(this.form);">
-                                        <option value="1" selected>
-                                            A1
-                                        </option>
-                                        <option value="2">
-                                            A2
-                                        </option>
-                                        <option value="3">
-                                            A3
-                                        </option>
-                                        <option value="4">
-                                            B1
-                                        </option>
-                                        <option value="5">
-                                            B2
-                                        </option>
-                                        <option value="6">
-                                            B3
-                                        </option>
-                                        <option value="7">
-                                            C1
-                                        </option>
-                                        <option value="8">
-                                            C2
-                                        </option>
-                                        <option value="9">
-                                            C3
-                                        </option>
-                                        <option value="10">
-                                            C4
-                                        </option>
+                                        <option value="1" selected>A1</option>
+                                        <option value="2">A2</option>
+                                        <option value="3">A3</option>
+                                        <option value="4">B1</option>
+                                        <option value="5">B2</option>
+                                        <option value="6">B3</option>
+                                        <option value="7">C1</option>
+                                        <option value="8">C2</option>
+                                        <option value="9">C3</option>
+                                        <option value="10">C4</option>
                                     </select>
                                 </label>
                             </div>
@@ -191,42 +126,18 @@
                                 <label>                                    
                                     Classe/Nível:
                                     <select name="ddPadrao" id="ddPadrao1" onchange="calcSalario(this.form);">
-                                        <option value="1" selected>
-                                            A1
-                                        </option>
-                                        <option value="2">
-                                            A2
-                                        </option>
-                                        <option value="3">
-                                            A3
-                                        </option>
-                                        <option value="4">
-                                            B1
-                                        </option>
-                                        <option value="5">
-                                            B2
-                                        </option>
-                                        <option value="6">
-                                            B3
-                                        </option>
-                                        <option value="7">
-                                            C1
-                                        </option>
-                                        <option value="8">
-                                            C2
-                                        </option>
-                                        <option value="9">
-                                            C3
-                                        </option>
-                                        <option value="10">
-                                            D1
-                                        </option>
-                                        <option value="11">
-                                            D2
-                                        </option>
-                                        <option value="12">
-                                            D3
-                                        </option>
+                                        <option value="1" selected>A1</option>
+                                        <option value="2">A2</option>
+                                        <option value="3">A3</option>
+                                        <option value="4">B1</option>
+                                        <option value="5">B2</option>
+                                        <option value="6">B3</option>
+                                        <option value="7">C1</option>
+                                        <option value="8">C2</option>
+                                        <option value="9">C3</option>
+                                        <option value="10">D1</option>
+                                        <option value="11">D2</option>
+                                        <option value="12">D3</option>
                                     </select>
                                 </label>
                             </div>
@@ -244,21 +155,11 @@
                                     Qualificação (AQ-I a AQ-IV):
                                     <select name="ddQuali" id="ddQuali1" onchange="calcSalario(this.form);"
                                         style="width: 150px;">
-                                        <option value="0" selected>
-                                            Exigência Mínima
-                                        </option>
-                                        <option value="1">
-                                            Graduação
-                                        </option>
-                                        <option value="2">
-                                            Especialização
-                                        </option>
-                                        <option value="3">
-                                            Mestrado
-                                        </option>
-                                        <option value="4">
-                                            Doutorado
-                                        </option>
+                                        <option value="0" selected>Exigência Mínima</option>
+                                        <option value="1">Graduação</option>
+                                        <option value="2">Especialização</option>
+                                        <option value="3">Mestrado</option>
+                                        <option value="4">Doutorado</option>
                                     </select>
                                 </label>  
                                 <input type="text" name="txAQ" value="R$ 0,00" readonly />                              
@@ -276,21 +177,11 @@
                                 <label>Adic. de risco:
                                     <select name="ddInsa" id="ddInsa1" onchange="calcSalario(this.form);"
                                         style="width: 150px;">
-                                        <option value="0" selected>
-                                            Nenhum
-                                        </option>
-                                        <option value="0.2">
-                                            Insalubridade (20%)
-                                        </option>
-                                        <option value="0.3">
-                                            Insalubridade (30%)
-                                        </option>
-                                        <option value="0.4">
-                                            Insalubridade (40%)
-                                        </option>
-                                        <option value="0.3">
-                                            Periculosidade (30%)
-                                        </option>
+                                        <option value="0" selected>Nenhum</option>
+                                        <option value="0.2">Insalubridade (20%)</option>
+                                        <option value="0.3">Insalubridade (30%)</option>
+                                        <option value="0.4">Insalubridade (40%)</option>
+                                        <option value="0.3">Periculosidade (30%)</option>
                                     </select>
                                 </label>
                                 <input type="text" name="txInsa" style="width: 82px" value="R$ 0,00" readonly />
@@ -315,12 +206,8 @@
                                     Sindicato:
                                     <select name="ddSindTipo" id="ddSindTipo1" onchange="calcSalario(this.form);"
                                         style="width: 110px;">
-                                        <option value="nao" selected>
-                                            Não filiado
-                                        </option>
-                                        <option value="sim">
-                                            Filiado
-                                        </option>
+                                        <option value="nao" selected>Não filiado</option>
+                                        <option value="sim">Filiado</option>
                                     </select>
                                     <input type="text" name="txSindicato" value="R$ 0,00" readonly />
                                 </label>
@@ -398,24 +285,6 @@
                                     onClick="calcSalario(this.form);" />
                                     <br />
                             </div>
-                            <!-- <div style="display: none" class="tab-content_col" >
-                                <label for="numOutrosRendTrib11" style="display: inline-block;">Diferença no aumento:</label>
-                                <input type="number" name="diffReajuste" id="diffReajuste1" min="0"
-                                    step="1" value="0" style="width: 40px;" onClick="calcSalario(this.form);"
-                                    onKeyUp="calcSalario(this.form);" /> <br/>
-                                    <label>
-                                        VB:
-                                        <input type="text" name="txDifVB" value="0" readonly />
-                                    </label>
-                                    <label>
-                                        Grat.:
-                                        <input type="text" name="txDifGT" value="0" readonly />
-                                    </label>
-                                    <label>
-                                        Insal./Peric.:
-                                        <input type="text" name="txDifRisco" value="0" readonly />
-                                    </label>
-                            </div> -->
                             <div style="display: block;">
                                 <label for="numOutrosRendIsnt1" style="display: inline-block;width: 85px;">Isentos:</label>
                                 R$ <input type="number" name="numOutrosRendIsnt" id="numOutrosRendIsnt1" min="0"
@@ -442,53 +311,20 @@
                     <div class="tabresults">
                         <div class="tab-content3 tab-resumo" id="tab-resumo1">
                             <div class="divresults_col" style="float: left;">
-                                <label>
-                                    Vencimento:
-                                    <input type="text" name="txVB" value="0" readonly />
-                                </label>                                
-                                <label>
-                                    Adicionais:
-                                    <input type="text" name="txAdicionais" value="0" readonly />
-                                </label>
-                                <label>
-                                    Outros:
-                                    <input type="text" name="txOutros" value="0" readonly />
-                                </label>
-                                <label>
-                                    Bruto:
-                                    <input type="text" name="txBruto" value="0" readonly />
-                                </label>
-                                <label> <!-- id="aqtext"> -->
-                                    AQ:
-                                    <input type="text" name="txQualif" value="R$ 0,00" readonly />
-                                </label>
-                                <label>
-                                    Líquido:
-                                    <input type="text" name="txResult" value="0" readonly />
-                                </label>
+                                <label>Vencimento:<input type="text" name="txVB" value="0" readonly /></label>                                
+                                <label>Adicionais:<input type="text" name="txAdicionais" value="0" readonly /></label>
+                                <label>Outros:<input type="text" name="txOutros" value="0" readonly /></label>
+                                <label>Bruto:<input type="text" name="txBruto" value="0" readonly /></label>
+                                <label>AQ:<input type="text" name="txQualif" value="R$ 0,00" readonly /></label>
+                                <label>Líquido:<input type="text" name="txResult" value="0" readonly /></label>
                             </div>
                             <div class="divresults_col">
 
-                                <label>
-                                    Base FEPA:
-                                    <input type="text" name="txbINSS" value="0" readonly />
-                                </label>
-                                <label>
-                                    Base IRRF:
-                                    <input type="text" name="txbIRRF" value="0" readonly />
-                                </label>
-                                <label>
-                                    FEPA:
-                                    <input type="text" name="txInss" value="0" readonly />
-                                </label>                                
-                                <label>
-                                    IRRF:
-                                    <input type="text" name="txIrrf" value="0" readonly />
-                                </label>
-                                <label>
-                                    Descontos:
-                                    <input type="text" name="txdesconto" value="0" readonly />
-                                </label>
+                                <label style="display: none;">Base FEPA:<input type="text" name="txbINSS" value="0" readonly /></label>
+                                <label>Base IRRF:<input type="text" name="txbIRRF" value="0" readonly /></label>
+                                <label>IRRF:<input type="text" name="txIrrf" value="0" readonly /></label>
+                                <label>FEPA:<input type="text" name="txInss" value="0" readonly /></label>                                
+                                <label>Descontos:<input type="text" name="txdesconto" value="0" readonly /></label>
                             </div>
                         </div>
                         <div id="ticketdiv1" style="font-style: italic;">
@@ -528,9 +364,6 @@
                 <input type="button" value="Zera simulação 2" onClick="zeraForm(myform2);"/>
             </div>
             <form name="myform2" action="" class="calcform" method="GET">
-                <!-- <div style="text-align: right; margin: 20px;">
-                    <input type="checkbox" name="contra" id="contra2" value="0" onClick="updatePeriodo(this.form);"/>
-                </div> -->
                 <div class="divdata">
                     <ul class="tabs-menu tabs-menu2">
                         <li class="current"><a href="#tab-carreira2">Carreira</a></li>
@@ -541,25 +374,11 @@
                             <div>
                                 <label>
                                     Período:
-                                    <select name="ddAno" id="ddAno2" onchange="updateQuali(this.form);"> <!-- </select> onchange="updateQuali(this.form);"> -->
-                                        <!-- <option value="0">
-                                            Anterior (até 04/2024)
-                                        </option> -->
-                                        <option value="1">
-                                            Anterior (até abril/2025)
-                                        </option>
-                                        <option value="2" selected>
-                                            Vigente (a partir de maio/2025)
-                                            <!-- Proposta Sindsalem (05/2025 a 04/2026) -->
-                                        </option>
-                                        <option value="3">
-                                            2026 (2025 + 6,1% + 4%)
-                                            <!-- Proposta Sindsalem (05/2026 a 04/2027) -->
-                                        </option>
-                                        <option value="4">
-                                            2027 (2026 + 5% + 4%)
-                                            <!-- Proposta Sindsalem (a partir de 05/2027) -->
-                                        </option>
+                                    <select name="ddAno" id="ddAno2" onchange="updateQuali(this.form);">
+                                        <option value="1">Anterior (até abril/2025)</option>
+                                        <option value="2" selected>Vigente (a partir de maio/2025)</option>
+                                        <option value="3">2026 (2025 + 6,1% + 4%)</option>
+                                        <option value="4">2027 (2026 + 5% + 4%)</option>
                                     </select>
                                 </label>
                             </div>
@@ -577,15 +396,9 @@
                                     Função:
                                     <select name="ddFG" id="ddFG2" onchange="calcSalario(this.form);"
                                         style="width: 80px;">
-                                        <option value="0" selected>
-                                            Não
-                                        </option>
-                                        <option value="1">
-                                            FG-1
-                                        </option>
-                                        <option value="2">
-                                            FG-2
-                                        </option>
+                                        <option value="0" selected>Não</option>
+                                        <option value="1">FG-1</option>
+                                        <option value="2">FG-2</option>
                                     </select>
                                 </label>  
                                 <input type="text" name="txFG" value="R$ 0,00" readonly />                              
@@ -604,18 +417,10 @@
                                     Cargo:
                                     <select name="ddCargo" id="ddCargo2"
                                         onchange="updateQuali(this.form, this.form.ddCargo.value, this.form.ddAno.value);">
-                                        <option value="-1">
-                                            Auxiliar Legislativo Operacional
-                                        </option>
-                                        <option value="0">
-                                            Assistente Legislativo Administrativo
-                                        </option>
-                                        <option value="1" selected>
-                                            Técnico de Gestão Administrativa
-                                        </option>
-                                        <option value="2" >
-                                            Consultor Legislativo Especial
-                                        </option>
+                                        <option value="-1">Auxiliar Legislativo Operacional</option>
+                                        <option value="0">Assistente Legislativo Administrativo</option>
+                                        <option value="1" selected>Técnico de Gestão Administrativa</option>
+                                        <option value="2" >Consultor Legislativo Especial</option>
                                     </select>
                                 </label>
                             </div>
@@ -631,36 +436,16 @@
                                 <label>
                                     Classe/Nível:
                                     <select name="ddNivel" id="ddNivel2" onchange="calcSalario(this.form);">
-                                        <option value="1" selected>
-                                            A1
-                                        </option>
-                                        <option value="2">
-                                            A2
-                                        </option>
-                                        <option value="3">
-                                            A3
-                                        </option>
-                                        <option value="4">
-                                            B1
-                                        </option>
-                                        <option value="5">
-                                            B2
-                                        </option>
-                                        <option value="6">
-                                            B3
-                                        </option>
-                                        <option value="7">
-                                            C1
-                                        </option>
-                                        <option value="8">
-                                            C2
-                                        </option>
-                                        <option value="9">
-                                            C3
-                                        </option>
-                                        <option value="10">
-                                            C4
-                                        </option>
+                                        <option value="1" selected>A1</option>
+                                        <option value="2">A2</option>
+                                        <option value="3">A3</option>
+                                        <option value="4">B1</option>
+                                        <option value="5">B2</option>
+                                        <option value="6">B3</option>
+                                        <option value="7">C1</option>
+                                        <option value="8">C2</option>
+                                        <option value="9">C3</option>
+                                        <option value="10">C4</option>
                                     </select>
                                 </label>
                             </div>
@@ -668,42 +453,18 @@
                                 <label>                                    
                                     Classe/Nível:
                                     <select name="ddPadrao" id="ddPadrao2" onchange="calcSalario(this.form);">
-                                        <option value="1" selected>
-                                            A1
-                                        </option>
-                                        <option value="2">
-                                            A2
-                                        </option>
-                                        <option value="3">
-                                            A3
-                                        </option>
-                                        <option value="4">
-                                            B1
-                                        </option>
-                                        <option value="5">
-                                            B2
-                                        </option>
-                                        <option value="6">
-                                            B3
-                                        </option>
-                                        <option value="7">
-                                            C1
-                                        </option>
-                                        <option value="8">
-                                            C2
-                                        </option>
-                                        <option value="9">
-                                            C3
-                                        </option>
-                                        <option value="10">
-                                            D1
-                                        </option>
-                                        <option value="11">
-                                            D2
-                                        </option>
-                                        <option value="12">
-                                            D3
-                                        </option>
+                                        <option value="1" selected>A1</option>
+                                        <option value="2">A2</option>
+                                        <option value="3">A3</option>
+                                        <option value="4">B1</option>
+                                        <option value="5">B2</option>
+                                        <option value="6">B3</option>
+                                        <option value="7">C1</option>
+                                        <option value="8">C2</option>
+                                        <option value="9">C3</option>
+                                        <option value="10">D1</option>
+                                        <option value="11">D2</option>
+                                        <option value="12">D3</option>
                                     </select>
                                 </label>
                             </div>
@@ -721,21 +482,11 @@
                                     Qualificação (AQ-I a AQ-IV):
                                     <select name="ddQuali" id="ddQuali2" onchange="calcSalario(this.form);"
                                         style="width: 150px;">
-                                        <option value="0" selected>
-                                            Exigência Mínima
-                                        </option>
-                                        <option value="1">
-                                            Graduação
-                                        </option>
-                                        <option value="2">
-                                            Especialização
-                                        </option>
-                                        <option value="3">
-                                            Mestrado
-                                        </option>
-                                        <option value="4">
-                                            Doutorado
-                                        </option>
+                                        <option value="0" selected>Exigência Mínima</option>
+                                        <option value="1">Graduação</option>
+                                        <option value="2">Especialização</option>
+                                        <option value="3">Mestrado</option>
+                                        <option value="4">Doutorado</option>
                                     </select>
                                 </label>  
                                 <input type="text" name="txAQ" value="R$ 0,00" readonly />                               
@@ -753,21 +504,11 @@
                                 <label>Adic. de risco:
                                     <select name="ddInsa" id="ddInsa2" onchange="calcSalario(this.form);"
                                         style="width: 150px;">
-                                        <option value="0" selected>
-                                            Nenhum
-                                        </option>
-                                        <option value="0.2">
-                                            Insalubridade (20%)
-                                        </option>
-                                        <option value="0.3">
-                                            Insalubridade (30%)
-                                        </option>
-                                        <option value="0.4">
-                                            Insalubridade (40%)
-                                        </option>
-                                        <option value="0.3">
-                                            Periculosidade (30%)
-                                        </option>
+                                        <option value="0" selected>Nenhum</option>
+                                        <option value="0.2">Insalubridade (20%)</option>
+                                        <option value="0.3">Insalubridade (30%)</option>
+                                        <option value="0.4">Insalubridade (40%)</option>
+                                        <option value="0.3">Periculosidade (30%)</option>
                                     </select>
                                 </label>
                                 <input type="text" name="txInsa" style="width: 82px" value="R$ 0,00" readonly />
@@ -792,12 +533,8 @@
                                     Sindicato:
                                     <select name="ddSindTipo" id="ddSindTipo2" onchange="calcSalario(this.form);"
                                         style="width: 110px;">
-                                        <option value="nao" selected>
-                                            Não filiado
-                                        </option>
-                                        <option value="sim">
-                                            Filiado
-                                        </option>
+                                        <option value="nao" selected>Não filiado</option>
+                                        <option value="sim">Filiado</option>
                                     </select>
                                     <input type="text" name="txSindicato" value="R$ 0,00" readonly />
                                 </label>
@@ -897,24 +634,6 @@
                                     onClick="calcSalario(this.form);" />
                                     <br />
                             </div>
-                            <!-- <div style="display: none" class="tab-content_col" >
-                                <label                                     style="display: inline-block;">Diferença no aumento:</label>
-                                <input type="number" name="diffReajuste" id="diffReajuste2" min="0"
-                                    step="1" value="0" style="width: 40px;" onClick="calcSalario(this.form);"
-                                    onKeyUp="calcSalario(this.form);" /> <br/>
-                                    <label>
-                                        VB:
-                                        <input type="text" name="txDifVB" value="0" readonly />
-                                    </label>
-                                    <label>
-                                        Grat.:
-                                        <input type="text" name="txDifGT" value="0" readonly />
-                                    </label>
-                                    <label>
-                                        Insal./Peric.:
-                                        <input type="text" name="txDifRisco" value="0" readonly />
-                                    </label>
-                            </div> -->
                             <div style="display: block;">
                                 <label for="numOutrosRendIsnt2" style="display: inline-block;width: 85px;">Isentos:</label>
                                 R$ <input type="number" name="numOutrosRendIsnt" id="numOutrosRendIsnt2" min="0"
@@ -941,53 +660,19 @@
                     <div class="tabresults">
                         <div class="tab-content4 tab-resumo" id="tab-resumo2">
                             <div class="divresults_col" style="float: left;">
-                                <label>
-                                    Vencimento:
-                                    <input type="text" name="txVB" value="0" readonly />
-                                </label>                                
-                                <label>
-                                    Adicionais:
-                                    <input type="text" name="txAdicionais" value="0" readonly />
-                                </label>
-                                <label>
-                                    Outros:
-                                    <input type="text" name="txOutros" value="0" readonly />
-                                </label>
-                                <label>
-                                    Bruto:
-                                    <input type="text" name="txBruto" value="0" readonly />
-                                </label>
-                                <label> <!-- id="aqtext"> -->
-                                    AQ:
-                                    <input type="text" name="txQualif" value="0" readonly />
-                                </label>
-                                <label>
-                                    Líquido:
-                                    <input type="text" name="txResult" value="0" readonly />
-                                </label>
+                                <label>Vencimento:<input type="text" name="txVB" value="0" readonly /></label>                                
+                                <label>Adicionais:<input type="text" name="txAdicionais" value="0" readonly /></label>
+                                <label>Outros:<input type="text" name="txOutros" value="0" readonly /></label>
+                                <label>Bruto:<input type="text" name="txBruto" value="0" readonly /></label>
+                                <label>AQ:<input type="text" name="txQualif" value="0" readonly /></label>
+                                <label>Líquido:<input type="text" name="txResult" value="0" readonly /></label>
                             </div>
                             <div class="divresults_col">
-
-                                <label>
-                                    Base FEPA:
-                                    <input type="text" name="txbINSS" value="0" readonly />
-                                </label>
-                                <label>
-                                    Base IRRF:
-                                    <input type="text" name="txbIRRF" value="0" readonly />
-                                </label>
-                                <label>
-                                    FEPA:
-                                    <input type="text" name="txInss" value="0" readonly />
-                                </label>                                
-                                <label>
-                                    IRRF:
-                                    <input type="text" name="txIrrf" value="0" readonly />
-                                </label>
-                                <label>
-                                    Descontos:
-                                    <input type="text" name="txdesconto" value="0" readonly />
-                                </label>
+                                <label style="display: none;">Base FEPA:<input type="text" name="txbINSS" value="0" readonly /></label>
+                                <label>Base IRRF:<input type="text" name="txbIRRF" value="0" readonly /></label>
+                                <label>IRRF:<input type="text" name="txIrrf" value="0" readonly /></label>
+                                <label>FEPA:<input type="text" name="txInss" value="0" readonly /></label>                                
+                                <label>Descontos:<input type="text" name="txdesconto" value="0" readonly /></label>
                             </div>
                         </div>
                         <div id="ticketdiv2" style="font-style: italic;">
@@ -1020,11 +705,6 @@
             <br />
         </div>
         <!-- Horizontal Bar -->
-        <ins class="adsbygoogle" style="display: block; height: 90px; margin-bottom: 0.5em;"
-            data-ad-client="ca-pub-0242087922176548" data-ad-slot="2331914013"> </ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
     </div>
     <footer>
         <div class="footer-disclaimer">
