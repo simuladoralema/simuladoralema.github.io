@@ -613,6 +613,7 @@ ul {
 
 .divresults_col label {
 	display: block;
+	padding: 0 5px;
 }
 
 .tabresults {
@@ -681,3 +682,27 @@ ul {
     background-image: url(../img/wiki.png);
     background-size: 14px;
 }
+
+.form-flex-container {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+  margin: 1rem auto;
+  max-width: 100%;
+  padding: 0 1rem;
+  overflow-x: auto;
+}
+
+.form-flex-container .main-content {
+  flex: 1 1 0;
+  max-width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  padding: 1.5rem;
+  background: #fff67225;
+  min-width: 450px;
+  min-height: 800px; /* força a altura a ficar igual */
+}
+

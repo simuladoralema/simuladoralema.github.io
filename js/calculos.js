@@ -83,7 +83,7 @@ function updateVisibilidade (form, id, estado) {
 
 // Função para atualizar lista de Adicional de Qualificação
 function updateQuali(form) {
-    let periodo = parseInt(form.ddAno.value, 10);
+    const periodo = form.ddAno ? parseInt(form.ddAno.value, 10) : null;
     let alloptions = Array("Exigência minima", "Graduação", "Especialização", "Mestrado", "Doutorado");
     let allvalues = Array(0, 1, 2, 3, 4);
     let newoptions = Array();
@@ -129,8 +129,8 @@ function updateQuali(form) {
     if (newvalues.includes(parseInt(curValue, 10))) {
         form.ddQuali.value = curValue;
     }
-    updateCargos(form);
-    atualizaNiveis(form);
+    //updateCargos(form);
+   // atualizaNiveis(form);
     calcSalario(form);
 }
 
@@ -454,7 +454,7 @@ function atualizaNiveis(form){
 function calcSalario(form) {  
 
     // Seleciona o período para cálculo
-    let periodo = parseInt(form.ddAno.value, 10);
+    const periodo = form.ddAno ? parseInt(form.ddAno.value, 10) : null;
 
     if (periodo == 4){
         var grat = 0;
@@ -657,39 +657,39 @@ function calcSalario(form) {
         vb2 = calcNovoPCCV(base, nivel, correl);
     }
 
-    let outrosRendTrib0 = parseFloat(form.numOutrosRendTrib0.value) || 0;
-    let outrosRendTrib1 = parseFloat(form.numOutrosRendTrib1.value) || 0;
-    let outrosRendTrib2 = parseFloat(form.numOutrosRendTrib2.value) || 0;
+    const outrosRendTrib0 = form.numOutrosRendTrib0 ? parseFloat(form.numOutrosRendTrib0.value) : null;
+ /* let outrosRendTrib1 = parseFloat(form.numOutrosRendTrib1.value) || 0;
+    let outrosRendTrib2 = parseFloat(form.numOutrosRendTrib2.value) || 0; 
 
     let outrosRendTribIR = 0;
     if (form.outrosIR0.checked) {
         outrosRendTribIR += outrosRendTrib0;
         //let aliqirrfferias = valorIRRF(ferias, periodo);
-    } if (form.outrosIR1.checked) {
+    } /* if (form.outrosIR1.checked) {
         outrosRendTribIR += outrosRendTrib1;
         //let aliqirrfferias = valorIRRF(ferias, periodo);
     } if (form.outrosIR2.checked) {
         outrosRendTribIR += outrosRendTrib2;
-        //let aliqirrfferias = valorIRRF(ferias, periodo);
-    }
+        //let aliqirrfferias = valorIRRF(ferias, periodo); 
+    } 
 
     let outrosRendTribFEPA = 0;
     if (form.outrosFEPA0.checked) {
         outrosRendTribFEPA += outrosRendTrib0;
         //let aliqirrfferias = valorIRRF(ferias, periodo);
-    } if (form.outrosFEPA1.checked) {
+    }/*  if (form.outrosFEPA1.checked) {
         outrosRendTribFEPA += outrosRendTrib1;
         //let aliqirrfferias = valorIRRF(ferias, periodo);
     } if (form.outrosFEPA2.checked) {
         outrosRendTribFEPA += outrosRendTrib2;
         //let aliqirrfferias = valorIRRF(ferias, periodo);
-    }
+    } 
 
-    let outrosRendTrib = outrosRendTrib0 + outrosRendTrib1 + outrosRendTrib2 /*  + diffTotal */;
+    let outrosRendTrib = outrosRendTrib0 ;// + outrosRendTrib1 + outrosRendTrib2  + diffTotal 
 
     let outrosRendIsnt = parseFloat(form.numOutrosRendIsnt.value) || 0;
 
-    let outros = outrosRendTrib + outrosRendIsnt;
+    let outros = outrosRendTrib + outrosRendIsnt; */
 
     let adicionais = qualificacao + grat + insal + quinquenio;
     
@@ -707,14 +707,14 @@ function calcSalario(form) {
     }
 
     //A base do PSS é quase a mesma da 'remuneracao', mas sem insalubridade pois a cobrança é opcional
-    let basepss = remuneracao - grat - /* gratretro */ + outrosRendTribFEPA /* + diffFEPA */;
+    let basepss = remuneracao - grat; // - /* gratretro */ + outrosRendTribFEPA /* + diffFEPA */;
 
     let valorpss = calcPSS(periodo, basepss);
 
     let deducaoDepsIRRF = dependentesIR(form.numDepIRRF.value, periodo);
 
     //Funben
-    if (form.funben.checked){
+/*     if (form.funben.checked){
         
         var depsfunben = dependentesFunben(form.numDepFunben.value),
             funbentit = vencimento * 0.03,
@@ -729,22 +729,25 @@ function calcSalario(form) {
         funbendeps = 0;
         funben = 0;
         updateVisibilidade(form,"depsFunbenLabel", "hidden");
-    }
+    } */
+    const funben = 0;
+    const funbentit = 0;
+    const funbendeps = 0;
 
     let deducoesIrrf = valorpss + funben + deducaoDepsIRRF;
     if ( deducoesIrrf < descontoSimplificado ) {
         deducoesIrrf = descontoSimplificado;
     }
 
-    let baseirrf = remuneracao + outrosRendTribIR - deducoesIrrf;
+    let baseirrf = remuneracao /* + outrosRendTribIR */ - deducoesIrrf;
 
     let aliqirrf = valorIRRF(baseirrf, periodo);
 
-    let outrosdescontos = parseFloat(form.numOutros.value) || 0;
+   /*  let outrosdescontos = parseFloat(form.numOutros.value) || 0; */
 
-    let descontos = aliqirrf + funben + valorpss + sindicato + outrosdescontos /* + diffSindi */;
+    let descontos = aliqirrf + funben + valorpss + sindicato /* + outrosdescontos */ /* + diffSindi */;
 
-    let bruto = remuneracao + outrosRendTrib + outrosRendIsnt;
+    let bruto = remuneracao /* + outrosRendTrib + outrosRendIsnt */;
 
     let salario = bruto - descontos;
 
@@ -764,7 +767,7 @@ function calcSalario(form) {
 	    form.txFG.value = formatValor(fg);
         form.txCursos.value = formatValor(aqcursos);
         form.txAdicionais.value = formatValor(adicionais);
-        form.txOutros.value = formatValor(outros);
+        //form.txOutros.value = formatValor(outros);
         form.txGrat.value = formatValor(grat);
         form.txResult.value = formatValor(salario);
         form.txInss.value = formatValor(valorpss);
@@ -774,12 +777,12 @@ function calcSalario(form) {
         form.txbINSS.value = formatValor(basepss);
         form.txdesconto.value = formatValor(descontos);
         form.txSindicato.value = formatValor(sindicato);
-        form.txQualif.value = formatValor(qualificacao);
+        //form.txQualif.value = formatValor(qualificacao);
         form.txDepIRRF.value = formatValor(deducaoDepsIRRF);
         form.txTicket.value = formatValor(ticket);
         form.txCticket.value = formatValor(salario + ticket);
-        form.txFunbenTit.value = formatValor(funbentit);
-        form.txDepsFunben.value = formatValor(funbendeps);
+        //form.txFunbenTit.value = formatValor(funbentit);
+        ///form.txDepsFunben.value = formatValor(funbendeps);
         form.txInsa.value = formatValor(insal);
 
     //Display info on Detailed Results
@@ -787,11 +790,11 @@ function calcSalario(form) {
     if (form.name == "myform1") {
         $("#tabdetails-rend-1").empty();
         $("#tabdetails-desc-1").empty();
-        $("#tabdetails-outros-1").empty();
+       // $("#tabdetails-outros-1").empty();
     } else {
         $("#tabdetails-rend-2").empty();
         $("#tabdetails-desc-2").empty();
-        $("#tabdetails-outros-2").empty();
+       // $("#tabdetails-outros-2").empty();
         formid = 2;
     }
 
@@ -801,14 +804,14 @@ function calcSalario(form) {
     if (quinquenio > 0) addDetailValue("#tabdetails-rend", formid, "Quinquênio", quinquenio);
     if (fg > 0) addDetailValue("#tabdetails-rend", formid, "FG", fg);
     if (insal > 0) addDetailValue("#tabdetails-rend", formid, "Insal./Pericul.", insal);
-    if (outrosRendIsnt > 0) addDetailValue("#tabdetails-rend", formid, "Outros Rend. Isen.", outrosRendIsnt);
-    if (outrosRendTrib > 0) addDetailValue("#tabdetails-rend", formid, "Outros Rend. Trib.", outrosRendTrib);
+    //if (outrosRendIsnt > 0) addDetailValue("#tabdetails-rend", formid, "Outros Rend. Isen.", outrosRendIsnt);
+   // if (outrosRendTrib > 0) addDetailValue("#tabdetails-rend", formid, "Outros Rend. Trib.", outrosRendTrib);
 
     addDetailValue("#tabdetails-desc", formid, "FEPA", valorpss);
     addDetailValue("#tabdetails-desc", formid, "IR", aliqirrf);
     if (sindicato > 0) addDetailValue("#tabdetails-desc", formid, "Sindicato", sindicato);
     if (funben > 0) addDetailValue("#tabdetails-desc", formid, "Funben", funben);
-    if (outrosdescontos > 0) addDetailValue("#tabdetails-desc", formid, "Outros", outrosdescontos);
+    //if (outrosdescontos > 0) addDetailValue("#tabdetails-desc", formid, "Outros", outrosdescontos);
 
     addDetailValue("#tabdetails-outros", formid, "Bruto", bruto);
     addDetailValue("#tabdetails-outros", formid, "Base IR", baseirrf);
