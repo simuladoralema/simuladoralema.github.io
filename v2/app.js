@@ -1,4 +1,4 @@
-""// app.js (refatorado e otimizado)
+// app.js (refatorado e otimizado)
 import { calcularINSS, calcularIRPF, prepararDefinicoes } from './calculos2.js';
 import { definicoes, gratLabels } from './definicoes.js';
 
@@ -44,15 +44,17 @@ function criarCard(id) {
         </label>
       </div>
       <div data-content="adicionais" class="tab-content hidden flex-1">
-        <label class="block mb-2">Alimentação (R$):
-          <input readonly type="text" data-field="alimentacao" class="input-field mt-1 block w-full border rounded p-2">
+        <label class="block mb-2">Adicionais (R$):
           <input readonly type="text" data-field="adicionais" class="input-field mt-1 block w-full border rounded p-2">
+        </label>
+        <label class="block mb-2">Qualificação (R$):
+          <input readonly type="text" data-field="qualificacao" class="input-field mt-1 block w-full border rounded p-2">
         </label>
         <label class="block mb-2">Gratificação Legislativa (R$):
           <input readonly type="text" data-field="gratificacao" class="input-field mt-1 block w-full border rounded p-2">
         </label>
-        <label class="block mb-2">Qualificacao (R$):
-          <input readonly type="text" data-field="qualificacao" class="input-field mt-1 block w-full border rounded p-2">
+        <label class="block mb-2">Alimentação (R$):
+          <input readonly type="text" data-field="alimentacao" class="input-field mt-1 block w-full border rounded p-2">
         </label>
       </div>
       <div data-content="outros" class="tab-content flex-1">
@@ -88,35 +90,32 @@ function criarCard(id) {
     selects.periodo.innerHTML = periodos.map(p => `<option value="${p}">${carreira[p].label}</option>`).join('');
     state.periodo ||= periodos[0];
 
-    const cargos = Object.entries(carreira[state.periodo].cargos);
+    const cargos = carreira[state.periodo]?.cargos ? Object.entries(carreira[state.periodo].cargos) : [];
     selects.cargo.innerHTML = cargos.map(([k, v]) => `<option value="${k}">${v.label}</option>`).join('');
-    state.cargo ||= cargos[0][0];
+    state.cargo ||= cargos[0]?.[0] || '';
 
-    const cargo = carreira[state.periodo].cargos[state.cargo];
-    const niveis = Object.keys(cargo.niveis);
+    const cargo = carreira[state.periodo]?.cargos?.[state.cargo];
+    const niveis = cargo?.niveis ? Object.keys(cargo.niveis) : [];
     selects.nivel.innerHTML = niveis.map(n => `<option value="${n}">${n}</option>`).join('');
-    state.nivel ||= niveis[0];
+    state.nivel ||= niveis[0] || '';
 
-    const qualificacoes = Object.entries(cargo.qualificacao);
+    const qualificacoes = cargo?.qualificacao ? Object.entries(cargo.qualificacao) : [];
     selects.qualificacao.innerHTML = qualificacoes.map(([k, v]) => `<option value="${k}">${v.label}</option>`).join('');
-    state.qualificacao ||= qualificacoes[0][0];
+    state.qualificacao ||= qualificacoes[0]?.[0] || '';
 
     Object.entries(selects).forEach(([key, select]) => {
-      select.value = state[key];
+      if (select && state[key]) select.value = state[key];
     });
   }
 
   function atualizarValores() {
-    const cargo = definicoes[state.carreira][state.periodo].cargos[state.cargo]; //.niveis[state.nivel];
-    const nivel = cargo.niveis[state.nivel] ;
-    console.log("Dados: ", cargo);
-    state.salario = nivel.salario;
-    state.alimentacao = nivel.adicionais?.alimentacao || 0;
-    state.gratificacao = nivel.adicionais?.gratificacao || 0;
-    state.qualificacao = nivel.qualificacao || 666;
-    //const percQualificacao = cargo.qualificacao[state.qualificacao]?.valor || 0;
-    //state.qualificacao = +(state.salario * percQualificacao).toFixed(2); // novo campo, se quiser
-    state.adicionais = cargo.total || 0; 
+    const dados = definicoes[state.carreira]?.[state.periodo]?.cargos?.[state.cargo]?.niveis?.[state.nivel];
+    if (!dados) return;
+    state.salario = dados.salario;
+    state.alimentacao = dados.adicionais?.alimentacao || 0;
+    state.gratificacao = dados.adicionais?.gratificacao || 0;
+    //state.qualificacao = dados.qualificacao || 666;
+    state.adicionais = dados.total || 0;
   }
 
   function renderState() {

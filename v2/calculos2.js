@@ -87,7 +87,7 @@ export function prepararDefinicoes(definicoes) {
             }
           } 
 
-          for (const qualificacaoKey in cargo.qualificacao) {
+         for (const qualificacaoKey in cargo.qualificacao) {
             const qualificacao = cargo.qualificacao[qualificacaoKey];
             if (qualificacao.valor < 1) {
               // Percentual (ex: 0.05 => 5%)
@@ -108,7 +108,7 @@ export function prepararDefinicoes(definicoes) {
           let adicionaisAtual = adicionaisBase;
           let qualificacaoAtual = qualificacaoBase;
           // let alimentacaoAtual = cargo.alimentacao || 0;
-
+          
           const nomesGrupos = Object.keys(grupos);
           let contadorNivel = 1;
 
@@ -175,7 +175,6 @@ export function prepararDefinicoes(definicoes) {
           cargo.niveis = {};
           let salarioAtual = base;
           let adicionaisAtual = adicionaisBase;
-
           continue;
         }
       }
