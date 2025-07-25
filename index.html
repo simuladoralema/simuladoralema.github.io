@@ -171,7 +171,13 @@
                                         step="1" value="0" style="width: 30px;" onClick="calcSalario(this.form);"
                                         onKeyUp="calcSalario(this.form);" />
                                 </label>
-                                <input type="text" name="txCursos" value="R$ 0,00" readonly /> 
+                                <input type="text" name="txCursos" value="R$ 0,00" readonly />
+                                <label>
+                                    1/3 férias:
+                                    <input type="checkbox" name="ferias" id="ferias1" value="0"
+                                            onClick="calcSalario(this.form);"/>
+                                    <input type="text" name="txFerias" value="R$ 0,00" readonly />  
+                                </label>
                             </div>
                             <div>
                                 <label>Adic. de risco:
@@ -197,7 +203,7 @@
                             </div>
                             <div>
                                 <label>
-                                    Ticket alimentação
+                                    Ticket alimentação:
                                     <input type="checkbox" name="ticket" id="ticket1" value="0"
                                         onClick="calcSalario(this.form);" />
                                     <input type="text" name="txTicket" value="R$ 0,00" readonly />
@@ -311,15 +317,15 @@
                     <div class="tabresults">
                         <div class="tab-content3 tab-resumo" id="tab-resumo1">
                             <div class="divresults_col" style="float: left;">
-                                <label>Vencimento:<input type="text" name="txVB" value="0" readonly /></label>                                
-                                <label>Adicionais:<input type="text" name="txAdicionais" value="0" readonly /></label>
-                                <label>Outros:<input type="text" name="txOutros" value="0" readonly /></label>
-                                <label>Bruto:<input type="text" name="txBruto" value="0" readonly /></label>
+                                <label>Vencimento:<input type="text" name="txVB" value="R$ 0,00" readonly /></label>                                
+                                <label>Adicionais:<input type="text" name="txAdicionais" value="R$ 0,00" readonly /></label>
+                                <label>Outros:<input type="text" name="txOutros" value="R$ 0,00" readonly /></label>
+                                <label>Bruto:<input type="text" name="txBruto" value="R$ 0,00" readonly /></label>
                                 <label>AQ:<input type="text" name="txQualif" value="R$ 0,00" readonly /></label>
-                                <label>Líquido:<input type="text" name="txResult" value="0" readonly /></label>
+                                <label>Líquido:<input type="text" name="txResult" value="R$ 0,00" readonly /></label>
                             </div>
                             <div class="divresults_col">
-
+                                
                                 <label style="display: none;">Base FEPA:<input type="text" name="txbINSS" value="0" readonly /></label>
                                 <label>Base IRRF:<input type="text" name="txbIRRF" value="0" readonly /></label>
                                 <label>IRRF:<input type="text" name="txIrrf" value="0" readonly /></label>
@@ -498,7 +504,13 @@
                                         step="1" value="0" style="width: 30px;" onClick="calcSalario(this.form);"
                                         onKeyUp="calcSalario(this.form);" />
                                 </label>
-                                <input type="text" name="txCursos" value="R$ 0,00" readonly /> 
+                                <input type="text" name="txCursos" value="R$ 0,00" readonly />
+                                <label>
+                                    1/3 férias:
+                                    <input type="checkbox" name="ferias" id="ferias2" value="0"
+                                            onClick="calcSalario(this.form);"/>
+                                    <input type="text" name="txFerias" value="R$ 0,00" readonly />  
+                                </label>
                             </div>
                             <div>
                                 <label>Adic. de risco:
@@ -524,7 +536,7 @@
                             </div>
                             <div>
                                 <label>
-                                    Ticket alimentação
+                                    Ticket alimentação:
                                     <input type="checkbox" name="ticket" id="ticket2" value="0"
                                         onClick="calcSalario(this.form);" />
                                     <input type="text" name="txTicket" value="R$ 0,00" readonly />
@@ -660,12 +672,12 @@
                     <div class="tabresults">
                         <div class="tab-content4 tab-resumo" id="tab-resumo2">
                             <div class="divresults_col" style="float: left;">
-                                <label>Vencimento:<input type="text" name="txVB" value="0" readonly /></label>                                
-                                <label>Adicionais:<input type="text" name="txAdicionais" value="0" readonly /></label>
-                                <label>Outros:<input type="text" name="txOutros" value="0" readonly /></label>
-                                <label>Bruto:<input type="text" name="txBruto" value="0" readonly /></label>
-                                <label>AQ:<input type="text" name="txQualif" value="0" readonly /></label>
-                                <label>Líquido:<input type="text" name="txResult" value="0" readonly /></label>
+                                <label>Vencimento:<input type="text" name="txVB" value="R$ 0,00" readonly /></label>                                
+                                <label>Adicionais:<input type="text" name="txAdicionais" value="R$ 0,00" readonly /></label>
+                                <label>Outros:<input type="text" name="txOutros" value="R$ 0,00" readonly /></label>
+                                <label>Bruto:<input type="text" name="txBruto" value="R$ 0,00" readonly /></label>
+                                <label>AQ:<input type="text" name="txQualif" value="R$ 0,00" readonly /></label>
+                                <label>Líquido:<input type="text" name="txResult" value="R$ 0,00" readonly /></label>
                             </div>
                             <div class="divresults_col">
                                 <label style="display: none;">Base FEPA:<input type="text" name="txbINSS" value="0" readonly /></label>

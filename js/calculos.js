@@ -51,6 +51,7 @@ function zeraForm(form){
         form.txInsalRetro.value = "R$ 0,00";
         form.txAQretro.value = "R$ 0,00";
         form.txGratRetro.value = "R$ 0,00";
+        form.txFerias.value = "R$ 0,00";
         // Aba "Outros"
         form.numOutrosRendTrib0.value = 0;
         form.numOutrosRendTrib1.value = 0;
@@ -61,12 +62,13 @@ function zeraForm(form){
         form.outrosIR0.checked = false;
         form.outrosIR1.checked = false;
         form.outrosIR2.checked = false;
+        form.ferias.checked = false;
         /* form.diffReajuste.value = 0;
         form.txDifVB.value = "R$ 0,00";
         form.txDifGT.value = "R$ 0,00";
         form.txDifRisco.value = "R$ 0,00"; */
         form.numOutrosRendIsnt.value = 0;
-        form.numOutros.value = 0;
+        form.numOutros.value = "R$ 0,00";
         form.numTempo.value = 0;
         updateVisibilidade(form,"gratdiv", "visible");
         updateQuali(form);
@@ -684,16 +686,24 @@ function calcSalario(form) {
         outrosRendTribFEPA += outrosRendTrib2;
         //let aliqirrfferias = valorIRRF(ferias, periodo);
     }
-
-    let outrosRendTrib = outrosRendTrib0 + outrosRendTrib1 + outrosRendTrib2 /*  + diffTotal */;
-
-    let outrosRendIsnt = parseFloat(form.numOutrosRendIsnt.value) || 0;
-
-    let outros = outrosRendTrib + outrosRendIsnt;
-
+    
     let adicionais = qualificacao + grat + insal + quinquenio;
     
     let remuneracao = vencimento + grat + qualificacao + insal + quinquenio + fg; //+ outrosRendTribIR + outrosRendTribFEPA;
+    
+    let ferias = 0;
+
+    if (form.ferias.checked) {
+        ferias = remuneracao / 3;
+        outrosRendTribIR += ferias;
+    }
+
+    //let outrosRendTribIR = outrosRendTrib0 + outrosRendTrib1 + outrosRendTrib2;
+
+    let outrosRendIsnt = parseFloat(form.numOutrosRendIsnt.value) || 0;
+
+    let outros = outrosRendIsnt + outrosRendTribIR || 0;
+    //let outros = outrosRendTribIR + outrosRendIsnt;
 
     let sindicato = 0;
     if (form.ddSindTipo.value != "nao") {
@@ -744,7 +754,7 @@ function calcSalario(form) {
 
     let descontos = aliqirrf + funben + valorpss + sindicato + outrosdescontos /* + diffSindi */;
 
-    let bruto = remuneracao + outrosRendTrib + outrosRendIsnt;
+    let bruto = remuneracao + outrosRendTribIR + outrosRendIsnt;
 
     let salario = bruto - descontos;
 
@@ -781,6 +791,13 @@ function calcSalario(form) {
         form.txFunbenTit.value = formatValor(funbentit);
         form.txDepsFunben.value = formatValor(funbendeps);
         form.txInsa.value = formatValor(insal);
+        form.txFerias.value = formatValor(ferias);
+        console.log("FERIAS: ", ferias);
+        console.log("FERIAS FORMATADO: ", form.txFerias.value);
+        console.log("VENCIMENTO: ", vencimento);
+        console.log("VENCIMENTO FORMATADO: ", form.txVB.value);
+        console.log()
+
 
     //Display info on Detailed Results
     let formid = 1;
@@ -802,7 +819,7 @@ function calcSalario(form) {
     if (fg > 0) addDetailValue("#tabdetails-rend", formid, "FG", fg);
     if (insal > 0) addDetailValue("#tabdetails-rend", formid, "Insal./Pericul.", insal);
     if (outrosRendIsnt > 0) addDetailValue("#tabdetails-rend", formid, "Outros Rend. Isen.", outrosRendIsnt);
-    if (outrosRendTrib > 0) addDetailValue("#tabdetails-rend", formid, "Outros Rend. Trib.", outrosRendTrib);
+    if (outrosRendTribIR > 0) addDetailValue("#tabdetails-rend", formid, "Outros Rend. Trib.", outrosRendTribIR);
 
     addDetailValue("#tabdetails-desc", formid, "FEPA", valorpss);
     addDetailValue("#tabdetails-desc", formid, "IR", aliqirrf);
@@ -865,6 +882,8 @@ function inverterform(tipo) {
 			//form1.diffReajuste.value,
 			form1.numTempo.value,
 		    form1.ddFG.value,
+            form1.ferias.checked,
+            form1.ferias.value,
 			//form1.contra.checked,
         );
 
@@ -902,7 +921,9 @@ function inverterform(tipo) {
             //form2.retrobox.checked,
 			//form2.diffReajuste.value,
 			form2.numTempo.value,
-		form2.ddFG.value,
+		    form2.ddFG.value,
+            form2.ferias.checked,
+            form2.ferias.value,
 			//form2.contra.checked,
         );
     } else if (tipo == "cima") {
@@ -940,7 +961,9 @@ function inverterform(tipo) {
             //form2.retrobox.checked,
 			//form2.diffReajuste.value,
 			form2.numTempo.value,
-		form2.ddFG.value,
+		    form2.ddFG.value,
+            form2.ferias.checked,
+            form2.ferias.value,
 			//form2.contra.checked,
         );
 
@@ -981,7 +1004,9 @@ function inverterform(tipo) {
             //form1.retrobox.checked,
 			//form1.diffReajuste.value,
 			form1.numTempo.value,
-		form1.ddFG.value,
+		    form1.ddFG.value,
+            form1.ferias.checked,
+            form1.ferias.value,
 			//form1.contra.checked,
         );
 
@@ -1017,11 +1042,11 @@ function inverterform(tipo) {
     form1.outrosFEPA0.checked = values2[27];
     form1.outrosFEPA1.checked = values2[28];
     form1.outrosFEPA2.checked = values2[29];
-	//form1.retrobox.checked = values2[30];
 	//form1.diffReajuste.value = values2[31];
 	form1.numTempo.value = values2[30];
 	form1.ddFG.value = values2[31];
-	//form1.contra.checked = values2[33];    
+	form1.ferias.checked = values2[32];
+	form1.ferias.value = values2[33];    
 
     ///////////////////////////////////
 
@@ -1055,11 +1080,11 @@ function inverterform(tipo) {
     form2.outrosFEPA0.checked = values1[27];
     form2.outrosFEPA1.checked = values1[28];
     form2.outrosFEPA2.checked = values1[29];
-	//form2.retrobox.checked = values1[30];
 	//form2.diffReajuste.value = values1[31];
 	form2.numTempo.value = values1[30];
 	form2.ddFG.value = values1[31];
-	//form2.contra.checked = values1[33];
+	form2.ferias.checked = values1[32];
+	form2.ferias.value = values1[33];
 
     updateQuali(form1, values2[0]);
     updateQuali(form2, values1[0]);
