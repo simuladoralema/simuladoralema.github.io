@@ -68,7 +68,7 @@ function zeraForm(form){
         form.txDifGT.value = "R$ 0,00";
         form.txDifRisco.value = "R$ 0,00"; */
         form.numOutrosRendIsnt.value = 0;
-        form.numOutros.value = "R$ 0,00";
+        form.numOutros.value = 0;
         form.numTempo.value = 0;
         updateVisibilidade(form,"gratdiv", "visible");
         updateQuali(form);
@@ -658,10 +658,16 @@ function calcSalario(form) {
         //ftstep = 1.025;
         vb2 = calcNovoPCCV(base, nivel, correl);
     }
-
+    
     let outrosRendTrib0 = parseFloat(form.numOutrosRendTrib0.value) || 0;
     let outrosRendTrib1 = parseFloat(form.numOutrosRendTrib1.value) || 0;
     let outrosRendTrib2 = parseFloat(form.numOutrosRendTrib2.value) || 0;
+    
+    let outrosRendTrib = outrosRendTrib0 + outrosRendTrib1 + outrosRendTrib2;
+
+    let outrosRendIsnt = parseFloat(form.numOutrosRendIsnt.value) || 0;
+
+    //console.log("Outros rendimentos: " + outrosRendTrib0 + ", " + outrosRendTrib1 + ", " + outrosRendTrib2);
 
     let outrosRendTribIR = 0;
     if (form.outrosIR0.checked) {
@@ -700,9 +706,8 @@ function calcSalario(form) {
 
     //let outrosRendTribIR = outrosRendTrib0 + outrosRendTrib1 + outrosRendTrib2;
 
-    let outrosRendIsnt = parseFloat(form.numOutrosRendIsnt.value) || 0;
 
-    let outros = outrosRendIsnt + outrosRendTribIR || 0;
+    let outros = outrosRendIsnt + outrosRendTrib || 0;
     //let outros = outrosRendTribIR + outrosRendIsnt;
 
     let sindicato = 0;
@@ -717,7 +722,7 @@ function calcSalario(form) {
     }
 
     //A base do PSS é quase a mesma da 'remuneracao', mas sem insalubridade pois a cobrança é opcional
-    let basepss = remuneracao - grat - /* gratretro */ + outrosRendTribFEPA /* + diffFEPA */;
+    let basepss = remuneracao - grat /* gratretro */ + outrosRendTribFEPA /* + diffFEPA */;
 
     let valorpss = calcPSS(periodo, basepss);
 
@@ -754,7 +759,7 @@ function calcSalario(form) {
 
     let descontos = aliqirrf + funben + valorpss + sindicato + outrosdescontos /* + diffSindi */;
 
-    let bruto = remuneracao + outrosRendTribIR + outrosRendIsnt;
+    let bruto = remuneracao + outrosRendTrib + outrosRendIsnt;
 
     let salario = bruto - descontos;
 
@@ -792,11 +797,11 @@ function calcSalario(form) {
         form.txDepsFunben.value = formatValor(funbendeps);
         form.txInsa.value = formatValor(insal);
         form.txFerias.value = formatValor(ferias);
-        console.log("FERIAS: ", ferias);
+        /* console.log("FERIAS: ", ferias);
         console.log("FERIAS FORMATADO: ", form.txFerias.value);
         console.log("VENCIMENTO: ", vencimento);
         console.log("VENCIMENTO FORMATADO: ", form.txVB.value);
-        console.log()
+        console.log(); */
 
 
     //Display info on Detailed Results
