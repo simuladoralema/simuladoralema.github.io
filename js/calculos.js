@@ -304,9 +304,9 @@ function calcNovoPCCV(salarioBase, nivelDesejado, correl) {
     for (let i = 1; i < nivelDesejado; i++) {
         let aumento = 0.03;
         
-        if ((niveis[i] === 3 && niveis[i + 1] === 4) ||
-            (niveis[i] === 6 && niveis[i + 1] === 7) ||
-            (niveis[i] === 9 && niveis[i + 1] === 10)) {
+        if ((niveis[i] === 4 && niveis[i + 1] === 5) ||
+            (niveis[i] === 7 && niveis[i + 1] === 8) ||
+            (niveis[i] === 10 && niveis[i + 1] === 11)) {
             aumento = 0.05;
         }
         
