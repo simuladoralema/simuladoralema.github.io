@@ -180,6 +180,18 @@
                                 </label>
                             </div>
                             <div>
+                                <label hidden>
+                                    <input type="checkbox" name="decter" id="decter1" value="decter"
+                                        onClick="calcSalario(this.form);" /> 13º Salário - Parcela:
+                                    <input type="radio" name="decter_par" id="decter_par11" value="1"
+                                        onClick="calcSalario(this.form);" checked />1ª
+                                    <input type="radio" name="decter_par" id="decter_par21" value="2"
+                                        onClick="calcSalario(this.form);" />2ª
+                                    <input style="width: 85px;" type="text" name="txDecter" id="txDecter"
+                                        value="R$ 0,00" readonly />
+                                </label>
+                            </div>
+                            <div>
                                 <label>Adic. de risco:
                                     <select name="ddInsa" id="ddInsa1" onchange="calcSalario(this.form);"
                                         style="width: 150px;">

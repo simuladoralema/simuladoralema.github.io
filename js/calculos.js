@@ -20,7 +20,7 @@ function zeraForm(form){
         form.ddAno.value = 2;
         form.numProposta.value = 0;
         form.grat.checked = true;
-        form.txGrat.value = "R$ 0,00";
+        //form.txGrat.value = "R$ 0,00";
         form.txAQ.value = "R$ 0,00";
 	    form.txFG.value = "R$ 0,00";
         form.txCursos.value = "R$ 0,00";
@@ -621,21 +621,6 @@ function calcSalario(form) {
 
     qualificacao = aqdiploma + aqcursos;
 
-
-    /* // Calcula o 13° salário
-    const decter = 0;
-    
-    if (form.decter.checked) {
-        if(form.decter_par.value == "1") {
-            //Primeira parcela, metade do bruto mas sem descontos
-            decter = (remuneracao + fungrat) / 2;
-        } else {
-            //Segunda parcela, bruto mas serao calculados descontos
-            decter = remuneracao + fungrat;
-        }
-    }
-    */
-
     if (periodo == 0 || periodo == 1){
         var base1 = base2023,
             vb1 = correl * Math.ceil(base1 * Math.pow(ftstep, ftvb) * 100) / 100,
@@ -706,7 +691,6 @@ function calcSalario(form) {
 
     //let outrosRendTribIR = outrosRendTrib0 + outrosRendTrib1 + outrosRendTrib2;
 
-
     let outros = outrosRendIsnt + outrosRendTrib || 0;
     //let outros = outrosRendTribIR + outrosRendIsnt;
 
@@ -753,11 +737,25 @@ function calcSalario(form) {
 
     let baseirrf = remuneracao + outrosRendTribIR - deducoesIrrf;
 
-    let aliqirrf = valorIRRF(baseirrf, periodo);
+    let aliqirrf = valorIRRF(baseirrf, periodo);   
 
     let outrosdescontos = parseFloat(form.numOutros.value) || 0;
 
     let descontos = aliqirrf + funben + valorpss + sindicato + outrosdescontos /* + diffSindi */;
+
+    let decter = remuneracao / 2;
+    
+    let desc_13 = form.decter.checked && form.decter_par.value == "2" ? calcPSS(periodo, decter) + valorIRRF(periodo,decter) : 0;
+    
+    if (form.decter.checked) {
+        if(form.decter_par.value == "1") {
+            //Primeira parcela, metade do bruto mas sem descontos
+            decter = (remuneracao / 2 );
+        } else {
+            //Segunda parcela, bruto mas serao calculados descontos
+            decter = (remuneracao - descontos) / 2;
+        }
+    }
 
     let bruto = remuneracao + outrosRendTrib + outrosRendIsnt;
 
@@ -797,6 +795,7 @@ function calcSalario(form) {
         form.txDepsFunben.value = formatValor(funbendeps);
         form.txInsa.value = formatValor(insal);
         form.txFerias.value = formatValor(ferias);
+        form.txDecter.value = formatValor(decter);
         /* console.log("FERIAS: ", ferias);
         console.log("FERIAS FORMATADO: ", form.txFerias.value);
         console.log("VENCIMENTO: ", vencimento);
