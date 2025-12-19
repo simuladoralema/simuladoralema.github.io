@@ -63,6 +63,7 @@ function zeraForm(form){
         form.outrosIR1.checked = false;
         form.outrosIR2.checked = false;
         form.ferias.checked = false;
+        form.decter.checked = false;
         /* form.diffReajuste.value = 0;
         form.txDifVB.value = "R$ 0,00";
         form.txDifGT.value = "R$ 0,00";
@@ -477,6 +478,15 @@ function calcSalario(form) {
         updateVisibilidade(form,"ticketdiv", "hidden");
     }
 
+    if (form.decter.checked){
+        //ticket = 1400.0;
+        updateVisibilidade(form,"dec13div", "visible");
+    } 
+    else {
+        //ticket = 0;
+        updateVisibilidade(form,"dec13div", "hidden");
+    }
+
         // Fator de step
     let ftstep = 1.025;
 
@@ -743,21 +753,26 @@ function calcSalario(form) {
 
     let descontos = aliqirrf + funben + valorpss + sindicato + outrosdescontos /* + diffSindi */;
 
-    let decter = remuneracao / 2;
+    let dec13 = 0;
     
-    let desc_13 = form.decter.checked && form.decter_par.value == "2" ? calcPSS(periodo, decter) + valorIRRF(periodo,decter) : 0;
+    //let desc_13 = form.decter.checked && form.decter_par.value == "2" ? calcPSS(periodo, decter) + valorIRRF(periodo,decter) : 0;
     
     if (form.decter.checked) {
         if(form.decter_par.value == "1") {
             //Primeira parcela, metade do bruto mas sem descontos
-            decter = (remuneracao / 2 );
+            dec13 = (remuneracao / 2 );
         } else {
             //Segunda parcela, bruto mas serao calculados descontos
-            decter = (remuneracao - descontos) / 2;
+            //dec13 = (remuneracao - descontos) - (remuneracao / 2);
+            if (periodo == 2){
+                dec13 = remuneracao - descontos - 6044.01;
+            } else {
+                dec13 = (remuneracao / 2) - descontos;
+            }
         }
     }
 
-    let bruto = remuneracao + outrosRendTrib + outrosRendIsnt;
+    let bruto = remuneracao + outrosRendTrib + outrosRendIsnt + ferias;
 
     let salario = bruto - descontos;
 
@@ -790,12 +805,13 @@ function calcSalario(form) {
         form.txQualif.value = formatValor(qualificacao);
         form.txDepIRRF.value = formatValor(deducaoDepsIRRF);
         form.txTicket.value = formatValor(ticket);
-        form.txCticket.value = formatValor(salario + ticket);
+        form.txCticket.value = formatValor(salario + ticket + dec13);
+        form.txCdec13.value = formatValor(salario + dec13);
         form.txFunbenTit.value = formatValor(funbentit);
         form.txDepsFunben.value = formatValor(funbendeps);
         form.txInsa.value = formatValor(insal);
         form.txFerias.value = formatValor(ferias);
-        form.txDecter.value = formatValor(decter);
+        form.txDecter.value = formatValor(dec13);
         /* console.log("FERIAS: ", ferias);
         console.log("FERIAS FORMATADO: ", form.txFerias.value);
         console.log("VENCIMENTO: ", vencimento);

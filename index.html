@@ -180,7 +180,7 @@
                                 </label>
                             </div>
                             <div>
-                                <label hidden>
+                                <label>
                                     <input type="checkbox" name="decter" id="decter1" value="decter"
                                         onClick="calcSalario(this.form);" /> 13º Salário - Parcela:
                                     <input type="radio" name="decter_par" id="decter_par11" value="1"
@@ -344,6 +344,12 @@
                                 <label>FEPA:<input type="text" name="txInss" value="0" readonly /></label>                                
                                 <label>Descontos:<input type="text" name="txdesconto" value="0" readonly /></label>
                             </div>
+                        </div>
+                        <div id="dec13div1" style="font-style: italic;">
+                            <label>
+                                C/ décimo terceiro:
+                                <input type="text" name="txCdec13" value="0" readonly />
+                            </label>
                         </div>
                         <div id="ticketdiv1" style="font-style: italic;">
                             <label>
@@ -525,6 +531,18 @@
                                 </label>
                             </div>
                             <div>
+                                <label>
+                                    <input type="checkbox" name="decter" id="decter2" value="decter"
+                                        onClick="calcSalario(this.form);" /> 13º Salário - Parcela:
+                                    <input type="radio" name="decter_par" id="decter_par21" value="1"
+                                        onClick="calcSalario(this.form);" checked />1ª
+                                    <input type="radio" name="decter_par" id="decter_par22" value="2"
+                                        onClick="calcSalario(this.form);" />2ª
+                                    <input style="width: 85px;" type="text" name="txDecter" id="txDecter"
+                                        value="R$ 0,00" readonly />
+                                </label>
+                            </div>
+                            <div>
                                 <label>Adic. de risco:
                                     <select name="ddInsa" id="ddInsa2" onchange="calcSalario(this.form);"
                                         style="width: 150px;">
@@ -698,6 +716,12 @@
                                 <label>FEPA:<input type="text" name="txInss" value="0" readonly /></label>                                
                                 <label>Descontos:<input type="text" name="txdesconto" value="0" readonly /></label>
                             </div>
+                        </div>
+                        <div id="dec13div2" style="font-style: italic;">
+                            <label>
+                                C/ décimo terceiro:
+                                <input type="text" name="txCdec13" value="0" readonly />
+                            </label>
                         </div>
                         <div id="ticketdiv2" style="font-style: italic;">
                             <label>
