@@ -228,8 +228,8 @@ function firstload() {
     updateQuali(myform);
     updateQuali(myform2);
     //enSind();
-    //zeraForm(myform);
-    //zeraForm(myform2);
+    zeraForm(myform);
+    zeraForm(myform2);
 }
 
 // Formata o valor para R$
