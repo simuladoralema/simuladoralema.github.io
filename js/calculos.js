@@ -1,6 +1,37 @@
 let liq1 = 0;
 let liq2 = 0;
-const descontoSimplificado = 564.8;
+
+// Tabelas IRRF 2026
+const descontoSimplificado = 607.2; // até dez/2025: 564.8;
+const irB1 = 5000;
+const irB2 = 7350;
+const irConst = 978.62;
+const irF1 = 2428.8;
+const irF2 = 2826.65;
+const irF3 = 3751.05;
+const irF4 = 4664.68;
+const irR1 = 182.16;
+const irR2 = 394.16;
+const irR3 = 675.49;
+const irR4 = 908.73;
+const irD1 = 189.59; //por dependente
+
+// Tabelas FEPA 2026
+const fepaF1 = 1621.00;
+const fepaF2 = 2902.84;
+const fepaF3 = 4354.27;
+const fepaF4 = 8475.55;
+const fepaF5 = 14514.30;
+const fepaF6 = 29028.57;
+const fepaF7 = 56605.73;
+const residualF1 = fepaF1 * 0.075;
+const residualF2 = residualF1 + (fepaF2 - fepaF1) * 0.09; // (fepaF2 - fepaF1) * 0.09;
+const residualF3 = residualF2 + (fepaF3 - fepaF2) * 0.12; //(fepaF3 - fepaF2) * 0.12;
+const residualF4 = residualF3 + (fepaF4 - fepaF3) * 0.14; //(fepaF4 - fepaF3) * 0.14;
+const residualF5 = residualF4 + (fepaF5 - fepaF4) * 0.145; //(fepaF5 - fepaF4) * 0.145;
+const residualF6 = residualF5 + (fepaF6 - fepaF5) * 0.165; //(fepaF6 - fepaF5) * 0.165;
+const residualF7 = residualF6 + (fepaF7 - fepaF6) * 0.19; //(fepaF7 - fepaF6) * 0.19;
+//const tetoFepa = 6382.03; //fepaF7 * 0.22;
 
 let base = 0;
 
@@ -197,8 +228,8 @@ function firstload() {
     updateQuali(myform);
     updateQuali(myform2);
     //enSind();
-    zeraForm(myform);
-    zeraForm(myform2);
+    //zeraForm(myform);
+    //zeraForm(myform2);
 }
 
 // Formata o valor para R$
@@ -209,13 +240,13 @@ function formatValor(valor) {
 }
 
 // Calcula o Imposto de Renda
-function valorIRRF(base, periodo) {
+function valorIRRF(base, deducoes, periodo) {
     let aliquota = 0;
     if (periodo <= 1) { 
         // Ano 2024
-        if (base <= 2259.20) {
+        if (base <= 2228.65) {
             aliquota = 0;
-        } else if (base >= 2259.21 && base <= 2826.65) {
+        } else if (base >= 2228.66 && base <= 2826.65) {
             aliquota = base * 0.075 - 169.44;
         } else if (base >= 2826.66 && base <= 3751.05) {
             aliquota = base * 0.15 - 381.44;
@@ -225,7 +256,7 @@ function valorIRRF(base, periodo) {
             aliquota = base * 0.275 - 896.00;
         }
     }
-    else if (periodo >= 2) {
+    else if (periodo < 2) {
         // a partir de maio/2025
         if (base <= 2259.20) {
             aliquota = 0;
@@ -239,42 +270,177 @@ function valorIRRF(base, periodo) {
             aliquota = base * 0.275 - 908.73;
         }
     }
-    else {
-	// periodos futuros	
+    else if (periodo >= 2) {
+        // a partir de janeiro/2026
+        if (base <= irB1) {
+            aliquota = 0;
+        } else if (base >= (irB1 + 0.01) && base <= irB2) {
+            let reducao = irConst - (0.133145 * base);
+            base = base - deducoes;
+            if (base <= irF1) {
+                aliquota = 0;
+            } else if (base >= (irF1 + 0.01) && base <= irF2) {
+                aliquota = base * 0.075 - irR1;
+            } else if (base >= (irF2 + 0.01) && base <= irF3) {
+                aliquota = base * 0.15 - irR2;
+            } else if (base >= (irF3 + 0.01) && base <= irF4) {
+                aliquota = base * 0.225 - irR3;
+            } else if (base > irF4) {
+                aliquota = base * 0.275 - irR4;
+            }
+            aliquota = aliquota - reducao;
+            if (aliquota < 0){
+                aliquota = 0;
+            }
+        } else if (base >= (irB2 + 0.01)) {
+            base = base - deducoes;
+            aliquota = base * 0.275 - irR4;
+        }
     }
-    return Math.floor(aliquota * 100) / 100;
+    return Math.round(aliquota * 100) / 100;
 }
 
 // Calcula Previdência (FEPA)
+function trunc2(v) {
+  return Math.floor(v * 100 + 1e-9) / 100;
+}
+
+function calcPSS(periodo, base) {
+  if (periodo < 0) return trunc2(base * 0.11);
+
+  let total = 0;
+
+  // Faixa 1
+  total += trunc2(Math.min(base, fepaF1) * 0.075);
+
+  // Faixa 2
+  if (base > fepaF1) {
+    total += trunc2((Math.min(base, fepaF2) - fepaF1) * 0.09);
+  }
+
+  // Faixa 3
+  if (base > fepaF2) {
+    total += trunc2((Math.min(base, fepaF3) - fepaF2) * 0.12);
+  }
+
+  // Faixa 4
+  if (base > fepaF3) {
+    total += trunc2((Math.min(base, fepaF4) - fepaF3) * 0.14);
+  }
+
+  // Faixa 5
+  if (base > fepaF4) {
+    total += trunc2((Math.min(base, fepaF5) - fepaF4) * 0.145);
+  }
+
+  // Faixa 6
+  if (base > fepaF5) {
+    total += trunc2((Math.min(base, fepaF6) - fepaF5) * 0.165);
+  }
+
+  // Faixa 7
+  if (base > fepaF6) {
+    total += trunc2((Math.min(base, fepaF7) - fepaF6) * 0.19);
+  }
+
+  // Acima
+  if (base > fepaF7) {
+    total += trunc2((base - fepaF7) * 0.22);
+  }
+
+  return trunc2(total);
+}
+
+/* FUNCIONOU
+// ===== FEPA 2026 (centavos) =====
+const FEPA_2026 = [
+  { ate: 1621.00, aliquota: 0.075 },
+  { ate: 2902.84, aliquota: 0.09 },
+  { ate: 4354.27, aliquota: 0.12 },
+  { ate: 8475.55, aliquota: 0.14 },
+  { ate: 14514.30, aliquota: 0.145 },
+  { ate: 29028.57, aliquota: 0.165 },
+  { ate: 56605.73, aliquota: 0.19 },
+  { ate: Infinity, aliquota: 0.22 },
+];
+
+function calcFEPA2026_TRUNCA_POR_FAIXA(base) {
+  const baseC = Math.floor(Number(base) * 100 + 1e-9); // trunca base em centavos
+  let totalC = 0;
+  let anteriorC = 0;
+
+  for (const f of FEPA_2026) {
+    const tetoC = (f.ate === Infinity) ? baseC : Math.floor(f.ate * 100 + 1e-9);
+    if (baseC <= anteriorC) break;
+
+    const parteC = Math.max(0, Math.min(baseC, tetoC) - anteriorC);
+
+    // calcula centavos da faixa e TRUNCA (pra baixo)
+    const contribC = Math.floor(parteC * f.aliquota + 1e-9);
+
+    totalC += contribC;
+    anteriorC = tetoC;
+  }
+
+  return totalC / 100;
+}
+
+function calcPSS(periodo, base) {
+  if (periodo < 0) {
+    // legado (11% fixo)
+    return Math.round(base * 0.11 * 100) / 100;
+  }
+  // 2026+ progressivo exato
+  return calcFEPA2026_TRUNCA_POR_FAIXA(base);
+}
+*/
+
+/*
+function calcPSS(periodo, base) {
+  if (periodo < 0) return Math.round(base * 0.11 * 100) / 100;
+
+  let total = 0;
+  let anterior = 0;
+
+  for (const f of FEPA) {
+    if (base <= anterior) break;
+    const parte = Math.min(base, f.ate) - anterior;
+    total += parte * f.aliquota;
+    anterior = f.ate;
+  }
+
+  return Math.round(total * 100) / 100;
+}*/
+/*
 function calcPSS(periodo, base) {
     let valor = 0;
     if (periodo < 0) {
         valor = base * 0.11;
     } 
     else if (periodo >= 0) {
-       if (base <= 1412.0) {
+       if (base <= fepaF1) {
             //salario minimo
             valor = 0.075 * base;
-        } else if (base >= 1412.01 && base <= 2666.68) {
-            valor = (base - 1412.0) * 0.09 + 112;
-        } else if (base >= 2666.69 && base <= 4000.03) {
-            valor = (base - 2666.68) * 0.12 + 218.82;
-        } else if (base >= 4000.04 && base <= 7786.02) {
-            //teto
-            valor = (base - 4000.03) * 0.14 + 378.82;
-        } else if (base >= 7786.03 && base <= 13333.48) {
-           valor = (base - 7786.02) * 0.145 + 908.86;
-        } else if (base >= 13333.49 && base <= 26666.94) {
-            valor = (base - 13333.48) * 0.165 + 1713.24;
-        } else if (base >= 26666.95 && base <= 52000.54) {
-            valor = (base - 26666.94) * 0.19 + 3913.26;
+        } else if (base > fepaF1 && base <= fepaF2) {
+            valor = (base - fepaF1) * 0.09 + residualF1;
+        } else if (base > fepaF2 && base <= fepaF3) {
+            valor = (base - fepaF2) * 0.12 + residualF2;
+        } else if (base > fepaF3 && base <= fepaF4) {
+            valor = (base - fepaF3) * 0.14 + residualF3;
+        } else if (base > fepaF4 && base <= fepaF5) {
+            valor = (base - fepaF4) * 0.145 + residualF4;
+        } else if (base > fepaF5 && base <= fepaF6) {
+            valor = (base - fepaF5) * 0.165 + residualF5;
+        } else if (base > fepaF6 && base <= fepaF7) {
+            valor = (base - fepaF6) * 0.19 + residualF6;
         } else {
             valor = base * 0.22;
         }
        // valor = base * 0.145;
     }
-    return Math.floor(valor * 100) / 100;
+    return Math.round(valor * 100) / 100;
 }
+*/
 
 // Desconta dependentes na aliquota do IR
 function dependentesIR(deps, periodo) {
@@ -286,13 +452,13 @@ function dependentesIR(deps, periodo) {
     } else {
         // aliq = deps * 189.59;
     }
-    return Math.floor(aliq * 100) / 100;
+    return Math.round(aliq * 100) / 100;
 }
 
 // Calcula valor da aliquota por dependentes do FEPA
 function dependentesFunben(deps) {
     let aliq = deps * 0.01;
-    return Math.floor(aliq * 100) / 100;
+    return Math.round(aliq * 100) / 100;
 }
 
 // Calcula salario com o novo PCCV
@@ -745,9 +911,14 @@ function calcSalario(form) {
         deducoesIrrf = descontoSimplificado;
     }
 
-    let baseirrf = remuneracao + outrosRendTribIR - deducoesIrrf;
-
-    let aliqirrf = valorIRRF(baseirrf, periodo);   
+    let baseirrf = 0;
+    if (periodo >= 2) {
+        baseirrf = remuneracao + outrosRendTribIR;
+    } else {
+        baseirrf = remuneracao + outrosRendTribIR - deducoesIrrf;
+    }
+    
+    let aliqirrf = valorIRRF(baseirrf, deducoesIrrf, periodo);   
 
     let outrosdescontos = parseFloat(form.numOutros.value) || 0;
 
@@ -798,7 +969,7 @@ function calcSalario(form) {
         form.txInss.value = formatValor(valorpss);
         form.txBruto.value = formatValor(bruto);
         form.txIrrf.value = formatValor(aliqirrf);
-        form.txbIRRF.value = formatValor(baseirrf);
+        form.txbIRRF.value = formatValor(baseirrf-deducoesIrrf);
         form.txbINSS.value = formatValor(basepss);
         form.txdesconto.value = formatValor(descontos);
         form.txSindicato.value = formatValor(sindicato);
