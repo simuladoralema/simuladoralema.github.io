@@ -1,6 +1,7 @@
 let liq1 = 0;
 let liq2 = 0;
 
+const alimentacao = 1500.00;
 // Tabelas IRRF 2026
 const descontoSimplificado = 607.2; // até dez/2025: 564.8;
 const irB1 = 5000;
@@ -633,10 +634,12 @@ function calcSalario(form) {
     }
 
     // Adiciona o tiquete alimentação no cálculo
-    let ticket = 0;
+    let ticket = alimentacao;
 
     if (form.ticket.checked){
-        ticket = 1400.0;
+        if (periodo <= 2){
+            ticket = 1400.0;
+        }
         updateVisibilidade(form,"ticketdiv", "visible");
     } 
     else {
