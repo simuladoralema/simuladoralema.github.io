@@ -39,8 +39,8 @@ let base = 0;
 const base2023 = 17154.93, // 17154.92055,
     base2024 = 17789.66, // 17789.6526,
     base2025 = (base2024 * 1.217) * 1.04, // 23159.15055;
-    base2026 = (base2025 * 1.061) * 1.04,
-    base2027 = (base2026 * 1.05) * 1.04,
+    base2026 = (base2025 * 1.061) * 1.0504,
+    base2027 = (base2026 * 1.05) * 1.05,
     aq2025 = 1.19,
     aq2026 = aq2025 * 1.04,
     aq2027 = aq2026 * 1.04;
@@ -49,7 +49,7 @@ const base2023 = 17154.93, // 17154.92055,
 function zeraForm(form){
     // Zera os campos do formulário 1 ("Simulação 1")
         // Aba "Carreira"
-        form.ddAno.value = 2;
+        form.ddAno.value = 3;
         form.numProposta.value = 0;
         form.grat.checked = true;
         //form.txGrat.value = "R$ 0,00";
