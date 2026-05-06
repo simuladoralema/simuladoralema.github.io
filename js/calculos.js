@@ -881,6 +881,8 @@ function calcSalario(form) {
             } else {
                 sindicato = vencimento * 0.01;
             }
+        } else {
+            sindicato = vencimento * 0.015;
         }
     }
 
