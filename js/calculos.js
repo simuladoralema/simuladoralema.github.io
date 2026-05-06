@@ -725,8 +725,12 @@ function calcSalario(form) {
         quinquenio = percQuinquenio * vencimento;
         
     grat = 0;
-    if (form.grat.checked) {
-        grat = ((vencimento + quinquenio ) * 0.05);
+    if (periodo < 4) {
+        if (form.grat.checked) {
+            grat = ((vencimento + quinquenio ) * 0.05);
+        } else {
+            grat = 0;
+        }
     } else {
         grat = 0;
     }
