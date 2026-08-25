@@ -42,7 +42,7 @@ const base2023 = 17154.93, // 17154.92055,
     base2026 = (base2025 * 1.061) * 1.04 * 1.01,
     base2027 = (base2026 * 1.05) * 1.04, // * 1.01,
     aq2025 = 1.19,
-    aq2026 = aq2025 * 1.05,
+    aq2026 = aq2025 * 1.04 * 1.01,
     aq2027 = aq2026 * 1.04;
 
 // Zera tudo ao carregar a página e ao pressionar o botão
