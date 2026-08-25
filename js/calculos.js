@@ -96,6 +96,7 @@ function zeraForm(form){
         form.outrosIR2.checked = false;
         form.ferias.checked = false;
         form.decter.checked = false;
+        form.saude.checked = false;
         /* form.diffReajuste.value = 0;
         form.txDifVB.value = "R$ 0,00";
         form.txDifGT.value = "R$ 0,00";
@@ -827,6 +828,21 @@ function calcSalario(form) {
         vb2 = calcNovoPCCV(base, nivel, correl);
     }
     
+    let saude = 0;
+    if (form.saude.checked == true){
+        if (form.ddIdade.value == "0"){
+            saude = 100;
+        } else if (form.ddIdade.value == "1"){
+            saude = 200;
+        } else if (form.ddIdade.value == "2"){
+            saude = 300;
+        } else if (form.ddIdade.value == "3"){
+            saude = 510.22;
+        } else if (form.ddIdade.value == "4"){
+            saude = 800;
+        }       
+    }
+
     let outrosRendTrib0 = parseFloat(form.numOutrosRendTrib0.value) || 0;
     let outrosRendTrib1 = parseFloat(form.numOutrosRendTrib1.value) || 0;
     let outrosRendTrib2 = parseFloat(form.numOutrosRendTrib2.value) || 0;
@@ -861,9 +877,9 @@ function calcSalario(form) {
         //let aliqirrfferias = valorIRRF(ferias, periodo);
     }
     
-    let adicionais = qualificacao + grat + insal + quinquenio;
+    let adicionais = qualificacao + grat + insal + quinquenio + saude;
     
-    let remuneracao = vencimento + grat + qualificacao + insal + quinquenio + fg; //+ outrosRendTribIR + outrosRendTribFEPA;
+    let remuneracao = vencimento + adicionais + fg; //+ outrosRendTribIR + outrosRendTribFEPA;
     
     let ferias = 0;
 
@@ -891,7 +907,7 @@ function calcSalario(form) {
     }
 
     //A base do PSS é quase a mesma da 'remuneracao', mas sem insalubridade pois a cobrança é opcional
-    let basepss = remuneracao - grat /* gratretro */ + outrosRendTribFEPA /* + diffFEPA */;
+    let basepss = remuneracao - grat - saude + outrosRendTribFEPA /* + diffFEPA */;
 
     let valorpss = calcPSS(periodo, basepss);
 
@@ -915,7 +931,7 @@ function calcSalario(form) {
         updateVisibilidade(form,"depsFunbenLabel", "hidden");
     }
 
-    let deducoesIrrf = valorpss + funben + deducaoDepsIRRF;
+    let deducoesIrrf = valorpss + funben + deducaoDepsIRRF + saude;
     if ( deducoesIrrf < descontoSimplificado ) {
         deducoesIrrf = descontoSimplificado;
     }
@@ -992,6 +1008,7 @@ function calcSalario(form) {
         form.txInsa.value = formatValor(insal);
         form.txFerias.value = formatValor(ferias);
         form.txDecter.value = formatValor(dec13);
+        form.txSaude.value = formatValor(saude);
         /* console.log("FERIAS: ", ferias);
         console.log("FERIAS FORMATADO: ", form.txFerias.value);
         console.log("VENCIMENTO: ", vencimento);
